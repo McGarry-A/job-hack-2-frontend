@@ -1,1 +1,1 @@
-# job-hack-2-frontend
+Recreation of my CodeNation final project to see what improvements that I can make to the application.
