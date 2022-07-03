@@ -1,5 +1,5 @@
 import Hero from "../components/Hero/Hero";
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiFillApple, AiOutlineSearch } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import React, { useState } from "react";
@@ -108,15 +108,20 @@ const Home = () => {
             return (
               <div
                 key={index}
-                className="border flex justify-between hover:cursor-pointer hover:shadow px-3 py-2"
+                className="border flex hover:cursor-pointer hover:shadow px-3 py-2"
               >
-                <div className="flex flex-col justify-center">
+                <div className="flex justify-center items-center mr-4">
+                  <AiFillApple size="3rem" />
+                </div>
+                <div className="flex flex-col justify-center pt-2">
                   <h5 className="text-2xl tracking-tight text-gray-900">
                     {el.title}
                   </h5>
-                  <p className="opacity-50 text-lg">{el.company.display_name}</p>
+                  <p className="opacity-50 text-lg">
+                    {el.company.display_name}
+                  </p>
                 </div>
-                <div className="flex flex-col text-right">
+                <div className="flex flex-col text-right ml-auto">
                   <h6 className="font-bold tracking-wide text-blue-900">
                     {el.location.display_name}
                   </h6>
@@ -133,6 +138,19 @@ const Home = () => {
     );
   };
 
+  const renderPagination = () => {
+    const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    return (
+      <div className="flex mx-auto justify-center space-x-5 text-xl mt-5">
+        <button> {"<"} </button>
+        {pages.map((el, index) => {
+          return <button>{el}</button>;
+        })}
+        <button> {">"} </button>
+      </div>
+    );
+  };
+
   return (
     <div>
       <Hero />
@@ -141,6 +159,7 @@ const Home = () => {
           {renderForm()}
           {renderOptions()}
           {renderJobCards()}
+          {renderPagination()}
         </ForegroundWrapper>
       </BGWrapper>
     </div>
@@ -148,11 +167,7 @@ const Home = () => {
 };
 
 const BGWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return (
-    <div className="bg-gray-50 relative h-screen">
-      {children}
-    </div>
-  );
+  return <div className="bg-gray-50 relative h-screen">{children}</div>;
 };
 
 const ForegroundWrapper: React.FC<{ children: React.ReactNode }> = ({
