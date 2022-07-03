@@ -4,9 +4,12 @@ import { GoLocation } from "react-icons/go";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import React, { useState } from "react";
 import Checkbox from "../components/Checkbox/Checkbox";
+import useAdzuna from "../hooks/useAdzuna";
 
 type workLocationType = "office" | "remote" | "hybrid" | undefined;
 const Home = () => {
+  const useJobs = useAdzuna();
+
   const [job, setJob] = useState<string>();
   const [location, setLocation] = useState<string>();
   const [workLocation, setWorkLocation] = useState<workLocationType>();
@@ -93,6 +96,43 @@ const Home = () => {
     );
   };
 
+  const renderJobCards = () => {
+    const { isLoading } = useJobs;
+    console.log(useJobs);
+    return (
+      <div className="space-y-4 border-t pt-4">
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          useJobs.jobs!.map((el, index) => {
+            return (
+              <div
+                key={index}
+                className="border flex justify-between hover:cursor-pointer hover:shadow px-3 py-2"
+              >
+                <div className="flex flex-col justify-center">
+                  <h5 className="text-2xl tracking-tight text-gray-900">
+                    {el.title}
+                  </h5>
+                  <p className="opacity-50 text-lg">{el.company.display_name}</p>
+                </div>
+                <div className="flex flex-col text-right">
+                  <h6 className="font-bold tracking-wide text-blue-900">
+                    {el.location.display_name}
+                  </h6>
+                  <p>£{el.salary_max}</p>
+                  <p className="text-green-500 font-bold uppercase text-sm">
+                    {el.contract_type.replace("_", "-")}
+                  </p>
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
+    );
+  };
+
   return (
     <div>
       <Hero />
@@ -100,6 +140,7 @@ const Home = () => {
         <ForegroundWrapper>
           {renderForm()}
           {renderOptions()}
+          {renderJobCards()}
         </ForegroundWrapper>
       </BGWrapper>
     </div>
@@ -108,7 +149,7 @@ const Home = () => {
 
 const BGWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="bg-gray-50 relative border-black border-2 h-screen">
+    <div className="bg-gray-50 relative h-screen">
       {children}
     </div>
   );
@@ -118,7 +159,7 @@ const ForegroundWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <div className="w-4/5 mx-auto bg-white p-4 shadow rounded absolute border-2 border-red-600 -top-10 left-0 right-0">
+    <div className="w-4/5 mx-auto bg-white p-4 shadow-lg rounded absolute -top-10 left-0 right-0">
       {children}
     </div>
   );
