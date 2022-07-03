@@ -108,7 +108,7 @@ const Home = () => {
             return (
               <div
                 key={index}
-                className="border flex hover:cursor-pointer hover:shadow px-3 py-2"
+                className="border flex hover:cursor-pointer hover:shadow px-3 py-2 rounded border-l-4"
               >
                 <div className="flex justify-center items-center mr-4">
                   <AiFillApple size="3rem" />
