@@ -3,7 +3,7 @@ import {
   AiFillFacebook,
   AiFillAmazonSquare,
   AiFillGoogleCircle,
-  AiOutlineSearch
+  AiOutlineSearch,
 } from "react-icons/ai";
 import { BsMicrosoft } from "react-icons/bs";
 import { RiNetflixFill } from "react-icons/ri";
@@ -45,8 +45,10 @@ const Hero = () => {
 
     return (
       <div className="flex space-x-11 justify-center pt-10 pb-24">
-        {icons.map((El) => {
-          return <El size={"5rem"} className="text-white opacity-70" />;
+        {icons.map((El, index) => {
+          return (
+            <El key={index} size={"5rem"} className="text-white opacity-70" />
+          );
         })}
       </div>
     );

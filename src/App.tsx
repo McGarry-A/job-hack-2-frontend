@@ -10,7 +10,7 @@ const ContentWrapper: React.FC<{ children: React.ReactNode }> = ({
 
 const App = () => {
   return (
-    <div className="w-screen h-screen font-leagueSpartan">
+    <div className="w-screen h-screen font-leagueSpartan border-yellow-500 border-2">
       <ContentWrapper>
         <Home />
       </ContentWrapper>
