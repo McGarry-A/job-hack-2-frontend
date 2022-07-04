@@ -1,8 +1,12 @@
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 
-const Register = () => {
-  const [register, setRegister] = useState<boolean>(true);
+interface props {
+  isRegister?: boolean;
+}
+
+const Register = ({ isRegister = true }: props) => {
+  const [register, setRegister] = useState<boolean>(isRegister);
 
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();

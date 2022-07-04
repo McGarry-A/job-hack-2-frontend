@@ -50,7 +50,7 @@ const HomeJobCards = (props: props) => {
                   </p>
                 </div>
                 <div className="flex flex-col text-right ml-auto">
-                  <h6 className="font-bold tracking-wide text-blue-900">
+                  <h6 className="font-bold tracking-wide text-sky-400">
                     {el.location.display_name}
                   </h6>
                   <p>£{el.salary_max}</p>
