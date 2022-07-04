@@ -1,17 +1,25 @@
 import Hero from "../components/Hero/Hero";
-import { AiFillApple, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Checkbox from "../components/Checkbox/Checkbox";
-import useAdzuna from "../hooks/useAdzuna";
+import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
+import HomeJobCards from "../components/HomeJobCards/HomeJobCards";
+import useAdzuna, { JobType } from "../hooks/useAdzuna";
 
 type workLocationType = "office" | "remote" | "hybrid" | undefined;
-const Home = () => {
-  const useJobs = useAdzuna();
+type JobsState = {
+  error: unknown;
+  isLoading: boolean;
+  jobs: JobType[] | undefined;
+};
 
-  const [job, setJob] = useState<string>();
-  const [location, setLocation] = useState<string>();
+const Home = () => {
+  const [jobsState, setJobsState] = useState<JobsState>();
+
+  const [job, setJob] = useState<string>("developer");
+  const [location, setLocation] = useState<string>("manchester");
   const [workLocation, setWorkLocation] = useState<workLocationType>();
 
   const [freelance, setFreelance] = useState<boolean>(false);
@@ -19,6 +27,26 @@ const Home = () => {
   const [partTime, setPartTime] = useState<boolean>(false);
   const [graduate, setGraduate] = useState<boolean>(false);
   const [internship, setInternship] = useState<boolean>(false);
+
+  const [pagination, setPagination] = useState<number>(1);
+
+  const paginationOptions = { pagination, setPagination };
+
+  const useJobs = useAdzuna({
+    page: pagination,
+    title: job,
+    location: location,
+    fullTime: fullTime,
+    partTime: partTime,
+    graduate: graduate,
+    internship: internship,
+  });
+
+  const { error, isLoading, jobs } = useJobs;
+
+  useEffect(() => {
+    setJobsState({ error, isLoading, jobs });
+  }, [pagination, error, jobs, isLoading]);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,7 +84,7 @@ const Home = () => {
         className="grid grid-cols-4 gap-3"
         onSubmit={(e) => handleFormSubmit(e)}
       >
-        <div className="flex border py-2 items-center px-2 text-lg">
+        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
           <AiOutlineSearch className="mr-2 text-2xl" />
           <input
             placeholder="Job Type"
@@ -64,7 +92,7 @@ const Home = () => {
             onChange={(e) => setJob(e.target.value)}
           />
         </div>
-        <div className="flex border py-2 items-center px-2 text-lg">
+        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
           <GoLocation className="mr-2 text-2xl" />
           <input
             placeholder="Location"
@@ -72,7 +100,7 @@ const Home = () => {
             onChange={(e) => setLocation(e.target.value)}
           />
         </div>
-        <div className="flex border py-2 items-center px-2 text-lg">
+        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
           <HiOutlineOfficeBuilding className="mr-2 text-2xl" />
           <select
             placeholder="input"
@@ -81,9 +109,6 @@ const Home = () => {
               setWorkLocation(e.target.value as workLocationType)
             }
           >
-            <option defaultChecked value={""}>
-              Where would you like to work from?
-            </option>
             <option value={"office"}>Office</option>
             <option value={"remote"}>Remote</option>
             <option value={"hybrid"}>Hybrid</option>
@@ -96,59 +121,18 @@ const Home = () => {
     );
   };
 
-  const renderJobCards = () => {
-    const { isLoading } = useJobs;
-    console.log(useJobs);
-    return (
-      <div className="space-y-4 border-t pt-4">
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          useJobs.jobs!.map((el, index) => {
-            return (
-              <div
-                key={index}
-                className="border flex hover:cursor-pointer hover:shadow px-3 py-2 rounded border-l-4"
-              >
-                <div className="flex justify-center items-center mr-4">
-                  <AiFillApple size="3rem" />
-                </div>
-                <div className="flex flex-col justify-center pt-2">
-                  <h5 className="text-2xl tracking-tight text-gray-900">
-                    {el.title}
-                  </h5>
-                  <p className="opacity-50 text-lg">
-                    {el.company.display_name}
-                  </p>
-                </div>
-                <div className="flex flex-col text-right ml-auto">
-                  <h6 className="font-bold tracking-wide text-blue-900">
-                    {el.location.display_name}
-                  </h6>
-                  <p>£{el.salary_max}</p>
-                  <p className="text-green-500 font-bold uppercase text-sm">
-                    {el.contract_type.replace("_", "-")}
-                  </p>
-                </div>
-              </div>
-            );
-          })
-        )}
-      </div>
-    );
-  };
+  const renderCards = () => {
+    if (jobsState && jobsState.jobs) {
+      return (
+        <HomeJobCards
+          jobs={jobsState.jobs}
+          isLoading={jobsState.isLoading}
+          error={jobsState.error}
+        />
+      );
+    }
 
-  const renderPagination = () => {
-    const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    return (
-      <div className="flex mx-auto justify-center space-x-5 text-xl mt-5">
-        <button> {"<"} </button>
-        {pages.map((el, index) => {
-          return <button>{el}</button>;
-        })}
-        <button> {">"} </button>
-      </div>
-    );
+    return <div>Loading...</div>;
   };
 
   return (
@@ -158,8 +142,9 @@ const Home = () => {
         <ForegroundWrapper>
           {renderForm()}
           {renderOptions()}
-          {renderJobCards()}
-          {renderPagination()}
+          <PaginationWrapper {...paginationOptions}>
+            {renderCards()}
+          </PaginationWrapper>
         </ForegroundWrapper>
       </BGWrapper>
     </div>

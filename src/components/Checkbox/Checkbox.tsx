@@ -9,13 +9,22 @@ interface Props {
 const Checkbox: React.FC<Props> = ({ name, isChecked, setIsChecked }) => {
   return (
     <div
-      className={`flex items-center border py-2 px-4 rounded-3xl ${
+      className={`flex items-center border py-2 px-4 rounded-3xl text-sm lg:text-base ${
         isChecked ? "bg-blue-400" : "bg-blue-300"
-      } cursor-pointer`}
+      } cursor-pointer hover:bg-blue-400`}
       onClick={() => setIsChecked(!isChecked)}
     >
-      <input type="checkbox" checked={isChecked} className="" />
-      <p className={`ml-2 mt-1 ${isChecked ? "text-blue-200" : "text-gray-50"}`}>{name}</p>
+      <input
+        type="checkbox"
+        checked={isChecked}
+        className=""
+        onChange={() => null}
+      />
+      <p
+        className={`ml-2 mt-1 ${isChecked ? "text-blue-200" : "text-gray-50"}`}
+      >
+        {name}
+      </p>
     </div>
   );
 };
