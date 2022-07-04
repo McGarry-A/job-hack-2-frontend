@@ -90,7 +90,7 @@ const Register = () => {
           <button className="w-full py-2 text-semibold bg-sky-400 text-gray-50 rounded mt-2">
             Sign in
           </button>
-          <button className="w-full py-2 text-semibold flex items-center justify-center border my-2 rounded">
+          <button className="w-full py-2 text-semibold flex items-center justify-center border my-2 rounded bg-white">
             <FcGoogle className="mr-2" />
             Sign in with Google
           </button>
