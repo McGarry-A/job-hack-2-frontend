@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'hero': "url('../src/images/hero-bg.jpg')"
+        'hero': "url('../src/images/hero-bg.jpg')",
+        'registerHero': "url('../src/images/register-hero.jpg')"
       },
       fontFamily: {
         'leagueSpartan': ['League Spartan', 'sans-serif']
