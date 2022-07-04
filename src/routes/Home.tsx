@@ -73,7 +73,7 @@ const Home = () => {
         className="grid grid-cols-4 gap-3"
         onSubmit={(e) => handleFormSubmit(e)}
       >
-        <div className="flex border py-2 items-center px-2 text-lg">
+        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
           <AiOutlineSearch className="mr-2 text-2xl" />
           <input
             placeholder="Job Type"
@@ -81,7 +81,7 @@ const Home = () => {
             onChange={(e) => setJob(e.target.value)}
           />
         </div>
-        <div className="flex border py-2 items-center px-2 text-lg">
+        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
           <GoLocation className="mr-2 text-2xl" />
           <input
             placeholder="Location"
@@ -89,7 +89,7 @@ const Home = () => {
             onChange={(e) => setLocation(e.target.value)}
           />
         </div>
-        <div className="flex border py-2 items-center px-2 text-lg">
+        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
           <HiOutlineOfficeBuilding className="mr-2 text-2xl" />
           <select
             placeholder="input"
@@ -98,9 +98,6 @@ const Home = () => {
               setWorkLocation(e.target.value as workLocationType)
             }
           >
-            <option defaultChecked value={""}>
-              Where would you like to work from?
-            </option>
             <option value={"office"}>Office</option>
             <option value={"remote"}>Remote</option>
             <option value={"hybrid"}>Hybrid</option>

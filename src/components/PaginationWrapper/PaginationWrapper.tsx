@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction } from "react";
-import useAdzuna from "../../hooks/useAdzuna";
 import Pagination from "../Pagination/Pagination";
 
 interface props {

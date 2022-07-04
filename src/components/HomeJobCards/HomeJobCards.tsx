@@ -22,8 +22,10 @@ interface props {
 }
 
 const HomeJobCards = (props: props) => {
-  const { isLoading, jobs, error } = props;
+  const { isLoading, jobs } = props;
 
+  // SHOW SKELETON WHILE ITEMS ARE LOADING
+  // const renderLoading = () => {};
   const renderJobCards = () => {
     return (
       <div className="space-y-4 border-t pt-4">
