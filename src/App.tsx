@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Footer from "./components/Footer/Footer";
 import Home from "./routes/Home";
 
 const ContentWrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -14,6 +15,7 @@ const App = () => {
       <ContentWrapper>
         <Home />
       </ContentWrapper>
+      <Footer />
     </div>
   );
 };
