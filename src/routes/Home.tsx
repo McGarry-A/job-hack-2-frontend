@@ -50,7 +50,7 @@ const Home = () => {
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(job, location, workLocation);
+    setJobsState({ error, isLoading, jobs });
   };
 
   const renderOptions = () => {
@@ -114,7 +114,7 @@ const Home = () => {
             <option value={"hybrid"}>Hybrid</option>
           </select>
         </div>
-        <button className="border bg-blue-500 text-gray-50" type="submit">
+        <button className="border bg-sky-500 text-gray-50" type="submit">
           Search Jobs
         </button>
       </form>

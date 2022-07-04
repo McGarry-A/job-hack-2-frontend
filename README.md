@@ -7,6 +7,9 @@ HomePage:
 > Pagination
 > Cards Clickable - show modal with details > add to apply list
 > Link search for to results
+> Skeleton while homepage cards are loading
+> Mask on the hero image on the homepage to make it darker
+>
 
 ContactPage:
 > Build page

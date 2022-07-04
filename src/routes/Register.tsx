@@ -1,8 +1,34 @@
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 
-const Register = () => {
-  const [register, setRegister] = useState<boolean>(true);
+interface props {
+  isRegister?: boolean;
+}
+
+const Register = ({ isRegister = true }: props) => {
+  const [register, setRegister] = useState<boolean>(isRegister);
+
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const [confirmPassword, setConfirmPassword] = useState<string>();
+  const [error, setError] = useState<string>();
+
+  const handleFormSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+  const handleFormSubmitRegister = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!password || !email || !confirmPassword) {
+      setError("Please make sure all filds are filled.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Please ensure that both passwords match.");
+    }
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+    }
+  };
 
   const renderHeaders = () => {
     if (register) {
@@ -31,7 +57,11 @@ const Register = () => {
       return (
         <div className="mt-2">
           <label className="block">Confrim password</label>
-          <input type={"text"} className="w-full h-10" />
+          <input
+            type={"text"}
+            className="w-full h-10"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
         </div>
       );
     }
@@ -67,15 +97,33 @@ const Register = () => {
   return (
     <>
       <div className="max-w-6xl w-full mx-auto p-10 md:p-24 flex">
-        <div className="p-12 border max-w-xl w-full">
+        <form
+          className="p-12 border max-w-xl w-full"
+          onSubmit={
+            register
+              ? (e) => handleFormSubmitLogin(e)
+              : (e) => handleFormSubmitRegister(e)
+          }
+        >
           {renderHeaders()}
+          <div>
+            <p className="text-sm text-red-600 mt-1">{error}</p>
+          </div>
           <div className="mt-4">
             <label className="block">Email</label>
-            <input type={"email"} className="w-full h-10" />
+            <input
+              type={"email"}
+              className="w-full h-10"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className="mt-2">
             <label className="block">Password</label>
-            <input type={"password"} className="w-full h-10" />
+            <input
+              type={"password"}
+              className="w-full h-10"
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
           {renderSecondPassword()}
           <div className="flex justify-between mt-3">
@@ -87,7 +135,10 @@ const Register = () => {
               <a href="www.google.com">Forgot password</a>
             </div>
           </div>
-          <button className="w-full py-2 text-semibold bg-sky-400 text-gray-50 rounded mt-2">
+          <button
+            type="submit"
+            className="w-full py-2 text-semibold bg-sky-400 text-gray-50 rounded mt-2"
+          >
             Sign in
           </button>
           <button className="w-full py-2 text-semibold flex items-center justify-center border my-2 rounded bg-white">
@@ -95,7 +146,7 @@ const Register = () => {
             Sign in with Google
           </button>
           {renderSwitchViews()}
-        </div>
+        </form>
         <div className="bg-registerHero w-full hidden md:flex flex-grow border"></div>
       </div>
     </>
