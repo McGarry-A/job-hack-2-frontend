@@ -11,7 +11,7 @@ const ContentWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <div className="max-w-[1920px] mx-auto bg-gradient-to-b from-[#f2f2f2] to-[#ffffff]">
+    <div className="max-w-[1920px] mx-auto bg-gradient-to-b from-[#f2f2f2] to-[#ffffff] -z-10">
       {children}
     </div>
   );
