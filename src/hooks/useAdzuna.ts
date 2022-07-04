@@ -6,7 +6,17 @@ type JobType = Pick<
   "title" | "location" | "description" | "salary_max" | "company" | "contract_type"
 >;
 
-const useAdzuna = () => {
+interface props {
+  page: number;
+  title: string;
+  location: string;
+  fullTime: boolean;
+  partTime: boolean;
+  graduate: boolean;
+  internship: boolean;
+}
+
+const useAdzuna = ({page = 1}: props) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<unknown>();
   const [fullJobs, setFullJobs] = useState<ApiInterface>();
