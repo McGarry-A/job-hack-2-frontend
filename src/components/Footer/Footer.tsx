@@ -4,6 +4,7 @@ import {
   AiFillInstagram,
 } from "react-icons/ai";
 import { BsGithub } from "react-icons/bs";
+import { GrLinkNext } from "react-icons/gr";
 
 const Footer = () => {
   const renderSocialIcons = () => {
@@ -29,42 +30,36 @@ const Footer = () => {
 
   return (
     <footer className="border-t flex font-sans justify-around p-4 space-x-3">
-      <nav className="flex flex-col justify-center">
-        <ul className="flex text-lg flex-col">
+      <nav className="flex flex-col my-2">
+        <ul className="flex text-lg flex-col space-y-2">
           <li className="text-xl font-bold">Pages</li>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
+          <li className="opacity-50">Home</li>
+          <li className="opacity-50">About</li>
+          <li className="opacity-50">Contact</li>
         </ul>
       </nav>
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col my-2">
         <ul className="space-y-2">
           <li className="text-xl font-bold">Join us</li>
-          <li>
-            <button className="border px-3 py-1 w-24">Login</button>
-          </li>
-          <li>
-            <button className="border px-3 py-1 w-24 bg-blue-600 text-white font-semibold">
-              Register
-            </button>
-          </li>
+          <li className="opacity-50">Login</li>
+          <li className="opacity-50">Register</li>
         </ul>
       </div>
       <div>
-        <div className="space-y-1">
+        <div className="space-y-1 flex flex-col my-2">
           <h5 className="text-xl font-bold">Connect With Us</h5>
           <p>
-            Follow us on social media, and plug your email in to be the first to
-            hear about the latest news and job listings on the site.
+            Be the first to hear about the latest news and job listings on the
+            site.
           </p>
-          <input
-            type="email"
-            placeholder="Email address"
-            className="border p-2 max-w-lg w-full h-10"
-          />
-          <button className="border px-3 py-1 w-24 h-10 ml-2 text-white font-semibold bg-blue-600 rounded">
-            Submit
-          </button>
+          <div className="flex justify-between items-center border py-2 px-3">
+            <input
+              type="email"
+              placeholder="Email address"
+              className="max-w-lg w-full h-10"
+            />
+            <GrLinkNext size="1.5rem" className="cursor-pointer" />
+          </div>
           {renderSocialIcons()}{" "}
         </div>
       </div>
