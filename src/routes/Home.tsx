@@ -152,7 +152,7 @@ const Home = () => {
 };
 
 const BGWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <div className="bg-gray-50 relative h-screen">{children}</div>;
+  return <div className="relative h-screen">{children}</div>;
 };
 
 const ForegroundWrapper: React.FC<{ children: React.ReactNode }> = ({
