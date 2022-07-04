@@ -3,7 +3,6 @@ import {
   AiFillFacebook,
   AiFillAmazonSquare,
   AiFillGoogleCircle,
-  AiOutlineSearch,
 } from "react-icons/ai";
 import { BsMicrosoft } from "react-icons/bs";
 import { RiNetflixFill } from "react-icons/ri";
