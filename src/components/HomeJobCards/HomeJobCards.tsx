@@ -55,7 +55,7 @@ const HomeJobCards = (props: props) => {
                   </h6>
                   <p>£{el.salary_max}</p>
                   <p className="text-green-500 font-bold uppercase text-sm">
-                    {el.contract_type.replace("_", "-")}
+                    {el.contract_type && el.contract_type.replace("_", "-")}
                   </p>
                 </div>
               </div>

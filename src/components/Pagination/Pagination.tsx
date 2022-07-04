@@ -13,7 +13,15 @@ const Pagination = ({ setPagination, pagination }: props) => {
       <button onClick={() => setPagination(pagination - 1)}> {"<"} </button>
       {pages.map((el, index) => {
         return (
-          <button key={index} onClick={() => setPagination(el as number)}>
+          <button
+            key={index}
+            onClick={() => setPagination(el as number)}
+            className={`w-4 ${
+              pagination === el
+                ? "text-blue-800 border-b-2 border-blue-900"
+                : ""
+            }`}
+          >
             {el}
           </button>
         );

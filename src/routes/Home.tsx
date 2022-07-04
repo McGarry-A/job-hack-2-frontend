@@ -2,17 +2,24 @@ import Hero from "../components/Hero/Hero";
 import { AiOutlineSearch } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Checkbox from "../components/Checkbox/Checkbox";
 import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
 import HomeJobCards from "../components/HomeJobCards/HomeJobCards";
-import useAdzuna from "../hooks/useAdzuna";
+import useAdzuna, { JobType } from "../hooks/useAdzuna";
 
 type workLocationType = "office" | "remote" | "hybrid" | undefined;
+type JobsState = {
+  error: unknown;
+  isLoading: boolean;
+  jobs: JobType[] | undefined;
+};
 
 const Home = () => {
-  const [job, setJob] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
+  const [jobsState, setJobsState] = useState<JobsState>();
+
+  const [job, setJob] = useState<string>("developer");
+  const [location, setLocation] = useState<string>("manchester");
   const [workLocation, setWorkLocation] = useState<workLocationType>();
 
   const [freelance, setFreelance] = useState<boolean>(false);
@@ -35,7 +42,11 @@ const Home = () => {
     internship: internship,
   });
 
-  const { isLoading, jobs, error } = useJobs;
+  const { error, isLoading, jobs } = useJobs;
+
+  useEffect(() => {
+    setJobsState({ error, isLoading, jobs });
+  }, [pagination, error, jobs, isLoading]);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -111,8 +122,14 @@ const Home = () => {
   };
 
   const renderCards = () => {
-    if (jobs !== undefined) {
-      return <HomeJobCards jobs={jobs} isLoading={isLoading} error={error} />;
+    if (jobsState && jobsState.jobs) {
+      return (
+        <HomeJobCards
+          jobs={jobsState.jobs}
+          isLoading={jobsState.isLoading}
+          error={jobsState.error}
+        />
+      );
     }
 
     return <div>Loading...</div>;
