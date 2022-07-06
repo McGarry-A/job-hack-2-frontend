@@ -1,5 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import loginEmail from "../utils/loginEmail";
+import registerEmail from "../utils/registerEmail";
 
 interface props {
   isRegister?: boolean;
@@ -13,12 +15,28 @@ const Register = ({ isRegister = true }: props) => {
   const [confirmPassword, setConfirmPassword] = useState<string>();
   const [error, setError] = useState<string>();
 
+  const [firstName, setFirstName] = useState<string>();
+  const [lastName, setLastName] = useState<string>();
+
+  useEffect(() => {
+    setError("");
+  }, [email, password, confirmPassword, firstName, lastName]);
+
+  const handleGoogleAuth = () => {};
+
   const handleFormSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!email || !password) {
+      setError("Please enter a username and password");
+      return;
+    }
+
+    loginEmail({ email, password });
   };
+
   const handleFormSubmitRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!password || !email || !confirmPassword) {
+    if (!password || !email || !confirmPassword || !firstName || !lastName) {
       setError("Please make sure all filds are filled.");
       return;
     }
@@ -27,6 +45,33 @@ const Register = ({ isRegister = true }: props) => {
     }
     if (password.length < 6) {
       setError("Password must be at least 6 characters.");
+    }
+
+    registerEmail({ firstName, lastName, email, password });
+  };
+
+  const renderNameFields = () => {
+    if (!register) {
+      return (
+        <div className="grid grid-cols-2 gap-2">
+          <div className="mt-4">
+            <label className="block">First Name</label>
+            <input
+              type={"text"}
+              className="w-full h-10"
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+          <div className="mt-4">
+            <label className="block">Last Name</label>
+            <input
+              type={"text"}
+              className="w-full h-10"
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+        </div>
+      );
     }
   };
 
@@ -58,7 +103,7 @@ const Register = ({ isRegister = true }: props) => {
         <div className="mt-2">
           <label className="block">Confrim password</label>
           <input
-            type={"text"}
+            type={"password"}
             className="w-full h-10"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
@@ -109,6 +154,7 @@ const Register = ({ isRegister = true }: props) => {
           <div>
             <p className="text-sm text-red-600 mt-1">{error}</p>
           </div>
+          {renderNameFields()}
           <div className="mt-4">
             <label className="block">Email</label>
             <input
@@ -141,7 +187,10 @@ const Register = ({ isRegister = true }: props) => {
           >
             Sign in
           </button>
-          <button className="w-full py-2 text-semibold flex items-center justify-center border my-2 rounded bg-white">
+          <button
+            className="w-full py-2 text-semibold flex items-center justify-center border my-2 rounded bg-white"
+            onClick={() => handleGoogleAuth()}
+          >
             <FcGoogle className="mr-2" />
             Sign in with Google
           </button>

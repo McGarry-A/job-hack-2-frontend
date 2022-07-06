@@ -8,7 +8,6 @@ import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper
 import HomeJobCards from "../components/HomeJobCards/HomeJobCards";
 import useAdzuna, { JobType } from "../hooks/useAdzuna";
 
-type workLocationType = "office" | "remote" | "hybrid" | undefined;
 type JobsState = {
   error: unknown;
   isLoading: boolean;
@@ -20,7 +19,6 @@ const Home = () => {
 
   const [job, setJob] = useState<string>("developer");
   const [location, setLocation] = useState<string>("manchester");
-  const [workLocation, setWorkLocation] = useState<workLocationType>();
 
   const [freelance, setFreelance] = useState<boolean>(false);
   const [fullTime, setFullTime] = useState<boolean>(false);
@@ -105,9 +103,7 @@ const Home = () => {
           <select
             placeholder="input"
             className="w-full focus:outline-none"
-            onChange={(e) =>
-              setWorkLocation(e.target.value as workLocationType)
-            }
+            onChange={() => undefined}
           >
             <option value={"office"}>Office</option>
             <option value={"remote"}>Remote</option>

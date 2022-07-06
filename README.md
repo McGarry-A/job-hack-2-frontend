@@ -3,23 +3,23 @@ Recreation of my CodeNation final project to see what improvements that I can ma
 To Do List:
 
 HomePage:
-> Render Cards
-> Pagination
+> Render Cards DONE
+> Pagination DONE
 > Cards Clickable - show modal with details > add to apply list
-> Link search for to results
+> Link search to results
 > Skeleton while homepage cards are loading
 > Mask on the hero image on the homepage to make it darker
->
 
 ContactPage:
-> Build page
-> Build form
+> Build page DONE
+> Build form DONE
 > Error handling in form
 > Modal that feedsback when you submit Email
 
 Register:
-> Build Register page
-> Toggle Login/Register
+> Build Register page DONE
+> Toggle Login/Register DONE
+> Error handling in form DONE
 > Sign In With Google (Firebase?)
 > Sign In With Email (Typescript backend?)
 > Find a better image for the sign in component
