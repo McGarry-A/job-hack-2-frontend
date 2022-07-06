@@ -29,10 +29,11 @@ const register = async ({ firstName, lastName, email, password}: props) => {
       // Add user to global state
       console.log(res.message);
       console.log(res.newUser);
+      return true
 
     } catch (error) {
       console.error(error);
-
+      return false
     }
   };
 

@@ -2,6 +2,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useEffect, useState } from "react";
 import loginEmail from "../utils/loginEmail";
 import registerEmail from "../utils/registerEmail";
+import GoogleAuth from "../components/GoogleAuth";
 
 interface props {
   isRegister?: boolean;
@@ -187,13 +188,7 @@ const Register = ({ isRegister = true }: props) => {
           >
             Sign in
           </button>
-          <button
-            className="w-full py-2 text-semibold flex items-center justify-center border my-2 rounded bg-white"
-            onClick={() => handleGoogleAuth()}
-          >
-            <FcGoogle className="mr-2" />
-            Sign in with Google
-          </button>
+          <GoogleAuth />
           {renderSwitchViews()}
         </form>
         <div className="bg-registerHero w-full hidden md:flex flex-grow border"></div>
