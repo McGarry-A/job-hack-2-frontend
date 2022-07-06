@@ -7,7 +7,7 @@ import Checkbox from "../components/Checkbox/Checkbox";
 import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
 import HomeJobCards from "../components/HomeJobCards/HomeJobCards";
 import useAdzuna, { JobType } from "../hooks/useAdzuna";
-import GoogleAuth from "../components/GoogleAuth";
+// import GoogleAuth from "../components/GoogleAuth";
 
 type JobsState = {
   error: unknown;

@@ -1,4 +1,4 @@
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import { useEffect, useState } from "react";
 import loginEmail from "../utils/loginEmail";
 import registerEmail from "../utils/registerEmail";
@@ -23,7 +23,7 @@ const Register = ({ isRegister = true }: props) => {
     setError("");
   }, [email, password, confirmPassword, firstName, lastName]);
 
-  const handleGoogleAuth = () => {};
+  // const handleGoogleAuth = () => {};
 
   const handleFormSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
