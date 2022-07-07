@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import loginEmail from "../utils/loginEmail";
 import registerEmail from "../utils/registerEmail";
 import GoogleAuth from "../components/GoogleAuth";
+import { NavLink } from "react-router-dom";
+import { setActiveCustomer, userInterface } from "../store/userSlice";
+import { useAppDispatch } from "../store";
 
 interface props {
   isRegister?: boolean;
@@ -19,20 +22,34 @@ const Register = ({ isRegister = true }: props) => {
   const [firstName, setFirstName] = useState<string>();
   const [lastName, setLastName] = useState<string>();
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     setError("");
   }, [email, password, confirmPassword, firstName, lastName]);
 
   // const handleGoogleAuth = () => {};
 
-  const handleFormSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email || !password) {
       setError("Please enter a username and password");
       return;
     }
 
-    loginEmail({ email, password });
+    const user: userInterface | boolean = await loginEmail({
+      email,
+      password,
+    });
+    console.log(user);
+
+    if (typeof user === "boolean" || typeof user === "undefined") {
+      setError("Failed logging in");
+      return;
+    }
+
+    dispatch(setActiveCustomer(user));
+    console.log("logged in!");
   };
 
   const handleFormSubmitRegister = (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,6 +71,17 @@ const Register = ({ isRegister = true }: props) => {
   const renderPageHeading = () => (
     <div className="flex justify-center px-12 pt-12">
       <h2 className="text-5xl font-semibold">JobHack-2</h2>
+    </div>
+  );
+
+  const renderHomeLink = () => (
+    <div className="flex space-x-2 items-center justify-center my-12">
+      <NavLink
+        to="/"
+        className="opacity-50 text-xs uppercase tracking-widest mt-1"
+      >
+        Home
+      </NavLink>
     </div>
   );
 
@@ -149,7 +177,8 @@ const Register = ({ isRegister = true }: props) => {
   return (
     <div className="">
       {renderPageHeading()}
-      <div className="max-w-6xl w-full mx-auto p-10 md:p-24 flex">
+      {renderHomeLink()}
+      <div className="max-w-6xl w-full mx-auto pb-10 flex">
         <form
           className="p-12 border max-w-xl w-full"
           onSubmit={
@@ -186,7 +215,9 @@ const Register = ({ isRegister = true }: props) => {
               <label>Remember me</label>
             </div>
             <div className="">
-              <a href="www.google.com">Forgot password</a>
+              <a href="www.google.com" className="text-sm">
+                Forgot password
+              </a>
             </div>
           </div>
           <button

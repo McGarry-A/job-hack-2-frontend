@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface userInterface {
+    isLoggedIn: boolean;
     user: {
         firstName: string;
         lastName: string;
@@ -20,6 +21,7 @@ export interface JobInterface {
 }
 
 const initialState: userInterface = {
+    isLoggedIn: false,
     user: {
         firstName: "",
         lastName: "",
@@ -36,7 +38,18 @@ const userSlice = createSlice({
     initialState: initialState,
     reducers: {
         setActiveCustomer: (state: userInterface, action: PayloadAction<userInterface>) => {
-            return state
+            return state = {
+                isLoggedIn: true,
+                user: {
+                    firstName: action.payload.user.firstName,
+                    lastName: action.payload.user.lastName,
+                    email: action.payload.user.email
+                },
+                savedJobs: {
+                    liked: [],
+                    applied: [],
+                }
+            }
         },
         removeActiveCustomer: (state: userInterface, action: PayloadAction<string>) => {
             return state
@@ -56,5 +69,5 @@ export const {
         addToAppliedJobs, 
         addToLikedJobs
      } = userSlice.actions
-     
+
 export default userSlice

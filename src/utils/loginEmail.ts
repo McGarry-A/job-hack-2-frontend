@@ -1,9 +1,11 @@
+import { userInterface } from "../store/userSlice";
+
 interface props {
     email: string;
     password: string;
 }
 
-const loginEmail = async ({email, password}: props) => {
+const loginEmail = async ({email, password}: props): Promise<boolean | userInterface> => {
     try {
         const data = await fetch("http://localhost:5001/login", {
           method: "POST",
@@ -21,14 +23,13 @@ const loginEmail = async ({email, password}: props) => {
 
         if (res.message !== "Success") {
           console.log("Error fetching from server");
-          return;
+          return false
         }
 
         // Successfully logged in
         // Add user to global state
-        console.log(res.user);
 
-        return true
+        return res.user
       } catch (err) {
         console.error(err);
         return false

@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar/Navbar";
 import { GrFormNext } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../components/Modal/Modal";
 
 const Contact = () => {
@@ -16,6 +16,10 @@ const Contact = () => {
   const [messageSuccessSent, setMessageSuccessSent] = useState<boolean>(false);
 
   const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    setError("");
+  }, [subject, message, firstName, lastName, email, phone]);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -100,7 +104,7 @@ const Contact = () => {
           onSubmit={(e) => handleFormSubmit(e)}
         >
           <div className="gird-cols-2">
-            {error && <p className="text-red-500">*{error}</p>}
+            {error && <p className="text-red-500 text-sm">*{error}</p>}
           </div>
           <div className="col-span-2">
             <label className="block">
@@ -108,7 +112,7 @@ const Contact = () => {
             </label>
             <input
               type="text"
-              className="border w-full h-10 rounded border-gray-300"
+              className="border w-full h-10 rounded border-gray-300 p-2"
               onChange={(e) => setSubject(e.target.value)}
             />
           </div>
@@ -118,7 +122,7 @@ const Contact = () => {
             </label>
             <textarea
               rows={10}
-              className="border w-full rounded border-gray-300"
+              className="border w-full rounded border-gray-300 p-2"
               onChange={(e) => setMessage(e.target.value)}
             />
           </div>
@@ -128,7 +132,7 @@ const Contact = () => {
             </label>
             <input
               type="text"
-              className="border w-full rounded border-gray-300 h-10"
+              className="border w-full rounded border-gray-300 h-10 p-2"
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
@@ -138,7 +142,7 @@ const Contact = () => {
             </label>
             <input
               type="text"
-              className="border w-full rounded border-gray-300 h-10"
+              className="border w-full rounded border-gray-300 h-10 p-2"
               onChange={(e) => setLastName(e.target.value)}
             />
           </div>
@@ -148,7 +152,7 @@ const Contact = () => {
             </label>
             <input
               type="text"
-              className="border w-full rounded border-gray-300 h-10"
+              className="border w-full rounded border-gray-300 h-10 p-2"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -158,7 +162,7 @@ const Contact = () => {
             </label>
             <input
               type="text"
-              className="border w-full rounded border-gray-300 h-10"
+              className="border w-full rounded border-gray-300 h-10 p-2"
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
@@ -190,6 +194,9 @@ const Contact = () => {
           Our team will be reviewing your email, and will be back in touch as
           soon as possible.
         </p>
+        <button onClick={() => setModalIsHidden(true)}>
+          <NavLink to="/">Back To Home</NavLink>
+        </button>
       </div>
     );
   };
