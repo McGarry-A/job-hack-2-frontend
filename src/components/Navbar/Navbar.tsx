@@ -1,8 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { removeActiveUser } from "../../store/userSlice";
 
 const Navbar = () => {
   const user = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+
+  const handleLogOut = () => {
+    dispatch(removeActiveUser("LOGOUT"));
+  };
 
   const renderIsLoggedInTabs = () => {
     const { isLoggedIn } = user;
@@ -11,18 +17,26 @@ const Navbar = () => {
       return (
         <>
           <li>
-            <NavLink to="/register">
+            <NavLink to="/">
               <button className="border-2 px-4 py-1 ml-4 rounded text-gray-50 border-gray-50">
                 My Account
               </button>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/register">
+            <NavLink to="/">
               <button className="border-2 px-4 py-1 bg-sky-500 border-sky-500 rounded text-gray-50">
                 Wishlist
               </button>
             </NavLink>
+          </li>
+          <li>
+            <button
+              className="border-2 px-4 py-1 bg-sky-500 border-sky-500 rounded text-gray-50"
+              onClick={() => handleLogOut()}
+            >
+              Logout
+            </button>
           </li>
         </>
       );

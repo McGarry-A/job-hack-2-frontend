@@ -4,7 +4,7 @@ import loginEmail from "../utils/loginEmail";
 import registerEmail from "../utils/registerEmail";
 import GoogleAuth from "../components/GoogleAuth";
 import { NavLink } from "react-router-dom";
-import { setActiveCustomer, userInterface } from "../store/userSlice";
+import { setActiveUser, userInterface } from "../store/userSlice";
 import { useAppDispatch } from "../store";
 
 interface props {
@@ -48,7 +48,7 @@ const Register = ({ isRegister = true }: props) => {
       return;
     }
 
-    dispatch(setActiveCustomer(user));
+    dispatch(setActiveUser(user));
     console.log("logged in!");
   };
 

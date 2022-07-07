@@ -37,7 +37,7 @@ const userSlice = createSlice({
     name: "user",
     initialState: initialState,
     reducers: {
-        setActiveCustomer: (state: userInterface, action: PayloadAction<userInterface>) => {
+        setActiveUser: (state: userInterface, action: PayloadAction<userInterface>) => {
             return state = {
                 isLoggedIn: true,
                 user: {
@@ -51,8 +51,10 @@ const userSlice = createSlice({
                 }
             }
         },
-        removeActiveCustomer: (state: userInterface, action: PayloadAction<string>) => {
-            return state
+        removeActiveUser: (state: userInterface, action: PayloadAction<string>) => {
+            if (action.payload === "LOGOUT") {
+                return state = initialState
+            }
         },
         addToLikedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {
             return state
@@ -64,8 +66,8 @@ const userSlice = createSlice({
 })
 
 export const { 
-        setActiveCustomer, 
-        removeActiveCustomer, 
+        setActiveUser, 
+        removeActiveUser, 
         addToAppliedJobs, 
         addToLikedJobs
      } = userSlice.actions
