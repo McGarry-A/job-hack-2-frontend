@@ -57,7 +57,16 @@ const userSlice = createSlice({
             }
         },
         addToLikedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {
-            return state
+            return state = {
+                ...state,
+                savedJobs: {
+                    ...state.savedJobs,
+                    liked: {
+                        ...state.savedJobs.liked,
+                        ...action.payload
+                    }
+                }
+            }
         },
         addToAppliedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {
             return state

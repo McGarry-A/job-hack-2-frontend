@@ -11,7 +11,11 @@ const Navbar = () => {
   };
 
   const renderIsLoggedInTabs = () => {
-    const { isLoggedIn } = user;
+    const { isLoggedIn, savedJobs } = user;
+
+    const jobsCount =
+      Object.values(savedJobs.applied).length +
+      Object.values(savedJobs.liked).length;
 
     if (isLoggedIn === true) {
       return (
@@ -25,8 +29,11 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink to="/">
-              <button className="border-2 px-4 py-1 bg-sky-500 border-sky-500 rounded text-gray-50">
-                Wishlist
+              <button className="border-2 px-4 py-1 bg-sky-500 border-sky-500 rounded text-gray-50 relative">
+                My Jobs
+                <span className="absolute -top-3 -right-2 bg-red-600 px-1 text-sm font-semibold rounded-[50%] flex items-center justify-center">
+                  {jobsCount}
+                </span>
               </button>
             </NavLink>
           </li>
