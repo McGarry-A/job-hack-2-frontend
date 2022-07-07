@@ -6,10 +6,10 @@ import { addToLikedJobs } from "../../store/userSlice";
 
 interface props {
   el: JobType;
-  index: number;
+  key: number;
 }
 
-const HomeJobCard = ({ el, index }: props) => {
+const HomeJobCard = ({ el, key }: props) => {
   const [showAddToWishList, setShowAddToWishList] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
@@ -27,7 +27,7 @@ const HomeJobCard = ({ el, index }: props) => {
 
   return (
     <div
-      key={index}
+      key={key}
       className="border flex hover:cursor-pointer hover:shadow rounded border-l-4 overflow-hidden"
       onMouseEnter={() => setShowAddToWishList(true)}
       onMouseLeave={() => setShowAddToWishList(false)}

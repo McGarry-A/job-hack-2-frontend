@@ -8,8 +8,8 @@ export interface userInterface {
         email: string;
     }
     savedJobs: {
-        liked: JobInterface[];
-        applied: JobInterface[];
+        likedJobs: JobInterface[];
+        appliedJobs: JobInterface[];
     },
 }
 
@@ -28,8 +28,8 @@ const initialState: userInterface = {
         email: ""
     },
     savedJobs: {
-        liked: [],
-        applied: []
+        likedJobs: [],
+        appliedJobs: []
     }
 }
 
@@ -46,13 +46,13 @@ const userSlice = createSlice({
                     email: action.payload.user.email
                 },
                 savedJobs: {
-                    liked: [],
-                    applied: [],
+                    likedJobs: [],
+                    appliedJobs: [],
                 }
             }
         },
-        removeActiveUser: (state: userInterface, action: PayloadAction<string>) => {
-            if (action.payload === "LOGOUT") {
+        removeActiveUser: (state: userInterface, action: PayloadAction<{type: string}>) => {
+            if (action.type === "LOGOUT") {
                 return state = initialState
             }
         },
@@ -61,15 +61,25 @@ const userSlice = createSlice({
                 ...state,
                 savedJobs: {
                     ...state.savedJobs,
-                    liked: {
-                        ...state.savedJobs.liked,
-                        ...action.payload
-                    }
+                    likedJobs: [
+
+                        ...state.savedJobs.likedJobs,
+                        action.payload
+                    ]
                 }
             }
         },
         addToAppliedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {
-            return state
+            return state = {
+                ...state,
+                savedJobs: {
+                    ...state.savedJobs,
+                    appliedJobs: {
+                        ...state.savedJobs.appliedJobs,
+                        ...action.payload
+                    }
+                }
+            }
         }
     }
 })

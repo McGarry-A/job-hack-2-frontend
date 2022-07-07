@@ -36,6 +36,7 @@ const Home = () => {
     title: job,
     location: location,
     fullTime: fullTime,
+    freelance: freelance,
     partTime: partTime,
     graduate: graduate,
     internship: internship,

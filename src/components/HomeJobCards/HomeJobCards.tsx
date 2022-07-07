@@ -19,7 +19,7 @@ const HomeJobCards = (props: props) => {
           <div>Loading...</div>
         ) : (
           jobs.map((el: JobType, index: number) => {
-            return <HomeJobCard el={el} index={index} />;
+            return <HomeJobCard el={el} key={index} />;
           })
         )}
       </div>

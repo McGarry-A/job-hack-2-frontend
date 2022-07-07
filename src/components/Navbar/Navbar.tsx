@@ -7,15 +7,15 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
 
   const handleLogOut = () => {
-    dispatch(removeActiveUser("LOGOUT"));
+    dispatch(removeActiveUser({ type: "LOGOUT" }));
   };
 
   const renderIsLoggedInTabs = () => {
     const { isLoggedIn, savedJobs } = user;
 
     const jobsCount =
-      Object.values(savedJobs.applied).length +
-      Object.values(savedJobs.liked).length;
+      Object.values(savedJobs.appliedJobs).length +
+      Object.values(savedJobs.likedJobs).length;
 
     if (isLoggedIn === true) {
       return (
@@ -49,6 +49,7 @@ const Navbar = () => {
       );
     }
   };
+
   const renderNotLoggedInTabs = () => {
     const { isLoggedIn } = user;
 
@@ -82,7 +83,6 @@ const Navbar = () => {
           <li className="cursor-pointer">
             <NavLink to="/">Home</NavLink>
           </li>
-
           <li className="cursor-pointer">
             <NavLink to="/about">About</NavLink>
           </li>

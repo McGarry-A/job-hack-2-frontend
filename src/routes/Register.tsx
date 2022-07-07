@@ -5,7 +5,7 @@ import registerEmail from "../utils/registerEmail";
 import GoogleAuth from "../components/GoogleAuth";
 import { NavLink } from "react-router-dom";
 import { setActiveUser, userInterface } from "../store/userSlice";
-import { useAppDispatch } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 
 interface props {
   isRegister?: boolean;
@@ -23,6 +23,7 @@ const Register = ({ isRegister = true }: props) => {
   const [lastName, setLastName] = useState<string>();
 
   const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state.user);
 
   useEffect(() => {
     setError("");
@@ -41,7 +42,6 @@ const Register = ({ isRegister = true }: props) => {
       email,
       password,
     });
-    console.log(user);
 
     if (typeof user === "boolean" || typeof user === "undefined") {
       setError("Failed logging in");
@@ -49,6 +49,8 @@ const Register = ({ isRegister = true }: props) => {
     }
 
     dispatch(setActiveUser(user));
+    console.log(state);
+    console.log(user);
     console.log("logged in!");
   };
 
