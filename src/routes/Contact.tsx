@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar/Navbar";
 import { GrFormNext } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import Modal from "../components/Modal/Modal";
 
 const Contact = () => {
   const [subject, setSubject] = useState<string>();
@@ -11,19 +12,25 @@ const Contact = () => {
   const [email, setEmail] = useState<string>();
   const [phone, setPhone] = useState<string>();
 
+  const [modalIsHidden, setModalIsHidden] = useState<boolean>(true);
+  const [messageSuccessSent, setMessageSuccessSent] = useState<boolean>(false);
+
   const [error, setError] = useState<string>("");
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (!subject || !message || !firstName || !lastName || !email || !phone) {
       setError("Please ensure all fields are filled");
     }
 
     // handle send email using emailjs
+
+    setMessageSuccessSent(true);
   };
 
   const renderBreadcrumbs = () => {
     return (
-      <div className="flex space-x-2 items-center justify-center my-24">
+      <div className="flex space-x-2 items-center justify-center my-12">
         <NavLink
           to="/"
           className="opacity-50 text-xs uppercase tracking-widest mt-1"
@@ -90,7 +97,7 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto bg-white rounded flex mb-24">
         <form
           className="grid grid-cols-2 gap-3 p-8 flex-grow"
-          onSubmit={handleFormSubmit}
+          onSubmit={(e) => handleFormSubmit(e)}
         >
           <div className="gird-cols-2">
             {error && <p className="text-red-500">*{error}</p>}
@@ -169,12 +176,30 @@ const Contact = () => {
     );
   };
 
+  const renderModal = () => {
+    if (messageSuccessSent) {
+      return <Modal isHidden={modalIsHidden}>{renderModalContent()}</Modal>;
+    }
+  };
+
+  const renderModalContent = () => {
+    return (
+      <div>
+        <h3>Thank you for reaching out.</h3>
+        <p>
+          Our team will be reviewing your email, and will be back in touch as
+          soon as possible.
+        </p>
+      </div>
+    );
+  };
   return (
     <div>
       <Navbar />
       {renderBreadcrumbs()}
       {renderHero()}
       {renderForm()}
+      {renderModal()}
     </div>
   );
 };

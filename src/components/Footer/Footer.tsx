@@ -20,7 +20,10 @@ const Footer = () => {
       <div className="flex">
         {icons.map((El, index) => {
           return (
-            <div className="cursor-pointer text-gray-600 hover:text-sky-500 mt-2 transition duration-150">
+            <div
+              className="cursor-pointer text-gray-600 hover:text-sky-500 mt-2 transition duration-150"
+              key={index}
+            >
               <El size="3rem" className="mr-2 " />
             </div>
           );

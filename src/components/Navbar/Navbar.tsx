@@ -18,14 +18,14 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink to="/register">
-              <button className="border-2 px-4 py-2 ml-4 rounded text-gray-50 border-gray-50">
+              <button className="border-2 px-4 py-1 ml-4 rounded text-gray-50 border-gray-50">
                 Log In
               </button>
             </NavLink>
           </li>
           <li>
             <NavLink to="/register">
-              <button className="border-2 px-4 py-2 bg-sky-500 border-sky-500 rounded text-gray-50">
+              <button className="border-2 px-4 py-1 bg-sky-500 border-sky-500 rounded text-gray-50">
                 Register
               </button>
             </NavLink>
