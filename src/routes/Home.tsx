@@ -31,15 +31,25 @@ const Home = () => {
 
   const paginationOptions = { pagination, setPagination };
 
+  const options = [
+    { name: "Freelance", state: freelance, setState: setFreelance },
+    { name: "Full-Time", state: fullTime, setState: setFullTime },
+    { name: "Part-Time", state: partTime, setState: setPartTime },
+    { name: "Graduate", state: graduate, setState: setGraduate },
+    { name: "Internship", state: internship, setState: setInternship },
+  ];
+
+  const optionsForAdzuna = options.map((el) => {
+    return { name: el.name, state: el.state };
+  });
+
+  console.log(optionsForAdzuna);
+
   const useJobs = useAdzuna({
     page: pagination,
     title: job,
     location: location,
-    fullTime: fullTime,
-    freelance: freelance,
-    partTime: partTime,
-    graduate: graduate,
-    internship: internship,
+    options: optionsForAdzuna,
   });
 
   const { error, isLoading, jobs } = useJobs;
@@ -54,14 +64,6 @@ const Home = () => {
   };
 
   const renderOptions = () => {
-    const options = [
-      { name: "Freelance", state: freelance, setState: setFreelance },
-      { name: "Full-Time", state: fullTime, setState: setFullTime },
-      { name: "Part-Time", state: partTime, setState: setPartTime },
-      { name: "Graduate", state: graduate, setState: setGraduate },
-      { name: "Internship", state: internship, setState: setInternship },
-    ];
-
     return (
       <div className="space-x-4 flex my-3 items-center">
         {options.map((el, index) => {

@@ -10,14 +10,14 @@ interface props {
   page?: number;
   title?: string;
   location?: string;
-  fullTime?: boolean;
-  partTime?: boolean;
-  graduate?: boolean;
-  internship?: boolean;
-  freelance?: boolean;
+  options: {
+    name: string, state: boolean
+  }[]
 }
 
-const useAdzuna = ({page, title, location, fullTime, partTime, freelance, graduate, internship}: props) => {
+
+
+const useAdzuna = ({page, title, location, options}: props) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<unknown>();
   const [fullJobs, setFullJobs] = useState<ApiInterface>();
@@ -25,16 +25,12 @@ const useAdzuna = ({page, title, location, fullTime, partTime, freelance, gradua
 
   const [url, setUrl] = useState<string | null>(null)
 
-  // const allOptions = [fullTime, partTime, freelance, graduate, internship]
-  // const filteredOptions = allOptions.filter((el) => el === false)
+  console.log(options)
 
   useEffect(() => {
     const setUrlParams = () => {  
       const titleString = `&what=${title}`
       const locationString = `&where=${location}`
-      // const options = filteredOptions.map(el => {
-      //   return `%20${el}`
-      // }).toString()
 
       const baseUrl = `https://api.adzuna.com/v1/api/jobs/gb/search/${page}?app_id=14758e80&app_key=b7bdf1e68baa9af01ec4a64dbfe8d2b3&results_per_page=10${titleString}${locationString}`
 
