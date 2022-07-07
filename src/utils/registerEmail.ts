@@ -5,10 +5,14 @@ interface props {
     password: string;
 }
 
-const register = async ({ firstName, lastName, email, password}: props) => {
-    try {
-      const data = await fetch("http://localhost:5000/user", {
-        method: "POST",
+const registerEmail = async ({ firstName, lastName, email, password}: props) => {
+
+  try {
+    const data = await fetch("http://localhost:5001/user", {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"
+      },
         body: JSON.stringify({
           first_name: firstName,
           last_name: lastName,
@@ -37,4 +41,4 @@ const register = async ({ firstName, lastName, email, password}: props) => {
     }
   };
 
-export default register;
+export default registerEmail;

@@ -51,6 +51,12 @@ const Register = ({ isRegister = true }: props) => {
     registerEmail({ firstName, lastName, email, password });
   };
 
+  const renderPageHeading = () => (
+    <div className="flex justify-center px-12 pt-12">
+      <h2 className="text-5xl font-semibold">JobHack-2</h2>
+    </div>
+  );
+
   const renderNameFields = () => {
     if (!register) {
       return (
@@ -114,12 +120,12 @@ const Register = ({ isRegister = true }: props) => {
   };
 
   const renderSwitchViews = () => {
-    if (!register) {
+    if (register) {
       return (
         <p className="mt-2 text-center text-sm opacity-70">
           Don't have an account?{" "}
           <span
-            onClick={() => setRegister(true)}
+            onClick={() => setRegister(false)}
             className="text-sky-500 cursor-pointer font-semibold"
           >
             Register
@@ -131,7 +137,7 @@ const Register = ({ isRegister = true }: props) => {
       <p className="mt-2 text-center text-sm opacity-70">
         Already have an account?{" "}
         <span
-          onClick={() => setRegister(false)}
+          onClick={() => setRegister(true)}
           className="text-sky-500 cursor-pointer font-semibold"
         >
           Log in
@@ -141,7 +147,8 @@ const Register = ({ isRegister = true }: props) => {
   };
 
   return (
-    <>
+    <div className="">
+      {renderPageHeading()}
       <div className="max-w-6xl w-full mx-auto p-10 md:p-24 flex">
         <form
           className="p-12 border max-w-xl w-full"
@@ -186,14 +193,14 @@ const Register = ({ isRegister = true }: props) => {
             type="submit"
             className="w-full py-2 text-semibold bg-sky-400 text-gray-50 rounded mt-2"
           >
-            Sign in
+            {register ? "Sign in" : "Register"}
           </button>
           <GoogleAuth />
           {renderSwitchViews()}
         </form>
         <div className="bg-registerHero w-full hidden md:flex flex-grow border"></div>
       </div>
-    </>
+    </div>
   );
 };
 
