@@ -12,16 +12,12 @@ import Register from "./routes/Register";
 const ContentWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  return (
-    <div className="max-w-[1920px] mx-auto bg-gradient-to-b from-[#f2f2f2] to-[#ffffff] -z-10">
-      {children}
-    </div>
-  );
+  return <div className="max-w-[1920px] mx-auto -z-10">{children}</div>;
 };
 
 const App = () => {
   return (
-    <div className="w-screen h-screen font-leagueSpartan">
+    <div className="w-screen h-screen font-leagueSpartan min-h-100vh bg-gradient-to-b from-[#f2f2f2] to-[#ffffff]">
       <ContentWrapper>
         <Routes>
           <Route path="/" element={<Home />} />

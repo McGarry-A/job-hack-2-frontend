@@ -33,7 +33,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="border-t flex font-sans justify-around p-4 space-x-3">
+    <footer className="border-t flex font-sans justify-around p-4 space-x-3 absolute bottom-0 w-[1920px]">
       <nav className="flex flex-col my-2">
         <ul className="flex flex-col space-y-2">
           <li className="text-xl font-bold">Pages</li>

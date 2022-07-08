@@ -1,10 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { removeActiveUser } from "../../store/userSlice";
 
 const Navbar = () => {
   const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const location = useLocation();
+
+  const [isHome] = useState<boolean>(location.pathname === "/" ? true : false);
 
   const handleLogOut = () => {
     dispatch(removeActiveUser({ type: "LOGOUT" }));
@@ -39,14 +43,20 @@ const Navbar = () => {
         <>
           <li>
             <NavLink to="/my-account">
-              <button className="border-2 px-4 py-1 ml-4 rounded text-gray-50 border-gray-50">
+              <button
+                className={`border-2 px-4 py-1 ml-4 rounded ${
+                  isHome
+                    ? "text-gray-50 border-gray-50 hover:text-gray-200 hover:border-gray-200"
+                    : "text-sky-600 border-sky-600 hover:text-sky-500 hover:border-sky-500"
+                }`}
+              >
                 My Account
               </button>
             </NavLink>
           </li>
           <li>
             <NavLink to="/my-jobs">
-              <button className="border-2 px-4 py-1 bg-sky-500 border-sky-500 rounded text-gray-50 relative">
+              <button className="border-2 px-4 py-1 hover:bg-sky-400 hover:border-sky-400 bg-sky-500 border-sky-500 rounded text-gray-50 relative">
                 My Jobs
                 <span className="absolute -top-3 -right-2 bg-red-600 px-1 text-sm font-semibold rounded-[50%] flex items-center justify-center">
                   {jobsCount}
@@ -75,7 +85,13 @@ const Navbar = () => {
         <>
           <li>
             <NavLink to="/register">
-              <button className="border-2 px-4 py-1 ml-4 rounded text-gray-50 border-gray-50">
+              <button
+                className={`border-2 px-4 py-1 ml-4 rounded ${
+                  isHome
+                    ? "text-gray-50 border-gray-50 hover:text-gray-200 hover:border-gray-200"
+                    : "text-sky-600 border-sky-600 hover:text-sky-500 hover:border-sky-500"
+                }`}
+              >
                 Log In
               </button>
             </NavLink>
