@@ -3,8 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer/Footer";
 import About from "./routes/About";
+import Account from "./routes/Account";
 import Contact from "./routes/Contact";
 import Home from "./routes/Home";
+import MyJobs from "./routes/MyJobs";
 import Register from "./routes/Register";
 
 const ContentWrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -26,6 +28,8 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/my-jobs" element={<MyJobs />} />
+          <Route path="/my-account" element={<Account />} />
         </Routes>
         <Footer />
       </ContentWrapper>

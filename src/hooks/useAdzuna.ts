@@ -25,8 +25,6 @@ const useAdzuna = ({page, title, location, options}: props) => {
 
   const [url, setUrl] = useState<string | null>(null)
 
-  console.log(options)
-
   useEffect(() => {
     const setUrlParams = () => {  
       const titleString = `&what=${title}`

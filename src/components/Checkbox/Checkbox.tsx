@@ -10,7 +10,7 @@ const Checkbox: React.FC<Props> = ({ name, isChecked, setIsChecked }) => {
   return (
     <div
       className={`flex items-center border py-1 px-4 rounded-3xl text-xs lg:text-base ${
-        isChecked ? "bg-blue-400" : "bg-sky-300"
+        isChecked ? "bg-sky-400" : "bg-sky-300"
       } cursor-pointer hover:bg-sky-400`}
       onClick={() => setIsChecked(!isChecked)}
     >

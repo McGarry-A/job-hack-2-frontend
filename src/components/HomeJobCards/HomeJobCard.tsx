@@ -36,7 +36,9 @@ const HomeJobCard = ({ el, key }: props) => {
         <AiFillApple size="3rem" />
       </div>
       <div className="flex flex-col justify-center py-2">
-        <h5 className="text-2xl tracking-tight text-gray-900">{el.title}</h5>
+        <h5 className="text-2xl tracking-tight text-gray-900 whitespace-nowrap">
+          {el.title}
+        </h5>
         <p className="opacity-50 text-lg">{el.company.display_name}</p>
       </div>
       <div className="flex flex-col text-right ml-auto mr-3 py-2">

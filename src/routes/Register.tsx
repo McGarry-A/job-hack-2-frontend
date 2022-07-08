@@ -6,6 +6,7 @@ import GoogleAuth from "../components/GoogleAuth";
 import { NavLink } from "react-router-dom";
 import { setActiveUser, userInterface } from "../store/userSlice";
 import { useAppDispatch, useAppSelector } from "../store";
+import { useNavigate } from "react-router-dom";
 
 interface props {
   isRegister?: boolean;
@@ -24,6 +25,7 @@ const Register = ({ isRegister = true }: props) => {
 
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setError("");
@@ -49,6 +51,7 @@ const Register = ({ isRegister = true }: props) => {
     }
 
     dispatch(setActiveUser(user));
+    navigate("/");
     console.log(state);
     console.log(user);
     console.log("logged in!");

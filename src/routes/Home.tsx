@@ -43,8 +43,6 @@ const Home = () => {
     return { name: el.name, state: el.state };
   });
 
-  console.log(optionsForAdzuna);
-
   const useJobs = useAdzuna({
     page: pagination,
     title: job,
