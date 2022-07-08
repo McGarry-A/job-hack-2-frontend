@@ -7,6 +7,8 @@ import { NavLink } from "react-router-dom";
 import { setActiveUser, userInterface } from "../store/userSlice";
 import { useAppDispatch, useAppSelector } from "../store";
 import { useNavigate } from "react-router-dom";
+import { GrFormNext } from "react-icons/gr";
+import Navbar from "../components/Navbar/Navbar";
 
 interface props {
   isRegister?: boolean;
@@ -73,11 +75,33 @@ const Register = ({ isRegister = true }: props) => {
     registerEmail({ firstName, lastName, email, password });
   };
 
-  const renderPageHeading = () => (
-    <div className="flex justify-center px-12 pt-12">
-      <h2 className="text-5xl font-semibold">JobHack-2</h2>
-    </div>
-  );
+  const renderBreadcrumbs = () => {
+    return (
+      <div className="flex space-x-2 items-center justify-center my-12">
+        <NavLink
+          to="/"
+          className="opacity-50 text-xs uppercase tracking-widest mt-1"
+        >
+          Home
+        </NavLink>
+        <GrFormNext size={"1.3rem"} className="opacity-50" />
+        <NavLink
+          to="/register"
+          className="text-xs uppercase tracking-widest mt-1"
+        >
+          Register
+        </NavLink>
+      </div>
+    );
+  };
+
+  const renderHero = () => {
+    return (
+      <div className="my-10 mx-auto text-center">
+        <h2 className="text-5xl font-semibold">Contact JobHack</h2>
+      </div>
+    );
+  };
 
   const renderHomeLink = () => (
     <div className="flex space-x-2 items-center justify-center my-12">
@@ -181,8 +205,9 @@ const Register = ({ isRegister = true }: props) => {
 
   return (
     <div className="">
-      {renderPageHeading()}
-      {renderHomeLink()}
+      <Navbar />
+      {renderBreadcrumbs()}
+      {renderHero()}
       <div className="max-w-6xl w-full mx-auto pb-10 flex">
         <form
           className="p-12 border max-w-xl w-full"

@@ -18,7 +18,9 @@ const Account = () => {
   }, []);
 
   const handleDeleteCustomer = () => {};
-  const handleUpdateCustomer = () => {};
+  const handleUpdateCustomer = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
 
   const renderBreadcrumbs = () => (
     <div className="flex space-x-2 items-center justify-center my-12">
@@ -49,7 +51,10 @@ const Account = () => {
 
   const renderUserDetails = () => {
     return (
-      <div className="grid grid-cols-2 w-full mx-auto gap-3 ">
+      <form
+        className="grid grid-cols-2 w-full mx-auto gap-3"
+        onSubmit={(e) => handleUpdateCustomer(e)}
+      >
         {renderSectionHeader("Edit user information")}
         <div>
           <label className="block">First Name</label>
@@ -106,7 +111,7 @@ const Account = () => {
             Update User
           </button>
         </div>
-      </div>
+      </form>
     );
   };
 
