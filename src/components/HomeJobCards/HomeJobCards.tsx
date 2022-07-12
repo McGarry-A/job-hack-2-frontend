@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { JobType } from "../../hooks/useAdzuna";
+import Modal from "../Modal/Modal";
 import HomeJobCard from "./HomeJobCard";
 
 interface props {

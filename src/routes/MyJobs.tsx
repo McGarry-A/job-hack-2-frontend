@@ -31,60 +31,60 @@ const MyJobs = () => {
     </div>
   );
 
-  type droppableType = { title: string; id: string };
+  // type droppableType = { title: string; id: string };
 
-  const rows = [
-    {
-      title: "Liked",
-      id: "1",
-    },
-    {
-      title: "Applied",
-      id: "2",
-    },
-    {
-      title: "Interviewed",
-      id: "3",
-    },
-  ];
+  // const rows = [
+  //   {
+  //     title: "Liked",
+  //     id: "1",
+  //   },
+  //   {
+  //     title: "Applied",
+  //     id: "2",
+  //   },
+  //   {
+  //     title: "Interviewed",
+  //     id: "3",
+  //   },
+  // ];
 
-  const renderRow = (props: droppableType) => {
-    const placeHolderCards = ["", "", "", "", ""];
-    return (
-      <div className="my-5">
-        <div>
-          <h3 className="text-2xl">{props.title}</h3>
-        </div>
-        <Droppable droppableId={props.id}>
-          {(provided) => (
-            <div
-              className="flex space-x-8 overflow-x-scroll"
-              innerRef={provided.innerRef}
-              {...provided.droppableProps}
-            >
-              {placeHolderCards.map((el, index) => (
-                <div
-                  className="bg-gray-200 cursor-grabbing min-w-md w-full h-[250px] draggable"
-                  key={index}
-                ></div>
-              ))}
-            </div>
-          )}
-        </Droppable>
-      </div>
-    );
-  };
+  // const renderRow = (props: droppableType) => {
+  //   const placeHolderCards = ["", "", "", "", ""];
+  //   return (
+  //     <div className="my-5">
+  //       <div>
+  //         <h3 className="text-2xl">{props.title}</h3>
+  //       </div>
+  //       <Droppable droppableId={props.id}>
+  //         {(provided) => (
+  //           <div
+  //             className="flex space-x-8 overflow-x-scroll"
+  //             innerRef={provided.innerRef}
+  //             {...provided.droppableProps}
+  //           >
+  //             {placeHolderCards.map((el, index) => (
+  //               <div
+  //                 className="bg-gray-200 cursor-grabbing min-w-md w-full h-[250px] draggable"
+  //                 key={index}
+  //               ></div>
+  //             ))}
+  //           </div>
+  //         )}
+  //       </Droppable>
+  //     </div>
+  //   );
+  // };
 
-  const onDragEnd = (result: DropResult) => {};
+  // const onDragEnd = (result: DropResult) => {};
 
   return (
     <div>
       <Navbar />
       {renderBreadcrumbs()}
       {renderHeader()}
-      <DragDropContext onDragEnd={onDragEnd}>
+      {/* <DragDropContext onDragEnd={onDragEnd}>
         {rows.map(renderRow)}
-      </DragDropContext>
+      </DragDropContext> */}
     </div>
   );
 };
