@@ -28,13 +28,7 @@ const registerEmail = async ({ firstName, lastName, email, password}: props) => 
         console.error("Error response from server");
         return;
       }
-
-      // Successfully registered
-      // Add user to global state
-      console.log(res.message);
-      console.log(res.newUser);
       return true
-
     } catch (error) {
       console.error(error);
       return false
