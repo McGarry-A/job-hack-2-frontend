@@ -17,7 +17,7 @@ const ContentWrapper: React.FC<{ children: React.ReactNode }> = ({
 
 const App = () => {
   return (
-    <div className="w-screen h-screen font-leagueSpartan min-h-100vh bg-gradient-to-b from-[#f2f2f2] to-[#ffffff]">
+    <div className="w-screen font-leagueSpartan bg-gradient-to-b from-[#f2f2f2] to-[#ffffff]">
       <ContentWrapper>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,7 +27,6 @@ const App = () => {
           <Route path="/my-jobs" element={<MyJobs />} />
           <Route path="/my-account" element={<Account />} />
         </Routes>
-        <Footer />
       </ContentWrapper>
     </div>
   );

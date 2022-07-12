@@ -8,6 +8,7 @@ import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper
 import HomeJobCards from "../components/HomeJobCards/HomeJobCards";
 import useAdzuna, { JobType } from "../hooks/useAdzuna";
 import useReed from "../hooks/useReed";
+import Footer from "../components/Footer/Footer";
 // import GoogleAuth from "../components/GoogleAuth";
 
 type JobsState = {
@@ -151,19 +152,20 @@ const Home = () => {
           </PaginationWrapper>
         </ForegroundWrapper>
       </BGWrapper>
+      <Footer />
     </div>
   );
 };
 
 const BGWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <div className="relative h-screen">{children}</div>;
+  return <div className="relative">{children}</div>;
 };
 
 const ForegroundWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <div className="w-4/5 mx-auto bg-white p-4 shadow-lg rounded absolute -top-10 left-0 right-0">
+    <div className="w-4/5 mx-auto bg-white p-4 shadow-lg rounded -mt-14 mb-14">
       {children}
     </div>
   );

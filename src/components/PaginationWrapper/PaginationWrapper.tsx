@@ -14,7 +14,7 @@ const PaginationWrapper: React.FC<props> = (props) => {
   };
 
   return (
-    <div>
+    <div className="">
       {props.children}
       <Pagination {...paginationProps} />
     </div>

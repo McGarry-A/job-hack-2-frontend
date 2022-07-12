@@ -83,7 +83,7 @@ const Navbar = () => {
     if (isLoggedIn === false) {
       return (
         <>
-          <li>
+          {/* <li>
             <NavLink to="/register">
               <button
                 className={`border-2 px-4 py-1 ml-4 rounded ${
@@ -95,11 +95,11 @@ const Navbar = () => {
                 Log In
               </button>
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink to="/register">
               <button className="border-2 px-4 py-1 bg-sky-500 border-sky-500 rounded text-gray-50">
-                Register
+                My Account
               </button>
             </NavLink>
           </li>

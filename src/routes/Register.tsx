@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "../store";
 import { useNavigate } from "react-router-dom";
 import { GrFormNext } from "react-icons/gr";
 import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
 
 interface props {
   isRegister?: boolean;
@@ -204,7 +205,7 @@ const Register = ({ isRegister = true }: props) => {
   };
 
   return (
-    <div className="">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       {renderBreadcrumbs()}
       {renderHero()}
@@ -261,6 +262,7 @@ const Register = ({ isRegister = true }: props) => {
         </form>
         <div className="bg-registerHero w-full hidden md:flex flex-grow border"></div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { GrFormNext } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Modal from "../components/Modal/Modal";
+import Footer from "../components/Footer/Footer";
 
 const Contact = () => {
   const [subject, setSubject] = useState<string>();
@@ -212,6 +213,7 @@ const Contact = () => {
       {renderHero()}
       {renderForm()}
       {renderModal()}
+      <Footer />
     </div>
   );
 };
