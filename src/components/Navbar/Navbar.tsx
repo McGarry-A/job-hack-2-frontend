@@ -10,8 +10,8 @@ const Navbar = () => {
 
   const [isHome] = useState<boolean>(location.pathname === "/" ? true : false);
 
-  const handleLogOut = () => {
-    dispatch(removeActiveUser({ type: "LOGOUT" }));
+  const handleLogout = () => {
+    dispatch(removeActiveUser());
   };
 
   const renderWelcomeName = () => {
@@ -42,9 +42,21 @@ const Navbar = () => {
       return (
         <>
           <li>
+            <button
+              onClick={() => handleLogout()}
+              className={`border-2 px-4 py-1 ml-4 rounded ${
+                isHome
+                  ? "text-gray-50 border-gray-50 hover:text-gray-200 hover:border-gray-200"
+                  : "text-rose-600 border-rose-600 hover:text-rose-500 hover:border-rose-500"
+              }`}
+            >
+              Log out
+            </button>
+          </li>
+          <li>
             <NavLink to="/my-account">
               <button
-                className={`border-2 px-4 py-1 ml-4 rounded ${
+                className={`border-2 px-4 py-1 rounded ${
                   isHome
                     ? "text-gray-50 border-gray-50 hover:text-gray-200 hover:border-gray-200"
                     : "text-sky-600 border-sky-600 hover:text-sky-500 hover:border-sky-500"

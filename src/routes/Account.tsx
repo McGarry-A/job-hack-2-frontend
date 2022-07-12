@@ -15,9 +15,9 @@ const Account = () => {
     if (firstNameRef.current) firstNameRef.current.value = state.user.firstName;
     if (lastNameRef.current) lastNameRef.current.value = state.user.lastName;
     if (emailRef.current) emailRef.current.value = state.user.email;
-  }, []);
+  });
 
-  const handleDeleteCustomer = () => {};
+  // const handleDeleteCustomer = () => {};
   const handleUpdateCustomer = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };

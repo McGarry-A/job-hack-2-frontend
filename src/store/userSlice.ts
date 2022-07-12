@@ -51,10 +51,10 @@ const userSlice = createSlice({
                 }
             }
         },
-        removeActiveUser: (state: userInterface, action: PayloadAction<{type: string}>) => {
-            if (action.type === "LOGOUT") {
+        removeActiveUser: (state: userInterface) => {
+            
                 return state = initialState
-            }
+            
         },
         addToLikedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {
             return state = {
