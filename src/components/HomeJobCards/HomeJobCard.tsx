@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiFillApple } from "react-icons/ai";
 import { JobType } from "../../hooks/useAdzuna";
-import { useAppDispatch } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { addToLikedJobs } from "../../store/userSlice";
 import Modal from "../Modal/Modal";
 
@@ -14,6 +14,7 @@ const HomeJobCard = ({ el }: props) => {
   const [modalIsHidden, setModalIsHidden] = useState<boolean>(true);
   const [showAddToWishList, setShowAddToWishList] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state.user);
 
   const renderModal = (job: JobType) => {
     const {
@@ -54,6 +55,9 @@ const HomeJobCard = ({ el }: props) => {
   };
 
   const handleAddToList = () => {
+    if (!state.isLoggedIn)
+      return console.log("plase log-in before adding to wishlist");
+
     const jobToAdd = {
       title: el.title,
       company: el.company.display_name,
@@ -70,25 +74,26 @@ const HomeJobCard = ({ el }: props) => {
       className="border flex hover:cursor-pointer hover:shadow rounded border-l-4 overflow-hidden"
       onMouseEnter={() => setShowAddToWishList(true)}
       onMouseLeave={() => setShowAddToWishList(false)}
-      onClick={() => setModalIsHidden(false)}
     >
-      <div className="flex justify-center items-center py-2 px-4 mr-4">
-        <AiFillApple size="3rem" />
-      </div>
-      <div className="flex flex-col justify-center py-2">
-        <h5 className="text-2xl tracking-tight text-gray-900 whitespace-nowrap">
-          {el.title}
-        </h5>
-        <p className="opacity-50 text-lg">{el.company.display_name}</p>
-      </div>
-      <div className="flex flex-col text-right ml-auto mr-3 py-2">
-        <h6 className="font-bold tracking-wide text-sky-400">
-          {el.location.display_name}
-        </h6>
-        <p>£{el.salary_max}</p>
-        <p className="text-green-500 font-bold uppercase text-sm">
-          {el.contract_type && el.contract_type.replace("_", "-")}
-        </p>
+      <div onClick={() => setModalIsHidden(false)} className="flex w-full">
+        <div className="flex justify-center items-center py-2 px-4 mr-4">
+          <AiFillApple size="3rem" />
+        </div>
+        <div className="flex flex-col justify-center py-2">
+          <h5 className="text-2xl tracking-tight text-gray-900 whitespace-nowrap">
+            {el.title}
+          </h5>
+          <p className="opacity-50 text-lg">{el.company.display_name}</p>
+        </div>
+        <div className="flex flex-col text-right ml-auto mr-3 py-2">
+          <h6 className="font-bold tracking-wide text-sky-400">
+            {el.location.display_name}
+          </h6>
+          <p>£{el.salary_max}</p>
+          <p className="text-green-500 font-bold uppercase text-sm">
+            {el.contract_type && el.contract_type.replace("_", "-")}
+          </p>
+        </div>
       </div>
       <div
         className={`transition duration-150 flex justify-center font-semibold items-center bg-sky-500 hover:bg-sky-400 text-gray-100 text-sm -p-3 ${

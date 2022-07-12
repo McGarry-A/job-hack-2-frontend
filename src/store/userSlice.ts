@@ -62,7 +62,6 @@ const userSlice = createSlice({
                 savedJobs: {
                     ...state.savedJobs,
                     likedJobs: [
-
                         ...state.savedJobs.likedJobs,
                         action.payload
                     ]
