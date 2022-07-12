@@ -17,13 +17,19 @@ interface props {
 
 
 
-const useAdzuna = ({page, title, location, options}: props) => {
+const useAdzuna = ({ page, title, location, options }: props) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<unknown>();
   const [fullJobs, setFullJobs] = useState<ApiInterface>();
   const [jobs, setJobs] = useState<JobType[]>();
 
   const [url, setUrl] = useState<string | null>(null)
+
+  useEffect(() => {
+    setIsLoading(true)
+    setError("")
+    setJobs(undefined)
+  }, [page, url])
 
   useEffect(() => {
     const setUrlParams = () => {  

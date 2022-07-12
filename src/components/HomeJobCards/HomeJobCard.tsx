@@ -4,6 +4,8 @@ import { JobType } from "../../hooks/useAdzuna";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { addToLikedJobs } from "../../store/userSlice";
 import Modal from "../Modal/Modal";
+import { motion } from "framer-motion";
+import { jobCardVariant } from "../../Animations/JobCard";
 
 interface props {
   el: JobType;
@@ -13,8 +15,9 @@ interface props {
 const HomeJobCard = ({ el }: props) => {
   const [modalIsHidden, setModalIsHidden] = useState<boolean>(true);
   const [showAddToWishList, setShowAddToWishList] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
+
   const state = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
   const renderModal = (job: JobType) => {
     const {
@@ -22,6 +25,7 @@ const HomeJobCard = ({ el }: props) => {
       description,
       company: { display_name: company_name },
       salary_max,
+
       contract_type,
       location: { display_name: location_name },
     } = job;
@@ -70,10 +74,11 @@ const HomeJobCard = ({ el }: props) => {
   };
 
   return (
-    <div
+    <motion.div
       className="border flex hover:cursor-pointer hover:shadow rounded border-l-4 overflow-hidden"
       onMouseEnter={() => setShowAddToWishList(true)}
       onMouseLeave={() => setShowAddToWishList(false)}
+      variants={jobCardVariant}
     >
       <div onClick={() => setModalIsHidden(false)} className="flex w-full">
         <div className="flex justify-center items-center py-2 px-4 mr-4">
@@ -104,7 +109,7 @@ const HomeJobCard = ({ el }: props) => {
         Add To List
       </div>
       {renderModal(el)}
-    </div>
+    </motion.div>
   );
 };
 

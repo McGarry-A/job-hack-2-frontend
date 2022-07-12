@@ -52,8 +52,7 @@ const userSlice = createSlice({
             }
         },
         removeActiveUser: (state: userInterface) => {
-            
-                return state = initialState
+            return state = initialState
             
         },
         addToLikedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {

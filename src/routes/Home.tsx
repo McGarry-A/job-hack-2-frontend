@@ -5,10 +5,15 @@ import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import React, { useEffect, useState } from "react";
 import Checkbox from "../components/Checkbox/Checkbox";
 import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
-import HomeJobCards from "../components/HomeJobCards/HomeJobCards";
 import useAdzuna, { JobType } from "../hooks/useAdzuna";
 import useReed from "../hooks/useReed";
 import Footer from "../components/Footer/Footer";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import HomeJobCard from "../components/HomeJobCards/HomeJobCard";
+import { motion } from "framer-motion";
+import { jobContainerVariant } from "../Animations/JobCard";
+import JobSkeleton from "../components/HomeJobCards/JobSkeleton";
 // import GoogleAuth from "../components/GoogleAuth";
 
 type JobsState = {
@@ -131,13 +136,36 @@ const Home = () => {
   };
 
   const renderCards = () => {
-    if (jobsState && jobsState.jobs) {
-      const { jobs, isLoading, error } = jobsState;
+    if (error) return <p>There was an error rendering the cards</p>;
 
-      return <HomeJobCards jobs={jobs} isLoading={isLoading} error={error} />;
+    const placeHolderArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    if (isLoading) {
+      return (
+        <motion.div
+          className="space-y-4 border-t pt-4"
+          variants={jobContainerVariant}
+          initial="hidden"
+          animate="show"
+        >
+          {placeHolderArray.map((el, index) => {
+            return <JobSkeleton />;
+          })}
+        </motion.div>
+      );
     }
 
-    return <div>Loading...</div>;
+    return (
+      <motion.div
+        className="space-y-4 border-t pt-4"
+        variants={jobContainerVariant}
+        initial="hidden"
+        animate="show"
+      >
+        {jobs!.map((el: JobType, index: number) => {
+          return <HomeJobCard el={el} key={index} />;
+        })}
+      </motion.div>
+    );
   };
 
   return (

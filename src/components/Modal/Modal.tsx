@@ -11,15 +11,12 @@ export interface Props {
 const Modal: React.FC<Props> = ({ children, isHidden, setIsHidden }) => {
   const target = document.getElementById("root")!;
 
-  return isHidden ? (
+  return isHidden === true ? (
     <></>
   ) : (
     ReactDOM.createPortal(
-      <div
-        className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50"
-        onClick={() => setIsHidden(false)}
-      >
-        <div className="max-w-xl w-full bg-white rounded-sm shadow-sm">
+      <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-40">
+        <div className="max-w-xl w-full bg-white rounded-sm shadow-sm z-50">
           <div className="relative px-8 py-10">
             <button className="absolute right-3 top-3">
               <AiOutlineClose
