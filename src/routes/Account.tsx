@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GrFormNext } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
@@ -7,9 +7,14 @@ import { useAppSelector } from "../store";
 const Account = () => {
   const state = useAppSelector((state) => state.user);
 
+  const [error, setError] = useState("");
+
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
+  const currentPassRef = useRef<HTMLInputElement>(null);
+  const newPassRef = useRef<HTMLInputElement>(null);
+  const newPassConfRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (firstNameRef.current) firstNameRef.current.value = state.user.firstName;
@@ -20,6 +25,28 @@ const Account = () => {
   // const handleDeleteCustomer = () => {};
   const handleUpdateCustomer = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const {
+      user: { firstName, lastName, email },
+    } = state;
+
+    if (newPassRef.current !== newPassConfRef.current) {
+      setError("Passwords do not match.");
+    }
+    const user = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+    };
+
+    const newUser = {
+      firstName: firstNameRef.current,
+      lastName: lastNameRef.current,
+      email: emailRef.current,
+      password: currentPassRef.current,
+    };
+
+    return { user, newUser };
   };
 
   const renderBreadcrumbs = () => (
@@ -46,6 +73,7 @@ const Account = () => {
   const renderSectionHeader = (title: string) => (
     <div className="col-span-2 mb-3">
       <h4 className="text-2xl">{title}</h4>
+      {error && <p className="text-sm text-rose-600">*{error}</p>}
     </div>
   );
 

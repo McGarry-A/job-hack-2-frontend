@@ -5,7 +5,7 @@ import registerEmail from "../utils/registerEmail";
 import GoogleAuth from "../components/GoogleAuth";
 import { NavLink } from "react-router-dom";
 import { setActiveUser, userInterface } from "../store/userSlice";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch } from "../store";
 import { useNavigate } from "react-router-dom";
 import { GrFormNext } from "react-icons/gr";
 import Navbar from "../components/Navbar/Navbar";
@@ -27,14 +27,11 @@ const Register = ({ isRegister = true }: props) => {
   const [lastName, setLastName] = useState<string>();
 
   const dispatch = useAppDispatch();
-  const state = useAppSelector((state) => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
     setError("");
   }, [email, password, confirmPassword, firstName, lastName]);
-
-  // const handleGoogleAuth = () => {};
 
   const handleFormSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,9 +52,6 @@ const Register = ({ isRegister = true }: props) => {
 
     dispatch(setActiveUser(user));
     navigate("/");
-    console.log(state);
-    console.log(user);
-    console.log("logged in!");
   };
 
   const handleFormSubmitRegister = (e: React.FormEvent<HTMLFormElement>) => {
@@ -103,17 +97,6 @@ const Register = ({ isRegister = true }: props) => {
       </div>
     );
   };
-
-  const renderHomeLink = () => (
-    <div className="flex space-x-2 items-center justify-center my-12">
-      <NavLink
-        to="/"
-        className="opacity-50 text-xs uppercase tracking-widest mt-1"
-      >
-        Home
-      </NavLink>
-    </div>
-  );
 
   const renderNameFields = () => {
     if (!register) {
@@ -253,7 +236,7 @@ const Register = ({ isRegister = true }: props) => {
           </div>
           <button
             type="submit"
-            className="w-full py-2 text-semibold bg-sky-400 text-gray-50 rounded mt-2"
+            className="w-full py-2 text-semibold bg-sky-400 text-gray-50 rounded mt-2 hover:bg-sky-300"
           >
             {register ? "Sign in" : "Register"}
           </button>

@@ -21,14 +21,17 @@ const Navbar = () => {
     } = user;
     if (isLoggedIn) {
       return (
-        <p>
-          Welcome back,{" "}
-          <span className="font-semibold text-sky-300 tracking-wider">
-            {firstName}
-          </span>
-        </p>
+        <div>
+          <p>
+            Welcome back,{" "}
+            <span className="font-semibold text-sky-300 tracking-wider">
+              {firstName}
+            </span>
+          </p>
+        </div>
       );
     }
+    return <div></div>;
   };
 
   const renderIsLoggedInTabs = () => {
@@ -76,14 +79,6 @@ const Navbar = () => {
               </button>
             </NavLink>
           </li>
-          {/* <li>
-            <button
-              className="border-2 px-4 py-1 bg-sky-500 border-sky-500 rounded text-gray-50"
-              onClick={() => handleLogOut()}
-            >
-              Logout
-            </button>
-          </li> */}
         </>
       );
     }
@@ -95,19 +90,6 @@ const Navbar = () => {
     if (isLoggedIn === false) {
       return (
         <>
-          {/* <li>
-            <NavLink to="/register">
-              <button
-                className={`border-2 px-4 py-1 ml-4 rounded ${
-                  isHome
-                    ? "text-gray-50 border-gray-50 hover:text-gray-200 hover:border-gray-200"
-                    : "text-sky-600 border-sky-600 hover:text-sky-500 hover:border-sky-500"
-                }`}
-              >
-                Log In
-              </button>
-            </NavLink>
-          </li> */}
           <li>
             <NavLink to="/register">
               <button className="border-2 px-4 py-1 bg-sky-500 border-sky-500 rounded text-gray-50">
@@ -120,17 +102,23 @@ const Navbar = () => {
     }
   };
 
+  const renderNavLinks = () => (
+    <>
+      <li className="cursor-pointer">
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li className="cursor-pointer">
+        <NavLink to="/contact">Contact</NavLink>
+      </li>
+    </>
+  );
+
   return (
     <header className="flex justify-between p-8 bg-transparent items-center">
-      <div>{renderWelcomeName()}</div>
+      {renderWelcomeName()}
       <nav className="flex justify-end">
         <ul className="flex space-x-5 items-center">
-          <li className="cursor-pointer">
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li className="cursor-pointer">
-            <NavLink to="/contact">Contact</NavLink>
-          </li>
+          {renderNavLinks()}
           {renderNotLoggedInTabs()}
           {renderIsLoggedInTabs()}
         </ul>

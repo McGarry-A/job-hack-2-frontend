@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Footer from "./components/Footer/Footer";
 import About from "./routes/About";
 import Account from "./routes/Account";
 import Contact from "./routes/Contact";

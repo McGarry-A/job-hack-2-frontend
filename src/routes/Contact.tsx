@@ -14,7 +14,7 @@ const Contact = () => {
   const [phone, setPhone] = useState<string>();
 
   const [modalIsHidden, setModalIsHidden] = useState<boolean>(true);
-  const [messageSuccessSent, setMessageSuccessSent] = useState<boolean>(false);
+  // const [messageSuccessSent, setMessageSuccessSent] = useState<boolean>(false);
 
   const [error, setError] = useState<string>("");
 
@@ -31,7 +31,7 @@ const Contact = () => {
 
     // handle send email using emailjs
 
-    setMessageSuccessSent(true);
+    // setMessageSuccessSent(true);
     setModalIsHidden(false);
   };
 
