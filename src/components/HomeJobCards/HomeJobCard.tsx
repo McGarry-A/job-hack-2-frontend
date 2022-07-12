@@ -3,15 +3,55 @@ import { AiFillApple } from "react-icons/ai";
 import { JobType } from "../../hooks/useAdzuna";
 import { useAppDispatch } from "../../store";
 import { addToLikedJobs } from "../../store/userSlice";
+import Modal from "../Modal/Modal";
 
 interface props {
   el: JobType;
   key: number;
 }
 
-const HomeJobCard = ({ el, key }: props) => {
+const HomeJobCard = ({ el }: props) => {
+  const [modalIsHidden, setModalIsHidden] = useState<boolean>(true);
   const [showAddToWishList, setShowAddToWishList] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+
+  const renderModal = (job: JobType) => {
+    const {
+      title,
+      description,
+      company: { display_name: company_name },
+      salary_max,
+      contract_type,
+      location: { display_name: location_name },
+    } = job;
+
+    return (
+      <Modal isHidden={modalIsHidden} setIsHidden={setModalIsHidden}>
+        <h3 className="text-xl text-sky-600 font-semibold">{title}</h3>
+        <h5 className="text-sm mt-1">At {company_name}</h5>
+        <h5 className="text-right text-sm opacity-70">{location_name}</h5>
+        <h5 className="text-right text-sm opacity-70 mt-1">
+          Salary up to{" "}
+          <span className="text-sky-600 font-semibold">£{salary_max}</span>
+        </h5>
+        {contract_type && (
+          <h5 className="text-right text-sm opacity-70 mt-1">
+            On a <span className="text-sky-600">{contract_type}</span>
+          </h5>
+        )}
+
+        <p className="mt-2 text-sm text-justify">{description}</p>
+        <div className="w-full flex justify-end space-x-4 mt-2">
+          <button className="rounded-sm text-sm px-3 py-2 border-2 border-sky-500 text-sky-500 hover:text-sky-400 hover:border-sky-400">
+            Add to list
+          </button>
+          <button className="rounded-sm text-sm px-3 py-2 border border-sky-500 bg-sky-500 text-gray-50 hover:bg-sky-400 hover:border-sky-400">
+            See More
+          </button>
+        </div>
+      </Modal>
+    );
+  };
 
   const handleAddToList = () => {
     const jobToAdd = {
@@ -27,10 +67,10 @@ const HomeJobCard = ({ el, key }: props) => {
 
   return (
     <div
-      key={key}
       className="border flex hover:cursor-pointer hover:shadow rounded border-l-4 overflow-hidden"
       onMouseEnter={() => setShowAddToWishList(true)}
       onMouseLeave={() => setShowAddToWishList(false)}
+      onClick={() => setModalIsHidden(false)}
     >
       <div className="flex justify-center items-center py-2 px-4 mr-4">
         <AiFillApple size="3rem" />
@@ -58,6 +98,7 @@ const HomeJobCard = ({ el, key }: props) => {
       >
         Add To List
       </div>
+      {renderModal(el)}
     </div>
   );
 };

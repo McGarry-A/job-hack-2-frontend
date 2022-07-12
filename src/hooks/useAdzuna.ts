@@ -40,7 +40,6 @@ const useAdzuna = ({page, title, location, options}: props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-
       try {
         if (url === null) return 
         const response = await fetch(url);

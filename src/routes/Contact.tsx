@@ -25,11 +25,13 @@ const Contact = () => {
     e.preventDefault();
     if (!subject || !message || !firstName || !lastName || !email || !phone) {
       setError("Please ensure all fields are filled");
+      return;
     }
 
     // handle send email using emailjs
 
     setMessageSuccessSent(true);
+    setModalIsHidden(false);
   };
 
   const renderBreadcrumbs = () => {
@@ -181,25 +183,28 @@ const Contact = () => {
   };
 
   const renderModal = () => {
-    if (messageSuccessSent) {
-      return <Modal isHidden={modalIsHidden}>{renderModalContent()}</Modal>;
-    }
-  };
-
-  const renderModalContent = () => {
     return (
-      <div>
-        <h3>Thank you for reaching out.</h3>
-        <p>
-          Our team will be reviewing your email, and will be back in touch as
-          soon as possible.
+      <Modal setIsHidden={setModalIsHidden} isHidden={modalIsHidden}>
+        <h3 className="text-xl text-sky-500 font-semibold">
+          Thanks for submitting a message
+        </h3>
+        <p className="mt-1 opacity-70">
+          Our team will review your message and get back to you as soon as
+          possible.
         </p>
-        <button onClick={() => setModalIsHidden(true)}>
-          <NavLink to="/">Back To Home</NavLink>
-        </button>
-      </div>
+
+        <div className="flex justify-end mt-2">
+          <button
+            className="border border-sky-500 bg-sky-500 hover:border-sky-400 hover:bg-sky-400 text-sm text-gray-50 px-3 py-2 rounded-sm"
+            onClick={() => setModalIsHidden(false)}
+          >
+            Close
+          </button>
+        </div>
+      </Modal>
     );
   };
+
   return (
     <div>
       <Navbar />

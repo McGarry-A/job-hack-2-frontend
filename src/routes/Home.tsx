@@ -7,6 +7,7 @@ import Checkbox from "../components/Checkbox/Checkbox";
 import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
 import HomeJobCards from "../components/HomeJobCards/HomeJobCards";
 import useAdzuna, { JobType } from "../hooks/useAdzuna";
+import useReed from "../hooks/useReed";
 // import GoogleAuth from "../components/GoogleAuth";
 
 type JobsState = {
@@ -49,6 +50,15 @@ const Home = () => {
     location: location,
     options: optionsForAdzuna,
   });
+
+  const useJobsReed = useReed({
+    page: pagination,
+    title: job,
+    location: location,
+    options: optionsForAdzuna,
+  });
+
+  console.log(useJobsReed);
 
   const { error, isLoading, jobs } = useJobs;
 
@@ -121,13 +131,9 @@ const Home = () => {
 
   const renderCards = () => {
     if (jobsState && jobsState.jobs) {
-      return (
-        <HomeJobCards
-          jobs={jobsState.jobs}
-          isLoading={jobsState.isLoading}
-          error={jobsState.error}
-        />
-      );
+      const { jobs, isLoading, error } = jobsState;
+
+      return <HomeJobCards jobs={jobs} isLoading={isLoading} error={error} />;
     }
 
     return <div>Loading...</div>;

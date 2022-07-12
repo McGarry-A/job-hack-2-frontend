@@ -116,9 +116,6 @@ const Navbar = () => {
           <li className="cursor-pointer">
             <NavLink to="/">Home</NavLink>
           </li>
-          {/* <li className="cursor-pointer">
-            <NavLink to="/about">About</NavLink>
-          </li> */}
           <li className="cursor-pointer">
             <NavLink to="/contact">Contact</NavLink>
           </li>
