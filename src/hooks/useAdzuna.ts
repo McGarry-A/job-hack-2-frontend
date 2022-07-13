@@ -33,16 +33,25 @@ const useAdzuna = ({ page, title, location, options }: props) => {
 
   useEffect(() => {
     const setUrlParams = () => {  
-      const titleString = `&what=${title}`
+      const newOptions: string[] = []
+      options.forEach(el => {
+        if (el.state === true) {
+          newOptions.push("+" + el.name)
+        }
+      })
+
+      const optionsString = newOptions.toString()
+      const titleString = `&what=${title}${optionsString}`
       const locationString = `&where=${location}`
 
       const baseUrl = `https://api.adzuna.com/v1/api/jobs/gb/search/${page}?app_id=14758e80&app_key=b7bdf1e68baa9af01ec4a64dbfe8d2b3&results_per_page=10${titleString}${locationString}`
 
       setUrl(baseUrl)
+      console.log(url)
     }
 
     setUrlParams()
-  }, [page, title, location, url]);
+  }, [page, title, location, url, options]);
 
   useEffect(() => {
     const fetchData = async () => {

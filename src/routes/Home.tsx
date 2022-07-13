@@ -162,7 +162,14 @@ const Home = () => {
       );
     }
 
-    if (jobs) {
+    if (jobs && jobs.length === 0) {
+      return (
+        <div className="my-10 mx-auto text-lg text-center">
+          There are no results for your search...
+        </div>
+      );
+    }
+    if (jobs && jobs.length > 1) {
       return (
         <motion.div
           className="space-y-4 border-t pt-4"
