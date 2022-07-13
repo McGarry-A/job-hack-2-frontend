@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar/Navbar";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
 
-import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
+// import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
 const MyJobs = () => {
   const renderBreadcrumbs = () => {

@@ -8,12 +8,9 @@ import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper
 import useAdzuna, { JobType } from "../hooks/useAdzuna";
 import useReed from "../hooks/useReed";
 import Footer from "../components/Footer/Footer";
-import "react-loading-skeleton/dist/skeleton.css";
 import HomeJobCard from "../components/HomeJobCards/HomeJobCard";
 import { motion } from "framer-motion";
 import { jobContainerVariant } from "../Animations/JobCard";
-import JobSkeleton from "../components/HomeJobCards/JobSkeleton";
-import Modal from "../components/Modal/Modal";
 
 type JobsState = {
   error: unknown;
@@ -34,9 +31,6 @@ const Home = () => {
   const [internship, setInternship] = useState<boolean>(false);
 
   const [pagination, setPagination] = useState<number>(1);
-
-  const [errorIsHidden, setErrorIsHidden] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const paginationOptions = { pagination, setPagination };
 
@@ -140,20 +134,8 @@ const Home = () => {
   const renderCards = () => {
     if (error) return <p>There was an error rendering the cards</p>;
 
-    const placeHolderArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
     if (isLoading) {
       return (
-        // <motion.div
-        //   className="space-y-4 border-t pt-4"
-        //   variants={jobContainerVariant}
-        //   initial="hidden"
-        //   animate="show"
-        // >
-        //   {placeHolderArray.map((el, index) => {
-        //     return <JobSkeleton key={index} />;
-        //   })}
-        // </motion.div>
         <button
           type="button"
           className=" px-4 py-2 rounded flex items-center justify-center mx-auto my-10"
