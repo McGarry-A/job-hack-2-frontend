@@ -73,9 +73,14 @@ const Navbar = () => {
             <NavLink to="/my-jobs">
               <button className="border-2 px-4 py-1 hover:bg-sky-400 hover:border-sky-400 bg-sky-500 border-sky-500 rounded text-gray-50 relative">
                 My Jobs
-                <span className="absolute -top-3 -right-2 bg-red-600 px-1 text-sm font-semibold rounded-[50%] flex items-center justify-center">
-                  {jobsCount}
-                </span>
+                {jobsCount > 0 && (
+                  <span className="absolute -top-3 -right-2 bg-rose-600 px-1 w-5 h-5 text-sm font-semibold rounded-[50%] flex items-center justify-center">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full w-full h-4 bg-rose-500">
+                      <p className="ml-[2px]">{jobsCount}</p>
+                    </span>
+                  </span>
+                )}
               </button>
             </NavLink>
           </li>
