@@ -1,6 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 import { motion } from "framer-motion";
 import { jobCardVariant } from "../../Animations/JobCard";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const JobSkeleton = () => {
   return (
