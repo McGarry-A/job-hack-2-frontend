@@ -10,6 +10,7 @@ HomePage:
 > Cards Clickable - show modal with details > add to apply list DONE
 > Skeleton while homepage cards are loading DONE (BASIC LOADER ADDED)
 > Mask on the hero image on the homepage to make it darker
+> WHAT CAN WE REPLACE THE APPLE LOGO ON EACH CARD WITH >.<
 
 ContactPage:
 > Build page DONE

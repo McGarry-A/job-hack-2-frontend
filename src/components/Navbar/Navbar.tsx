@@ -126,10 +126,18 @@ const Navbar = () => {
 
   const renderNavLinks = () => (
     <>
-      <li className="cursor-pointer">
+      <li
+        className={`cursor-pointer ${
+          isHome ? "text-gray-50" : "text-gray-500"
+        } tracking-wider`}
+      >
         <NavLink to="/">Home</NavLink>
       </li>
-      <li className="cursor-pointer">
+      <li
+        className={`cursor-pointer ${
+          isHome ? "text-gray-50" : "text-gray-500"
+        } tracking-wider`}
+      >
         <NavLink to="/contact">Contact</NavLink>
       </li>
     </>
@@ -139,7 +147,7 @@ const Navbar = () => {
     <header className="flex justify-between p-8 bg-transparent items-center">
       {renderWelcomeName()}
       <nav className="flex justify-end">
-        <ul className="flex space-x-5 items-center">
+        <ul className="flex space-x-12 items-center">
           {renderNavLinks()}
           {renderNotLoggedInTabs()}
           {renderIsLoggedInTabs()}
