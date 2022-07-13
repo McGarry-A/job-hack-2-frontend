@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { GrFormNext } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
-import { useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
+import { setNotification } from "../store/notificationSlice";
+import { motion } from "framer-motion";
+import RouteVar from "../Animations/Route";
 
 const Account = () => {
   const state = useAppSelector((state) => state.user);
@@ -16,12 +19,28 @@ const Account = () => {
   const newPassRef = useRef<HTMLInputElement>(null);
   const newPassConfRef = useRef<HTMLInputElement>(null);
 
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (firstNameRef.current) firstNameRef.current.value = state.user.firstName;
     if (lastNameRef.current) lastNameRef.current.value = state.user.lastName;
     if (emailRef.current) emailRef.current.value = state.user.email;
   });
 
+  const handleDeleteAccount = () => {
+    // keep user details here then =>
+    // sign-out
+    // delete account
+
+    // send notification that it was successful
+    dispatch(
+      setNotification({
+        state: false,
+        status: "success",
+        message: "Your account has been successfully deleted!",
+      })
+    );
+  };
   // const handleDeleteCustomer = () => {};
   const handleUpdateCustomer = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,6 +64,16 @@ const Account = () => {
       email: emailRef.current,
       password: currentPassRef.current,
     };
+
+    // Once updated
+
+    dispatch(
+      setNotification({
+        state: false,
+        status: "success",
+        message: "Your account information has been succesfully updated!",
+      })
+    );
 
     return { user, newUser };
   };
@@ -146,7 +175,10 @@ const Account = () => {
   const renderDeleteUserAccount = () => (
     <div>
       {renderSectionHeader("Delete your account")}
-      <button className="px-3 py-2 border bg-rose-600 text-gray-50 border-rose-600 rounded hover:bg-rose-500 hover:border-rose-500">
+      <button
+        className="px-3 py-2 border bg-rose-600 text-gray-50 border-rose-600 rounded hover:bg-rose-500 hover:border-rose-500"
+        onClick={() => handleDeleteAccount()}
+      >
         Delete Account
       </button>
     </div>
@@ -155,12 +187,19 @@ const Account = () => {
   return (
     <div>
       <Navbar />
-      {renderBreadcrumbs()}
-      {renderHeader()}
-      <BGWrapper>
-        {renderUserDetails()}
-        {renderDeleteUserAccount()}
-      </BGWrapper>
+      <motion.div
+        variants={RouteVar}
+        initial="hidden"
+        animate="show"
+        exit={{ opacity: 0 }}
+      >
+        {renderBreadcrumbs()}
+        {renderHeader()}
+        <BGWrapper>
+          {renderUserDetails()}
+          {renderDeleteUserAccount()}
+        </BGWrapper>
+      </motion.div>
     </div>
   );
 };

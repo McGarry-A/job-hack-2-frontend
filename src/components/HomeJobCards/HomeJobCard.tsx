@@ -6,6 +6,7 @@ import { addToLikedJobs } from "../../store/userSlice";
 import Modal from "../Modal/Modal";
 import { motion } from "framer-motion";
 import { jobCardVariant } from "../../Animations/JobCard";
+import { setNotification } from "../../store/notificationSlice";
 
 interface props {
   el: JobType;
@@ -18,6 +19,29 @@ const HomeJobCard = ({ el }: props) => {
 
   const state = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+
+  const handleAddToList = () => {
+    if (!state.isLoggedIn) {
+      dispatch(
+        setNotification({
+          state: false,
+          status: "error",
+          message:
+            "Please ensure that you are logged in before adding items to your wishlist.",
+        })
+      );
+    }
+
+    const jobToAdd = {
+      title: el.title,
+      company: el.company.display_name,
+      salary: el.salary_max,
+      location: el.location.display_name,
+      description: el.description,
+    };
+
+    dispatch(addToLikedJobs(jobToAdd));
+  };
 
   const renderModal = (job: JobType) => {
     const {
@@ -41,36 +65,33 @@ const HomeJobCard = ({ el }: props) => {
         </h5>
         {contract_type && (
           <h5 className="text-right text-sm opacity-70 mt-1">
-            On a <span className="text-sky-600">{contract_type}</span>
+            On a{" "}
+            <span className="text-sky-600">
+              {contract_type.replace("_", "-")}
+            </span>{" "}
+            contract
           </h5>
         )}
 
         <p className="mt-2 text-sm text-justify">{description}</p>
         <div className="w-full flex justify-end space-x-4 mt-2">
-          <button className="rounded-sm text-sm px-3 py-2 border-2 border-sky-500 text-sky-500 hover:text-sky-400 hover:border-sky-400">
+          <button
+            className="rounded-sm text-sm px-3 py-2 border-2 border-sky-500 text-sky-500 hover:text-sky-400 hover:border-sky-400"
+            onClick={() => {
+              handleAddToList();
+              setModalIsHidden(!modalIsHidden);
+            }}
+          >
             Add to list
           </button>
-          <button className="rounded-sm text-sm px-3 py-2 border border-sky-500 bg-sky-500 text-gray-50 hover:bg-sky-400 hover:border-sky-400">
-            See More
-          </button>
+          <a href="#">
+            <button className="rounded-sm text-sm px-3 py-2 border border-sky-500 bg-sky-500 text-gray-50 hover:bg-sky-400 hover:border-sky-400">
+              See More
+            </button>
+          </a>
         </div>
       </Modal>
     );
-  };
-
-  const handleAddToList = () => {
-    if (!state.isLoggedIn)
-      return console.log("plase log-in before adding to wishlist");
-
-    const jobToAdd = {
-      title: el.title,
-      company: el.company.display_name,
-      salary: el.salary_max,
-      location: el.location.display_name,
-      description: el.description,
-    };
-
-    dispatch(addToLikedJobs(jobToAdd));
   };
 
   return (

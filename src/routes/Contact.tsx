@@ -2,8 +2,11 @@ import Navbar from "../components/Navbar/Navbar";
 import { GrFormNext } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Modal from "../components/Modal/Modal";
 import Footer from "../components/Footer/Footer";
+import { useAppDispatch } from "../store";
+import { setNotification } from "../store/notificationSlice";
+import { motion } from "framer-motion";
+import RouteVar from "../Animations/Route";
 
 const Contact = () => {
   const [subject, setSubject] = useState<string>();
@@ -12,11 +15,11 @@ const Contact = () => {
   const [lastName, setLastName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [phone, setPhone] = useState<string>();
-
-  const [modalIsHidden, setModalIsHidden] = useState<boolean>(true);
   // const [messageSuccessSent, setMessageSuccessSent] = useState<boolean>(false);
 
   const [error, setError] = useState<string>("");
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setError("");
@@ -32,7 +35,14 @@ const Contact = () => {
     // handle send email using emailjs
 
     // setMessageSuccessSent(true);
-    setModalIsHidden(false);
+    dispatch(
+      setNotification({
+        state: false,
+        status: "success",
+        message:
+          "Your message has been successfully sent. Our team will reiview and get back to you as soon as possible.",
+      })
+    );
   };
 
   const renderBreadcrumbs = () => {
@@ -183,36 +193,19 @@ const Contact = () => {
     );
   };
 
-  const renderModal = () => {
-    return (
-      <Modal setIsHidden={setModalIsHidden} isHidden={modalIsHidden}>
-        <h3 className="text-xl text-sky-500 font-semibold">
-          Thanks for submitting a message
-        </h3>
-        <p className="mt-1 opacity-70">
-          Our team will review your message and get back to you as soon as
-          possible.
-        </p>
-
-        <div className="flex justify-end mt-2">
-          <button
-            className="border border-sky-500 bg-sky-500 hover:border-sky-400 hover:bg-sky-400 text-sm text-gray-50 px-3 py-2 rounded-sm"
-            onClick={() => setModalIsHidden(false)}
-          >
-            Close
-          </button>
-        </div>
-      </Modal>
-    );
-  };
-
   return (
     <div>
       <Navbar />
-      {renderBreadcrumbs()}
-      {renderHero()}
-      {renderForm()}
-      {renderModal()}
+      <motion.div
+        variants={RouteVar}
+        initial="hidden"
+        animate="show"
+        exit={{ opacity: 0 }}
+      >
+        {renderBreadcrumbs()}
+        {renderHero()}
+        {renderForm()}
+      </motion.div>
       <Footer />
     </div>
   );

@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom";
 import { GrFormNext } from "react-icons/gr";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
+import { setNotification } from "../store/notificationSlice";
+import { motion } from "framer-motion";
+import RouteVar from "../Animations/Route";
 
 interface props {
   isRegister?: boolean;
@@ -49,8 +52,14 @@ const Register = ({ isRegister = true }: props) => {
       setError("Failed logging in");
       return;
     }
-
     dispatch(setActiveUser(user));
+    dispatch(
+      setNotification({
+        state: false,
+        status: "success",
+        message: "Successfully logged into your account with Jobhack!",
+      })
+    );
     navigate("/");
   };
 
@@ -68,6 +77,14 @@ const Register = ({ isRegister = true }: props) => {
     }
 
     registerEmail({ firstName, lastName, email, password });
+    dispatch(
+      setNotification({
+        state: false,
+        status: "success",
+        message: "Successfully created a new account with Jobhack!",
+      })
+    );
+    navigate("/");
   };
 
   const renderBreadcrumbs = () => {
@@ -92,8 +109,8 @@ const Register = ({ isRegister = true }: props) => {
 
   const renderHero = () => {
     return (
-      <div className="my-10 mx-auto text-center">
-        <h2 className="text-5xl font-semibold">Contact JobHack</h2>
+      <div className="mb-10 mx-auto text-center">
+        <h2 className="text-5xl font-semibold">Register</h2>
       </div>
     );
   };
@@ -190,62 +207,69 @@ const Register = ({ isRegister = true }: props) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      {renderBreadcrumbs()}
-      {renderHero()}
-      <div className="max-w-6xl w-full mx-auto pb-10 flex">
-        <form
-          className="p-12 border max-w-xl w-full"
-          onSubmit={
-            register
-              ? (e) => handleFormSubmitLogin(e)
-              : (e) => handleFormSubmitRegister(e)
-          }
-        >
-          {renderHeaders()}
-          <div>
-            <p className="text-sm text-red-600 mt-1">{error}</p>
-          </div>
-          {renderNameFields()}
-          <div className="mt-4">
-            <label className="block">Email</label>
-            <input
-              type={"email"}
-              className="w-full h-10"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="mt-2">
-            <label className="block">Password</label>
-            <input
-              type={"password"}
-              className="w-full h-10"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          {renderSecondPassword()}
-          <div className="flex justify-between mt-3">
-            <div className="">
-              <input type="checkbox" className="mr-2" />
-              <label>Remember me</label>
-            </div>
-            <div className="">
-              <a href="www.google.com" className="text-sm">
-                Forgot password
-              </a>
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="w-full py-2 text-semibold bg-sky-400 text-gray-50 rounded mt-2 hover:bg-sky-300"
+      <motion.div
+        variants={RouteVar}
+        initial="hidden"
+        animate="show"
+        exit={{ opacity: 0 }}
+      >
+        {renderBreadcrumbs()}
+        {renderHero()}
+        <div className="max-w-6xl w-full mx-auto pb-10 flex">
+          <form
+            className="p-12 border max-w-xl w-full"
+            onSubmit={
+              register
+                ? (e) => handleFormSubmitLogin(e)
+                : (e) => handleFormSubmitRegister(e)
+            }
           >
-            {register ? "Sign in" : "Register"}
-          </button>
-          <GoogleAuth />
-          {renderSwitchViews()}
-        </form>
-        <div className="bg-registerHero w-full hidden md:flex flex-grow border"></div>
-      </div>
-      <Footer />
+            {renderHeaders()}
+            <div>
+              <p className="text-sm text-red-600 mt-1">{error}</p>
+            </div>
+            {renderNameFields()}
+            <div className="mt-4">
+              <label className="block">Email</label>
+              <input
+                type={"email"}
+                className="w-full h-10"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="mt-2">
+              <label className="block">Password</label>
+              <input
+                type={"password"}
+                className="w-full h-10"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            {renderSecondPassword()}
+            <div className="flex justify-between mt-3">
+              <div className="">
+                <input type="checkbox" className="mr-2" />
+                <label>Remember me</label>
+              </div>
+              <div className="">
+                <a href="www.google.com" className="text-sm">
+                  Forgot password
+                </a>
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="w-full py-2 text-semibold bg-sky-400 text-gray-50 rounded mt-2 hover:bg-sky-300"
+            >
+              {register ? "Sign in" : "Register"}
+            </button>
+            <GoogleAuth />
+            {renderSwitchViews()}
+          </form>
+          <div className="bg-registerHero w-full hidden md:flex flex-grow border"></div>
+        </div>
+        <Footer />
+      </motion.div>
     </div>
   );
 };

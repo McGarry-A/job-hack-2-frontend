@@ -13,6 +13,7 @@ import HomeJobCard from "../components/HomeJobCards/HomeJobCard";
 import { motion } from "framer-motion";
 import { jobContainerVariant } from "../Animations/JobCard";
 import JobSkeleton from "../components/HomeJobCards/JobSkeleton";
+import Modal from "../components/Modal/Modal";
 
 type JobsState = {
   error: unknown;
@@ -33,6 +34,9 @@ const Home = () => {
   const [internship, setInternship] = useState<boolean>(false);
 
   const [pagination, setPagination] = useState<number>(1);
+
+  const [errorIsHidden, setErrorIsHidden] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const paginationOptions = { pagination, setPagination };
 

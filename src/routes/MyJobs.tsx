@@ -1,6 +1,8 @@
 import { GrFormNext } from "react-icons/gr";
 import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
+import { motion } from "framer-motion";
+import RouteVar from "../Animations/Route";
 
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
@@ -80,11 +82,15 @@ const MyJobs = () => {
   return (
     <div>
       <Navbar />
-      {renderBreadcrumbs()}
-      {renderHeader()}
-      {/* <DragDropContext onDragEnd={onDragEnd}>
-        {rows.map(renderRow)}
-      </DragDropContext> */}
+      <motion.div
+        variants={RouteVar}
+        initial="hidden"
+        animate="show"
+        exit={{ opacity: 0 }}
+      >
+        {renderBreadcrumbs()}
+        {renderHeader()}
+      </motion.div>
     </div>
   );
 };
