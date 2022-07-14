@@ -33,7 +33,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="border-t flex font-sans justify-evenly p-4 space-x-3 w-[1920px] mt-auto">
+    <footer className="border-t border flex font-sans justify-evenly p-4 space-x-3 w-[1920px] mt-auto">
       <div className="my-2">
         <h2 className="text-xl">JobHack2</h2>
         <p className="opacity-50 w-3/4 tracking-wide text-sm">

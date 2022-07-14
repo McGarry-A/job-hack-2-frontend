@@ -1,7 +1,8 @@
 import Hero from "../components/Hero/Hero";
 import { AiOutlineSearch } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
-import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { IoIosGitNetwork } from "react-icons/io";
+import { BiSortAlt2 } from "react-icons/bi";
 import React, { useEffect, useState } from "react";
 import Checkbox from "../components/Checkbox/Checkbox";
 import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
@@ -18,28 +19,29 @@ type JobsState = {
   jobs: JobType[] | undefined;
 };
 
+type sortType = "date" | "relevance" | "salary"
+
 const Home = () => {
   const [jobsState, setJobsState] = useState<JobsState>();
 
   const [job, setJob] = useState<string>("developer");
   const [location, setLocation] = useState<string>("manchester");
 
-  const [freelance, setFreelance] = useState<boolean>(false);
+  const [contract, setContract] = useState<boolean>(false);
   const [fullTime, setFullTime] = useState<boolean>(false);
   const [partTime, setPartTime] = useState<boolean>(false);
-  const [graduate, setGraduate] = useState<boolean>(false);
-  const [internship, setInternship] = useState<boolean>(false);
+  const [permanent, setPermanent] = useState<boolean>(false);
+  const [sort, setSort] = useState<sortType>("relevance")
 
   const [pagination, setPagination] = useState<number>(1);
 
   const paginationOptions = { pagination, setPagination };
 
   const options = [
-    { name: "Freelance", state: freelance, setState: setFreelance },
-    { name: "Full-Time", state: fullTime, setState: setFullTime },
-    { name: "Part-Time", state: partTime, setState: setPartTime },
-    { name: "Graduate", state: graduate, setState: setGraduate },
-    { name: "Internship", state: internship, setState: setInternship },
+    { name: "contract", state: contract, setState: setContract },
+    { name: "full_time", state: fullTime, setState: setFullTime },
+    { name: "part_time", state: partTime, setState: setPartTime },
+    { name: "permanent", state: permanent, setState: setPermanent },
   ];
 
   const optionsForAdzuna = options.map((el) => {
@@ -51,6 +53,7 @@ const Home = () => {
     title: job,
     location: location,
     options: optionsForAdzuna,
+    sort: sort
   });
 
   const useJobsReed = useReed({
@@ -113,20 +116,27 @@ const Home = () => {
           />
         </div>
         <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-          <HiOutlineOfficeBuilding className="mr-2 text-2xl" />
-          <select
-            placeholder="input"
-            className="w-full focus:outline-none"
-            onChange={() => undefined}
-          >
-            <option value={"office"}>Office</option>
-            <option value={"remote"}>Remote</option>
-            <option value={"hybrid"}>Hybrid</option>
+          <BiSortAlt2 className="mr-2 text-2xl" />
+          <select className="w-full focus:outline-none opacity-50" 
+          onChange={(e) => setSort(e.target.value as sortType)
+          }>
+            <option value={"relevance"} defaultChecked >Relevance</option>
+            <option value={"salary"}>Salary</option>
+            <option value={"date"}>Date Posted</option>
           </select>
         </div>
-        <button className="border bg-sky-500 text-gray-50" type="submit">
-          Search Jobs
-        </button>
+        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
+          <IoIosGitNetwork className="mr-2 text-2xl" />
+          <select
+            placeholder="input"
+            className="w-full focus:outline-none opacity-50"
+            onChange={() => undefined}
+          >
+            <option value={"office"}>Search Using</option>
+            <option value={"office"}>Adzuna</option>
+            <option value={"remote"}>Reed</option>
+          </select>
+        </div>
       </form>
     );
   };

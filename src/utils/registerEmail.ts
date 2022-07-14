@@ -22,13 +22,12 @@ const registerEmail = async ({ firstName, lastName, email, password}: props) => 
       });
 
       const res = await data.json();
-      console.log(res);
 
       if (res.status === 400) {
         console.error("Error response from server");
         return;
       }
-      return true
+      return res.state
     } catch (error) {
       console.error(error);
       return false

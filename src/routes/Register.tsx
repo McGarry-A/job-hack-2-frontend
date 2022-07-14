@@ -63,7 +63,7 @@ const Register = ({ isRegister = true }: props) => {
     navigate("/");
   };
 
-  const handleFormSubmitRegister = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmitRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!password || !email || !confirmPassword || !firstName || !lastName) {
       setError("Please make sure all filds are filled.");
@@ -76,7 +76,9 @@ const Register = ({ isRegister = true }: props) => {
       setError("Password must be at least 6 characters.");
     }
 
-    registerEmail({ firstName, lastName, email, password });
+    const user = await registerEmail({ firstName, lastName, email, password });
+    console.log(user)
+    dispatch(setActiveUser(user))
     dispatch(
       setNotification({
         state: false,
@@ -205,7 +207,7 @@ const Register = ({ isRegister = true }: props) => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen border">
       <Navbar />
       <motion.div
         variants={RouteVar}

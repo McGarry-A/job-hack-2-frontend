@@ -49,7 +49,7 @@ const HomeJobCard = ({ el }: props) => {
       description,
       company: { display_name: company_name },
       salary_max,
-
+      redirect_url,
       contract_type,
       location: { display_name: location_name },
     } = job;
@@ -84,7 +84,7 @@ const HomeJobCard = ({ el }: props) => {
           >
             Add to list
           </button>
-          <a href="#">
+          <a href={redirect_url}>
             <button className="rounded-sm text-sm px-3 py-2 border border-sky-500 bg-sky-500 text-gray-50 hover:bg-sky-400 hover:border-sky-400">
               See More
             </button>
