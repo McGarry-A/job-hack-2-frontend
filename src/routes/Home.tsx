@@ -1,5 +1,5 @@
 import Hero from "../components/Hero/Hero";
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlineForm } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 import { IoIosGitNetwork } from "react-icons/io";
 import { BiSortAlt2 } from "react-icons/bi";
@@ -96,7 +96,7 @@ const Home = () => {
   const renderForm = () => {
     return (
       <form
-        className="grid grid-cols-4 gap-3"
+        className="grid grid-cols-6 gap-3"
         onSubmit={(e) => handleFormSubmit(e)}
       >
         <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
@@ -116,6 +116,20 @@ const Home = () => {
           />
         </div>
         <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
+          <AiOutlineForm className="mr-2 text-2xl" />
+          <select
+            placeholder="input"
+            className="w-full focus:outline-none opacity-50"
+            onChange={() => undefined}
+          >
+            <option value={""}>Contract Type</option>
+            <option value={"full_time"}>Full-Time</option>
+            <option value={"part_time"}>Part-Time</option>
+            <option value={"contract"}>Contract</option>
+            <option value={"permanent"}>permanent</option>
+          </select>
+        </div>
+        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
           <BiSortAlt2 className="mr-2 text-2xl" />
           <select className="w-full focus:outline-none opacity-50" 
           onChange={(e) => setSort(e.target.value as sortType)
@@ -132,11 +146,14 @@ const Home = () => {
             className="w-full focus:outline-none opacity-50"
             onChange={() => undefined}
           >
-            <option value={"office"}>Search Using</option>
-            <option value={"office"}>Adzuna</option>
-            <option value={"remote"}>Reed</option>
+            <option value={""}>Search Using</option>
+            <option value={"adzuna"}>Adzuna</option>
+            <option value={"reed"}>Reed</option>
           </select>
         </div>
+        <button className="flex justify-center items-center border border-sky-500 text-sky-500 font-semibold">
+          Clear
+        </button>
       </form>
     );
   };
@@ -182,7 +199,7 @@ const Home = () => {
     if (jobs && jobs.length > 1) {
       return (
         <motion.div
-          className="space-y-4 border-t pt-4"
+          className="space-y-4 border-t pt-4 mt-4"
           variants={jobContainerVariant}
           initial="hidden"
           animate="show"
@@ -201,7 +218,7 @@ const Home = () => {
       <BGWrapper>
         <ForegroundWrapper>
           {renderForm()}
-          {renderOptions()}
+          {/* {renderOptions()} */}
           <PaginationWrapper {...paginationOptions}>
             {renderCards()}
           </PaginationWrapper>

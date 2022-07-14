@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AiFillApple } from "react-icons/ai";
+import AdzunaLogo from "../../images/adzunaLogo.png"
 import { JobType } from "../../hooks/useAdzuna";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { addToLikedJobs } from "../../store/userSlice";
@@ -103,7 +103,7 @@ const HomeJobCard = ({ el }: props) => {
     >
       <div onClick={() => setModalIsHidden(false)} className="flex w-full">
         <div className="flex justify-center items-center py-2 px-4 mr-4">
-          <AiFillApple size="3rem" />
+          <img src={AdzunaLogo} className="w-20" alt="search-api-provider-logo" />
         </div>
         <div className="flex flex-col justify-center py-2">
           <h5 className="text-2xl tracking-tight text-gray-900 whitespace-nowrap">
