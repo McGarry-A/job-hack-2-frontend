@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { idText } from "typescript";
 import { ApiInterface, JobInterface } from "./apiInterfaces";
 
 export type JobType = Pick<
@@ -55,7 +54,7 @@ const useAdzuna = ({ page, title, location, options, sort = "relevance" }: props
     }
 
     setUrlParams()
-  }, [page, title, location, url, options]);
+  }, [page, title, location, url, options, sort]);
 
   useEffect(() => {
     const fetchData = async () => {
