@@ -31,17 +31,19 @@ const Hero = () => {
   };
 
   return (
-    <div className="bg-hero w-full text-gray-50">
-      <Navbar />
-      <div className=" w-full h-full flex justify-center flex-col items-center py-10">
-        <h1 className="text-7xl font-bold text-center text-gray-50 w-2/3">
-          The job board for developers, made by developers.
-        </h1>
-        <p className="w-full text-center uppercase text-sm font-bold opacity-50 my-6 text-gray-50">
-          Trusted by developers from around the world
-        </p>
+    <div className="bg-hero w-full text-gray-50 [mask-image:linear-gradient(to bottom, transparent 100%, black)]">
+      <div className="bg-gradient-to-b from-transparent via-transparent to-black ">
+        <Navbar />
+        <div className=" w-full h-full flex justify-center flex-col items-center py-10">
+          <h1 className="text-7xl font-bold text-center text-gray-50 w-2/3">
+            The job board for developers, made by developers.
+          </h1>
+          <p className="w-full text-center uppercase text-sm font-bold opacity-50 my-6 text-gray-50">
+            Trusted by developers from around the world
+          </p>
+        </div>
+        {renderIcons()}
       </div>
-      {renderIcons()}
     </div>
   );
 };
