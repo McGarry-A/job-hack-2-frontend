@@ -10,15 +10,13 @@ interface props {
   page?: number;
   title?: string;
   location?: string;
-  options: {
-    name: string, state: boolean
-  }[],
+  contract: "full_time" | "part_time" | "contract" | "permanent"
   sort: "date" | "relevance" | "salary"
 }
 
 
 
-const useAdzuna = ({ page, title, location, options, sort = "relevance" }: props) => {
+const useAdzuna = ({ page, title, location, contract = "full_time", sort = "relevance" }: props) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<unknown>();
   const [fullJobs, setFullJobs] = useState<ApiInterface>();
@@ -34,27 +32,19 @@ const useAdzuna = ({ page, title, location, options, sort = "relevance" }: props
 
   useEffect(() => {
     const setUrlParams = () => {  
-      const newOptions: string[] = []
-      
-      options.forEach(el => {
-        if (el.state === true) {
-          newOptions.push("&" + el.name +"=1")
-        }
-      })
-
-      const optionsString = newOptions.toString()
+      const contractString = `&${contract}=1`
       const titleString = `&what=${title}`
       const locationString = `&where=${location}`
       const sortString = `&sort_by=${sort}`
 
-      const baseUrl = `https://api.adzuna.com/v1/api/jobs/gb/search/${page}?app_id=14758e80&app_key=b7bdf1e68baa9af01ec4a64dbfe8d2b3&results_per_page=10${optionsString}${titleString}${locationString}${sortString}`
+      const baseUrl = `https://api.adzuna.com/v1/api/jobs/gb/search/${page}?app_id=14758e80&app_key=b7bdf1e68baa9af01ec4a64dbfe8d2b3&results_per_page=10${contractString}${titleString}${locationString}${sortString}`
 
       setUrl(baseUrl)
       console.log(url)
     }
 
     setUrlParams()
-  }, [page, title, location, url, options, sort]);
+  }, [page, title, location, url, contract, sort]);
 
   useEffect(() => {
     const fetchData = async () => {

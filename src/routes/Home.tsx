@@ -4,7 +4,6 @@ import { GoLocation } from "react-icons/go";
 import { IoIosGitNetwork } from "react-icons/io";
 import { BiSortAlt2 } from "react-icons/bi";
 import React, { useEffect, useState } from "react";
-import Checkbox from "../components/Checkbox/Checkbox";
 import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
 import useAdzuna, { JobType } from "../hooks/useAdzuna";
 import useReed from "../hooks/useReed";
@@ -20,6 +19,7 @@ type JobsState = {
 };
 
 type sortType = "date" | "relevance" | "salary"
+type contractType = "full_time" | "part_time" | "contract" | "permanent"
 
 const Home = () => {
   const [jobsState, setJobsState] = useState<JobsState>();
@@ -27,40 +27,25 @@ const Home = () => {
   const [job, setJob] = useState<string>("developer");
   const [location, setLocation] = useState<string>("manchester");
 
-  const [contract, setContract] = useState<boolean>(false);
-  const [fullTime, setFullTime] = useState<boolean>(false);
-  const [partTime, setPartTime] = useState<boolean>(false);
-  const [permanent, setPermanent] = useState<boolean>(false);
+  const [contract, setContract] = useState<contractType>("full_time");
   const [sort, setSort] = useState<sortType>("relevance")
 
   const [pagination, setPagination] = useState<number>(1);
 
   const paginationOptions = { pagination, setPagination };
 
-  const options = [
-    { name: "contract", state: contract, setState: setContract },
-    { name: "full_time", state: fullTime, setState: setFullTime },
-    { name: "part_time", state: partTime, setState: setPartTime },
-    { name: "permanent", state: permanent, setState: setPermanent },
-  ];
-
-  const optionsForAdzuna = options.map((el) => {
-    return { name: el.name, state: el.state };
-  });
-
   const useJobs = useAdzuna({
     page: pagination,
     title: job,
-    location: location,
-    options: optionsForAdzuna,
-    sort: sort
+    location,
+    contract,
+    sort
   });
 
   const useJobsReed = useReed({
     page: pagination,
     title: job,
     location: location,
-    options: optionsForAdzuna,
   });
 
   console.log(useJobsReed);
@@ -74,23 +59,6 @@ const Home = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setJobsState({ error, isLoading, jobs });
-  };
-
-  const renderOptions = () => {
-    return (
-      <div className="space-x-4 flex my-3 items-center">
-        {options.map((el, index) => {
-          return (
-            <Checkbox
-              name={el.name}
-              key={index}
-              isChecked={el.state}
-              setIsChecked={el.setState}
-            />
-          );
-        })}
-      </div>
-    );
   };
 
   const renderForm = () => {
@@ -151,7 +119,7 @@ const Home = () => {
             <option value={"reed"}>Reed</option>
           </select>
         </div>
-        <button className="flex justify-center items-center border border-sky-500 text-sky-500 font-semibold">
+        <button className="flex justify-center items-center border border-sky-500 text-sky-500 font-semibold uppercase tracking-wide">
           Clear
         </button>
       </form>

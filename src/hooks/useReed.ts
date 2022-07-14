@@ -10,12 +10,9 @@ interface props {
   page?: number;
   title?: string;
   location?: string;
-  options: {
-    name: string, state: boolean
-  }[]
 }
 
-const useReed = ({ title, location, options}: props) => {
+const useReed = ({ title, location }: props) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<unknown>();
     const [fullJobs, setFullJobs] = useState<ReedResponseInterface>();
