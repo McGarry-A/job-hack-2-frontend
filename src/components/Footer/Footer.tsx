@@ -33,7 +33,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="border-t border flex font-sans justify-evenly p-4 space-x-3 w-[1920px] mt-auto">
+    <footer className="border-t flex font-sans justify-evenly p-4 space-x-3 w-[1920px] mt-auto">
       <div className="my-2">
         <h2 className="text-xl">JobHack2</h2>
         <p className="opacity-50 w-3/4 tracking-wide text-sm">
@@ -47,7 +47,7 @@ const Footer = () => {
             <NavLink to="/">Home</NavLink>
           </li>
           <li className="opacity-50">
-            <NavLink to="/contact"></NavLink>
+            <NavLink to="/contact">Contact</NavLink>
           </li>
           <li className="opacity-50">
             <NavLink to="/register">My Account</NavLink>
@@ -72,7 +72,7 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Email address"
-              className="max-w-lg w-full h-10"
+              className="max-w-lg w-full h-10 focus:outline-none"
             />
             <GrLinkNext size="1.5rem" className="cursor-pointer" />
           </div>

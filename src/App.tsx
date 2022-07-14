@@ -3,7 +3,6 @@ import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import Modal from "./components/Modal/Modal";
-import About from "./routes/About";
 import Account from "./routes/Account";
 import Contact from "./routes/Contact";
 import Home from "./routes/Home";
@@ -41,7 +40,7 @@ const App = () => {
               status === "error" ? "text-rose-600" : "text-sky-500"
             }`}
           >
-            {status === "error" ? "There was an Error" : "Success"}
+            {status === "error" ? "There was an error" : "Success"}
           </h3>
           <p className="text-sm opacity-50">{message}</p>
         </div>
@@ -56,7 +55,6 @@ const App = () => {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
             <Route path="/register" element={<Register />} />
             <Route path="/my-jobs" element={<MyJobs />} />
             <Route path="/my-account" element={<Account />} />

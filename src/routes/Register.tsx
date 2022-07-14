@@ -207,7 +207,7 @@ const Register = ({ isRegister = true }: props) => {
   };
 
   return (
-    <div className="flex flex-col h-screen border">
+    <div className="flex flex-col h-screen">
       <Navbar />
       <motion.div
         variants={RouteVar}

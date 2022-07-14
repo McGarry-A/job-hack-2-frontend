@@ -11,6 +11,8 @@ import Footer from "../components/Footer/Footer";
 import HomeJobCard from "../components/HomeJobCards/HomeJobCard";
 import { motion } from "framer-motion";
 import { jobContainerVariant } from "../Animations/JobCard";
+import { useAppDispatch } from "../store";
+import { setNotification } from "../store/notificationSlice";
 
 type JobsState = {
   error: unknown;
@@ -18,8 +20,8 @@ type JobsState = {
   jobs: JobType[] | undefined;
 };
 
-type sortType = "date" | "relevance" | "salary"
-type contractType = "full_time" | "part_time" | "contract" | "permanent"
+type sortType = "date" | "relevance" | "salary";
+type contractType = "full_time" | "part_time" | "contract" | "permanent";
 
 const Home = () => {
   const [jobsState, setJobsState] = useState<JobsState>();
@@ -28,7 +30,7 @@ const Home = () => {
   const [location, setLocation] = useState<string>("manchester");
 
   const [contract, setContract] = useState<contractType>("full_time");
-  const [sort, setSort] = useState<sortType>("relevance")
+  const [sort, setSort] = useState<sortType>("relevance");
 
   const [pagination, setPagination] = useState<number>(1);
 
@@ -39,7 +41,7 @@ const Home = () => {
     title: job,
     location,
     contract,
-    sort
+    sort,
   });
 
   const useJobsReed = useReed({
@@ -48,9 +50,21 @@ const Home = () => {
     location: location,
   });
 
+  const dispatch = useAppDispatch()
+  
   console.log(useJobsReed);
 
   const { error, isLoading, jobs } = useJobs;
+
+  useEffect(() => {
+    if (error) {
+      dispatch(setNotification({
+        state: false,
+        status: "error",
+        message: "There was an error rendering cards. It's likely that we have reached the maximum calls to this API. Please choose another service provider."
+      }))
+    }
+  }, [error])
 
   useEffect(() => {
     setJobsState({ error, isLoading, jobs });
@@ -64,70 +78,92 @@ const Home = () => {
   const renderForm = () => {
     return (
       <form
-        className="grid grid-cols-6 gap-3"
+        className="grid grid-cols-6 gap-3 pt-2"
         onSubmit={(e) => handleFormSubmit(e)}
       >
-        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-          <AiOutlineSearch className="mr-2 text-2xl" />
-          <input
-            placeholder="Job Type"
-            className="w-full focus:outline-none"
-            onChange={(e) => setJob(e.target.value)}
-          />
+        <div className="flex flex-col">
+          <p className="opacity-60">Job Title</p>
+          <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
+            <AiOutlineSearch className="mr-2 text-2xl" />
+            <input
+              className="w-full focus:outline-none text-[16px]"
+              onChange={(e) => setJob(e.target.value)}
+              placeholder="Front-end Developer"
+            />
+          </div>
         </div>
-        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-          <GoLocation className="mr-2 text-2xl" />
-          <input
-            placeholder="Location"
-            className="w-full focus:outline-none"
-            onChange={(e) => setLocation(e.target.value)}
-          />
+        <div className="flex flex-col">
+          <p className="opacity-60">Location</p>
+          <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
+            <GoLocation className="mr-2 text-2xl" />
+            <input
+              className="w-full focus:outline-none text-[16px]"
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Manchester"
+            />
+          </div>
         </div>
-        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-          <AiOutlineForm className="mr-2 text-2xl" />
-          <select
-            placeholder="input"
-            className="w-full focus:outline-none opacity-50"
-            onChange={() => undefined}
-          >
-            <option value={""}>Contract Type</option>
-            <option value={"full_time"}>Full-Time</option>
-            <option value={"part_time"}>Part-Time</option>
-            <option value={"contract"}>Contract</option>
-            <option value={"permanent"}>permanent</option>
-          </select>
+        <div className="flex flex-col">
+          <p className="opacity-60">Contract</p>
+          <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
+            <AiOutlineForm className="mr-2 text-2xl" />
+            <select
+              className="w-full focus:outline-none opacity-50 text-[16px]"
+              onChange={(e) => setContract(e.target.value as contractType)}
+            >
+              <option value={"full_time"}>Full-Time</option>
+              <option value={"part_time"}>Part-Time</option>
+              <option value={"contract"}>Contract</option>
+              <option value={"permanent"}>permanent</option>
+            </select>
+          </div>
         </div>
-        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-          <BiSortAlt2 className="mr-2 text-2xl" />
-          <select className="w-full focus:outline-none opacity-50" 
-          onChange={(e) => setSort(e.target.value as sortType)
-          }>
-            <option value={"relevance"} defaultChecked >Relevance</option>
-            <option value={"salary"}>Salary</option>
-            <option value={"date"}>Date Posted</option>
-          </select>
+        <div className="flex flex-col">
+          <p className="opacity-60">Sort by</p>
+          <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
+            <BiSortAlt2 className="mr-2 text-2xl" />
+            <select
+              className="w-full focus:outline-none opacity-50 text-[16px]"
+              onChange={(e) => setSort(e.target.value as sortType)}
+            >
+              <option value={"relevance"} defaultChecked>
+                Relevance
+              </option>
+              <option value={"salary"}>Salary</option>
+              <option value={"date"}>Date Posted</option>
+            </select>
+          </div>
         </div>
-        <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-          <IoIosGitNetwork className="mr-2 text-2xl" />
-          <select
-            placeholder="input"
-            className="w-full focus:outline-none opacity-50"
-            onChange={() => undefined}
-          >
-            <option value={""}>Search Using</option>
-            <option value={"adzuna"}>Adzuna</option>
-            <option value={"reed"}>Reed</option>
-          </select>
+        <div className="flex flex-col">
+          <p className="opacity-60">Search Provider</p>
+          <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
+            <IoIosGitNetwork className="mr-2 text-2xl" />
+            <select
+              placeholder="input"
+              className="w-full focus:outline-none opacity-50 text-[16px]"
+              onChange={() => undefined}
+            >
+              <option value={"adzuna"}>Adzuna</option>
+              <option value={"reed"}>Reed</option>
+            </select>
+          </div>
         </div>
-        <button className="flex justify-center items-center border border-sky-500 text-sky-500 font-semibold uppercase tracking-wide">
-          Clear
-        </button>
+        <div className="flex flex-col pb-1">
+          <div className="invisible"></div>
+          <button className="flex justify-center items-center border border-sky-500 text-sky-500 font-semibold uppercase tracking-wide mt-auto py-2 px-2 text-sm lg:text-lg h-[42px]">
+            Clear
+          </button>
+        </div>
       </form>
     );
   };
 
   const renderCards = () => {
-    if (error) return <p>There was an error rendering the cards</p>;
+    if (error) {
+      
+
+      return <div className="text-center my-10 text-lg">This search returned an error...</div>
+    }
 
     if (isLoading) {
       return (
