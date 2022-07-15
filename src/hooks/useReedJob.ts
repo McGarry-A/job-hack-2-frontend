@@ -14,7 +14,7 @@ const useReedJob = (jobId: string = "") => {
             try {
               const options = {
                 method: "GET",
-                url: `http://localhost:5001/user/${jobId}`,
+                url: `http://localhost:5001/reed/${jobId}`,
                 headers: {
                   "Content-Type":"application/json",
                 }

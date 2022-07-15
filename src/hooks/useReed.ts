@@ -14,11 +14,18 @@ const useReed = ({ title , location , page }: props) => {
     const [jobs, setJobs] = useState<JobInterface[]>();
 
     useEffect(() => {
+    setIsLoading(true)
+    setError("")
+    setJobs(undefined)
+    }, [page])
+
+    useEffect(() => {
       const fetchReed = async () => {
         try {
           const options = {
             method: "GET",
             url: "http://localhost:5001/reed",
+            params: { title, location, page },
             headers: {
               "Content-Type":"application/json",
             }

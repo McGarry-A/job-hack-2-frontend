@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AdzunaLogo from "../../images/adzunaLogo.png";
+import reedLogo from "../../images/reedLogo.png";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { addToLikedJobs } from "../../store/userSlice";
 import Modal from "../Modal/Modal";
@@ -44,51 +44,18 @@ const HomeJobCard = ({ el }: props) => {
     dispatch(addToLikedJobs(jobToAdd));
   };
 
-  const renderModal = (job: JobInterface) => {
-    const { title, description, company, salary, url, id, location } = job;
-
-    return (
-      <Modal isHidden={modalIsHidden} setIsHidden={setModalIsHidden}>
-        <h3 className="text-xl text-sky-600 font-semibold">{title}</h3>
-        <h5 className="text-sm mt-1">At {company}</h5>
-        <h5 className="text-right text-sm opacity-70">{location}</h5>
-        <h5 className="text-right text-sm opacity-70 mt-1">
-          Salary up to{" "}
-          <span className="text-sky-600 font-semibold">£{salary}</span>
-        </h5>
-        <p className="mt-2 text-sm text-justify">{description}</p>
-        <div className="w-full flex justify-end space-x-4 mt-2">
-          <button
-            className="rounded-sm text-sm px-3 py-2 border-2 border-sky-500 text-sky-500 hover:text-sky-400 hover:border-sky-400"
-            onClick={() => {
-              handleAddToList();
-              setModalIsHidden(!modalIsHidden);
-            }}
-          >
-            Add to list
-          </button>
-          <a href={url}>
-            <button className="rounded-sm text-sm px-3 py-2 border border-sky-500 bg-sky-500 text-gray-50 hover:bg-sky-400 hover:border-sky-400">
-              See More
-            </button>
-          </a>
-        </div>
-      </Modal>
-    );
-  };
-
   return (
-    <NavLink to={`/job-profile/${el.id}`}>
-      <motion.div
-        className="border flex hover:cursor-pointer hover:shadow rounded border-l-4 overflow-hidden"
-        onMouseEnter={() => setShowAddToWishList(true)}
-        onMouseLeave={() => setShowAddToWishList(false)}
-        variants={jobCardVariant}
-      >
+    <motion.div
+      className="border flex hover:cursor-pointer hover:shadow rounded border-l-4 overflow-hidden"
+      onMouseEnter={() => setShowAddToWishList(true)}
+      onMouseLeave={() => setShowAddToWishList(false)}
+      variants={jobCardVariant}
+    >
+      <NavLink to={`/job-profile/${el.id}`} className="w-full">
         <div onClick={() => setModalIsHidden(false)} className="flex w-full">
           <div className="flex justify-center items-center py-2 px-4 mr-4">
             <img
-              src={AdzunaLogo}
+              src={reedLogo}
               className="w-20"
               alt="search-api-provider-logo"
             />
@@ -109,16 +76,16 @@ const HomeJobCard = ({ el }: props) => {
             </p>
           </div>
         </div>
-        <div
-          className={`transition duration-300 flex justify-center font-semibold items-center bg-sky-500 hover:bg-sky-400 text-gray-100 text-sm -p-3 ${
-            showAddToWishList ? "w-1/12 translate-x-0" : "w-0 translate-x-24"
-          }`}
-          onClick={() => handleAddToList()}
-        >
-          Add To List
-        </div>
-      </motion.div>
-    </NavLink>
+      </NavLink>
+      <div
+        className={`transition duration-300 flex justify-center font-semibold items-center bg-sky-500 hover:bg-sky-400 text-gray-100 text-sm -p-3 ${
+          showAddToWishList ? "w-1/12 translate-x-0" : "w-0 translate-x-24"
+        }`}
+        onClick={() => handleAddToList()}
+      >
+        Add To List
+      </div>
+    </motion.div>
   );
 };
 

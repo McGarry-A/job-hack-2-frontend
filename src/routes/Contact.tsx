@@ -15,7 +15,6 @@ const Contact = () => {
   const [lastName, setLastName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [phone, setPhone] = useState<string>();
-  // const [messageSuccessSent, setMessageSuccessSent] = useState<boolean>(false);
 
   const [error, setError] = useState<string>("");
 
