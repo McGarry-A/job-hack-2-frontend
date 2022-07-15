@@ -5,7 +5,6 @@ import { IoIosGitNetwork } from "react-icons/io";
 import { BiSortAlt2 } from "react-icons/bi";
 import React, { useEffect, useState } from "react";
 import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
-import useAdzuna, { JobType } from "../hooks/useAdzuna";
 import useReed from "../hooks/useReed";
 import Footer from "../components/Footer/Footer";
 import HomeJobCard from "../components/HomeJobCards/HomeJobCard";
@@ -13,6 +12,8 @@ import { motion } from "framer-motion";
 import { jobContainerVariant } from "../Animations/JobCard";
 import { useAppDispatch } from "../store";
 import { setNotification } from "../store/notificationSlice";
+import { JobInterface } from "../hooks/jobs.model";
+import { JobType } from "../hooks/useAdzuna";
 
 type JobsState = {
   error: unknown;
@@ -20,11 +21,20 @@ type JobsState = {
   jobs: JobType[] | undefined;
 };
 
+type ReedStateType = {
+  error: unknown;
+  isLoading: boolean;
+  jobs: JobInterface[] | undefined;
+};
+
 type sortType = "date" | "relevance" | "salary";
 type contractType = "full_time" | "part_time" | "contract" | "permanent";
 
 const Home = () => {
   const [jobsState, setJobsState] = useState<JobsState>();
+  const [reedJobState, setReedJobState] = useState<ReedStateType>();
+
+  const [reedJobs, setReedJobs] = useState<any>();
 
   const [job, setJob] = useState<string>("developer");
   const [location, setLocation] = useState<string>("manchester");
@@ -36,13 +46,13 @@ const Home = () => {
 
   const paginationOptions = { pagination, setPagination };
 
-  const useJobs = useAdzuna({
-    page: pagination,
-    title: job,
-    location,
-    contract,
-    sort,
-  });
+  // const useJobs = useAdzuna({
+  //   page: pagination,
+  //   title: job,
+  //   location,
+  //   contract,
+  //   sort,
+  // });
 
   const useJobsReed = useReed({
     page: pagination,
@@ -50,29 +60,33 @@ const Home = () => {
     location: location,
   });
 
-  const dispatch = useAppDispatch()
-  
+  const dispatch = useAppDispatch();
+
   console.log(useJobsReed);
 
-  const { error, isLoading, jobs } = useJobs;
+  // const { error, isLoading, jobs } = useJobs;
+  const { error, isLoading, jobs } = useJobsReed;
 
   useEffect(() => {
     if (error) {
-      dispatch(setNotification({
-        state: false,
-        status: "error",
-        message: "There was an error rendering cards. It's likely that we have reached the maximum calls to this API. Please choose another service provider."
-      }))
+      dispatch(
+        setNotification({
+          state: false,
+          status: "error",
+          message:
+            "There was an error rendering cards. It's likely that we have reached the maximum calls to this API. Please choose another service provider.",
+        })
+      );
     }
-  }, [error])
+  }, [error]);
 
-  useEffect(() => {
-    setJobsState({ error, isLoading, jobs });
-  }, [pagination, error, jobs, isLoading]);
+  // useEffect(() => {
+  //   setJobsState({ error, isLoading, jobs });
+  // }, [pagination, error, jobs, isLoading]);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setJobsState({ error, isLoading, jobs });
+    //   setJobsState({ error, isLoading, jobs });
   };
 
   const renderForm = () => {
@@ -160,9 +174,11 @@ const Home = () => {
 
   const renderCards = () => {
     if (error) {
-      
-
-      return <div className="text-center my-10 text-lg">This search returned an error...</div>
+      return (
+        <div className="text-center my-10 text-lg">
+          This search returned an error...
+        </div>
+      );
     }
 
     if (isLoading) {
@@ -208,7 +224,7 @@ const Home = () => {
           initial="hidden"
           animate="show"
         >
-          {jobs.map((el: JobType, index: number) => {
+          {jobs.map((el: JobInterface, index: number) => {
             return <HomeJobCard el={el} key={index} />;
           })}
         </motion.div>

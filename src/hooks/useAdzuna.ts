@@ -40,7 +40,6 @@ const useAdzuna = ({ page, title, location, contract = "full_time", sort = "rele
       const baseUrl = `https://api.adzuna.com/v1/api/jobs/gb/search/${page}?app_id=14758e80&app_key=b7bdf1e68baa9af01ec4a64dbfe8d2b3&results_per_page=10${contractString}${titleString}${locationString}${sortString}`
 
       setUrl(baseUrl)
-      console.log(url)
     }
 
     setUrlParams()

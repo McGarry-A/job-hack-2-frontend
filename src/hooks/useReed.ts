@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { ReedJobInterface, ReedResponseInterface } from "./reedInterfaces";
+import axios from "axios"
+import { ReedJobInterface } from "./reedInterfaces";
+import { JobInterface } from "./jobs.model";
 
 export type JobType = Pick<
   ReedJobInterface,
@@ -7,73 +9,42 @@ export type JobType = Pick<
 >;
 
 interface props {
-  page?: number;
-  title?: string;
-  location?: string;
+  page: number;
+  title: string;
+  location: string;
 }
 
-const useReed = ({ title, location }: props) => {
+const useReed = ({ title , location , page }: props) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<unknown>();
-    const [fullJobs, setFullJobs] = useState<ReedResponseInterface>();
-    const [jobs, setJobs] = useState<JobType[]>();
-
-    const [url, setUrl] = useState<string | null>(null);
+    const [jobs, setJobs] = useState<JobInterface[]>();
 
     useEffect(() => {
-        const setUrlParams = () => {  
-          // There is a different way to paginate using this
-          // results to take
-          // results to skip
-    
-          const baseUrl = `https://www.reed.co.uk/api/{versionnumber}/search?keywords=${title}&locationName=${location}`
-    
-          setUrl(baseUrl)
-        }
-    
-        setUrlParams()
-      }, [title, location, url]);
-
-      useEffect(() => {
-        const API_KEY = 'YjYwZGRmM2VkYzRjNDBmNWE4NjZiNmUzZDkxY2UyY2Q6'
-
-        const fetchData = async () => {
-          try {
-            if (url === null) return 
-            const response = await fetch(url, {
-                method: "GET",
-                headers: {
-                    "Content-Type":"application/json",
-                    "Authorization":`Basic ${API_KEY}`
-                }
-            });
-            const data: ReedResponseInterface = await response.json();
-            setFullJobs(data);
-          } catch (error) {
-            setError(error);
-            setIsLoading(false)
+      const fetchReed = async () => {
+        try {
+          const options = {
+            method: "GET",
+            url: "http://localhost:5001/reed",
+            headers: {
+              "Content-Type":"application/json",
+            }
           }
-        };
-    
-        fetchData()
-      }, [url])
+      
+          const response = await axios.request(options)
 
-      useEffect(() => {
-        if (fullJobs) {
-          const data: JobType[] = fullJobs.results.map((el) => {
-            return {
-              jobTitle: el.jobTitle,
-              locationName: el.locationName,
-              jobDescription: el.jobDescription,
-              maximumSalary: el.maximumSalary,
-              employerName: el.employerName,
-            };
-          });
-          
-          setJobs(data);
+          setJobs(response.data.jobs)
+          setError(false)
+          setIsLoading(false)
+        } catch (error) {
+          console.log(error)
+          setJobs(undefined)
+          setError(true)
           setIsLoading(false)
         }
-      }, [fullJobs]);
+
+      }
+      fetchReed()
+    }, [title, location, page])
 
     return { isLoading, error, jobs }
 }
