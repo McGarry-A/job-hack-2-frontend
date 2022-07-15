@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
-import { ReedJobInterface } from "./reedInterfaces";
 import { JobInterface } from "./jobs.model";
-
-export type JobType = Pick<
-  ReedJobInterface,
-  "jobTitle" | "locationName" | "jobDescription" | "maximumSalary" | "employerName"
->;
 
 interface props {
   page: number;

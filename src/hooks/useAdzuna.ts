@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import { ApiInterface, JobInterface } from "./apiInterfaces";
-
-export type JobType = Pick<
-  JobInterface,
-  "title" | "location" | "description" | "salary_max" | "company" | "contract_type" | "redirect_url" | "id"
->;
+import { AdzunaJobInterface, AdzunaResponseInterface, JobInterface } from "./jobs.model";
 
 interface props {
   page?: number;
@@ -19,8 +14,8 @@ interface props {
 const useAdzuna = ({ page, title, location, contract = "full_time", sort = "relevance" }: props) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<unknown>();
-  const [fullJobs, setFullJobs] = useState<ApiInterface>();
-  const [jobs, setJobs] = useState<JobType[]>();
+  const [fullJobs, setFullJobs] = useState<AdzunaResponseInterface>();
+  const [jobs, setJobs] = useState<JobInterface[]>();
 
   const [url, setUrl] = useState<string | null>(null)
 
@@ -63,16 +58,16 @@ const useAdzuna = ({ page, title, location, contract = "full_time", sort = "rele
 
   useEffect(() => {
     if (fullJobs) {
-      const data: JobType[] = fullJobs.results.map((el) => {
+      const data: JobInterface[] = fullJobs.results.map((el: AdzunaJobInterface) => {
         return {
-          id: el.id,
+          id: Number(el.id),
           title: el.title,
-          location: el.location,
+          location: el.location.display_name,
           description: el.description,
-          salary_max: el.salary_max,
-          company: el.company,
-          contract_type: el.contract_time,
-          redirect_url: el.redirect_url
+          salary: el.salary_max,
+          company: el.company.display_name,
+          url: el.redirect_url,
+          contract: el.contract_type
         };
       });
       

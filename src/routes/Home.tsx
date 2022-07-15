@@ -13,15 +13,14 @@ import { jobContainerVariant } from "../Animations/JobCard";
 import { useAppDispatch } from "../store";
 import { setNotification } from "../store/notificationSlice";
 import { JobInterface } from "../hooks/jobs.model";
-import { JobType } from "../hooks/useAdzuna";
 
 type JobsState = {
   error: unknown;
   isLoading: boolean;
-  jobs: JobType[] | undefined;
+  jobs: JobInterface[] | undefined;
 };
 
-type ReedStateType = {
+type HookReturnType = {
   error: unknown;
   isLoading: boolean;
   jobs: JobInterface[] | undefined;
@@ -31,11 +30,6 @@ type sortType = "date" | "relevance" | "salary";
 type contractType = "full_time" | "part_time" | "contract" | "permanent";
 
 const Home = () => {
-  const [jobsState, setJobsState] = useState<JobsState>();
-  const [reedJobState, setReedJobState] = useState<ReedStateType>();
-
-  const [reedJobs, setReedJobs] = useState<any>();
-
   const [job, setJob] = useState<string>("developer");
   const [location, setLocation] = useState<string>("manchester");
 
