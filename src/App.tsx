@@ -6,6 +6,7 @@ import Modal from "./components/Modal/Modal";
 import Account from "./routes/Account";
 import Contact from "./routes/Contact";
 import Home from "./routes/Home";
+import JobDetails from "./routes/JobDetails";
 import MyJobs from "./routes/MyJobs";
 import Register from "./routes/Register";
 import { useAppSelector } from "./store";
@@ -58,6 +59,7 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/my-jobs" element={<MyJobs />} />
             <Route path="/my-account" element={<Account />} />
+            <Route path="/job-profile/:id" element={<JobDetails />} />
           </Routes>
         </ContentWrapper>
       </AnimatePresence>
