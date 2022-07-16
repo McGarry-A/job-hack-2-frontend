@@ -2,13 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios"
 import { JobInterface } from "./jobs.model";
 
-interface props {
-  page: number;
-  title: string;
-  location: string;
-}
+const useReedEmployer = (employerId: number | undefined) => {
 
-const useReed = ({title, location, page}: props) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<unknown>();
     const [jobs, setJobs] = useState<JobInterface[]>();
@@ -17,21 +12,23 @@ const useReed = ({title, location, page}: props) => {
     setIsLoading(true)
     setError("")
     setJobs(undefined)
-    }, [page, title, location])
+    }, [employerId])
 
     useEffect(() => {
       const fetchReed = async () => {
         try {
           const options = {
             method: "GET",
-            url: `http://localhost:5001/api/reed`,
-            params: { title, location, page },
+            url: `http://localhost:5001/api/reed/company/${employerId}`,
             headers: {
               "Content-Type":"application/json",
             }
           }
       
           const response = await axios.request(options)
+
+          console.log(response)
+          console.log(jobs)
 
           setJobs(response.data.jobs)
           setError(false)
@@ -45,9 +42,9 @@ const useReed = ({title, location, page}: props) => {
 
       }
       fetchReed()
-    }, [title, location, page])
+    }, [employerId])
 
     return { isLoading, error, jobs }
 }
 
-export default useReed;
+export default useReedEmployer;

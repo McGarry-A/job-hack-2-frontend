@@ -3,7 +3,7 @@ import { AiOutlineSearch, AiOutlineForm } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 import { IoIosGitNetwork } from "react-icons/io";
 import { BiSortAlt2 } from "react-icons/bi";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
 import useReed from "../hooks/useReed";
 import Footer from "../components/Footer/Footer";
@@ -14,39 +14,20 @@ import { useAppDispatch } from "../store";
 import { setNotification } from "../store/notificationSlice";
 import { JobInterface } from "../hooks/jobs.model";
 
-type JobsState = {
-  error: unknown;
-  isLoading: boolean;
-  jobs: JobInterface[] | undefined;
-};
-
-type HookReturnType = {
-  error: unknown;
-  isLoading: boolean;
-  jobs: JobInterface[] | undefined;
-};
-
 type sortType = "date" | "relevance" | "salary";
 type contractType = "full_time" | "part_time" | "contract" | "permanent";
 
 const Home = () => {
-  const [job, setJob] = useState<string>("developer");
-  const [location, setLocation] = useState<string>("manchester");
-
-  const [contract, setContract] = useState<contractType>("full_time");
-  const [sort, setSort] = useState<sortType>("relevance");
-
+  const [job, setJob] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
   const [pagination, setPagination] = useState<number>(1);
+  const [provider, setProvider] = useState<string>("")
+
+  const titleRef = useRef<HTMLInputElement>(null)
+  const locationRef = useRef<HTMLInputElement>(null)
+  const providerRef = useRef<HTMLSelectElement>(null)
 
   const paginationOptions = { pagination, setPagination };
-
-  // const useJobs = useAdzuna({
-  //   page: pagination,
-  //   title: job,
-  //   location,
-  //   contract,
-  //   sort,
-  // });
 
   const useJobsReed = useReed({
     page: pagination,
@@ -61,6 +42,8 @@ const Home = () => {
   // const { error, isLoading, jobs } = useJobs;
   const { error, isLoading, jobs } = useJobsReed;
 
+  
+
   useEffect(() => {
     if (error) {
       dispatch(
@@ -74,19 +57,18 @@ const Home = () => {
     }
   }, [error]);
 
-  // useEffect(() => {
-  //   setJobsState({ error, isLoading, jobs });
-  // }, [pagination, error, jobs, isLoading]);
-
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit =(e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //   setJobsState({ error, isLoading, jobs });
-  };
+    
+    if (titleRef.current) setJob(titleRef.current?.value)
+    if (locationRef.current) setLocation(locationRef.current?.value)
+    if (providerRef.current) setProvider(providerRef.current?.value)
+  }
 
   const renderForm = () => {
     return (
       <form
-        className="grid grid-cols-6 gap-3 pt-2"
+        className="grid grid-cols-4 gap-3 pt-2"
         onSubmit={(e) => handleFormSubmit(e)}
       >
         <div className="flex flex-col">
@@ -95,7 +77,7 @@ const Home = () => {
             <AiOutlineSearch className="mr-2 text-2xl" />
             <input
               className="w-full focus:outline-none text-[16px]"
-              onChange={(e) => setJob(e.target.value)}
+              ref={titleRef}
               placeholder="Front-end Developer"
             />
           </div>
@@ -106,40 +88,9 @@ const Home = () => {
             <GoLocation className="mr-2 text-2xl" />
             <input
               className="w-full focus:outline-none text-[16px]"
-              onChange={(e) => setLocation(e.target.value)}
+              ref={locationRef}
               placeholder="Manchester"
             />
-          </div>
-        </div>
-        <div className="flex flex-col">
-          <p className="opacity-60">Contract</p>
-          <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-            <AiOutlineForm className="mr-2 text-2xl" />
-            <select
-              className="w-full focus:outline-none opacity-50 text-[16px]"
-              onChange={(e) => setContract(e.target.value as contractType)}
-            >
-              <option value={"full_time"}>Full-Time</option>
-              <option value={"part_time"}>Part-Time</option>
-              <option value={"contract"}>Contract</option>
-              <option value={"permanent"}>permanent</option>
-            </select>
-          </div>
-        </div>
-        <div className="flex flex-col">
-          <p className="opacity-60">Sort by</p>
-          <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-            <BiSortAlt2 className="mr-2 text-2xl" />
-            <select
-              className="w-full focus:outline-none opacity-50 text-[16px]"
-              onChange={(e) => setSort(e.target.value as sortType)}
-            >
-              <option value={"relevance"} defaultChecked>
-                Relevance
-              </option>
-              <option value={"salary"}>Salary</option>
-              <option value={"date"}>Date Posted</option>
-            </select>
           </div>
         </div>
         <div className="flex flex-col">
@@ -150,16 +101,20 @@ const Home = () => {
               placeholder="input"
               className="w-full focus:outline-none opacity-50 text-[16px]"
               onChange={() => undefined}
+              ref={providerRef}
             >
-              <option value={"adzuna"}>Adzuna</option>
               <option value={"reed"}>Reed</option>
+              <option value={"adzuna"}>Adzuna</option>
             </select>
           </div>
         </div>
         <div className="flex flex-col pb-1">
           <div className="invisible"></div>
-          <button className="flex justify-center items-center border border-sky-500 text-sky-500 font-semibold uppercase tracking-wide mt-auto py-2 px-2 text-sm lg:text-lg h-[42px]">
-            Clear
+          <button 
+            className="flex justify-center items-center border border-sky-500 bg-sky-500 text-gray-50 font-semibold uppercase tracking-wide mt-auto py-2 px-2 text-sm lg:text-lg h-[42px] hover:bg-sky-400 hover:border-sky-400"
+            type="submit"
+            >
+            Search
           </button>
         </div>
       </form>

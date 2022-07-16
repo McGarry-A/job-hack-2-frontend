@@ -257,7 +257,7 @@ const Register = ({ isRegister = true }: props) => {
               <label className="block">Email</label>
               <input
                 type={"email"}
-                className="w-full h-10"
+                className="w-full h-10 p-2"
                 ref={emailRef}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -266,7 +266,7 @@ const Register = ({ isRegister = true }: props) => {
               <label className="block">Password</label>
               <input
                 type={"password"}
-                className="w-full h-10"
+                className="w-full h-10 p-2"
                 ref={passwordRef}
                 onChange={(e) => setPassword(e.target.value)}
               />

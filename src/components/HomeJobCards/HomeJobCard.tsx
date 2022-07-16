@@ -22,7 +22,7 @@ const HomeJobCard = ({ el }: props) => {
   const dispatch = useAppDispatch();
 
   const handleAddToList = () => {
-    if (!state.isLoggedIn) {
+    if (state.isLoggedIn === false) {
       dispatch(
         setNotification({
           state: false,
@@ -31,23 +31,26 @@ const HomeJobCard = ({ el }: props) => {
             "Please ensure that you are logged in before adding items to your wishlist.",
         })
       );
+    } else {
+      dispatch(
+        setNotification({
+          state: false,
+          status: "success",
+          message:
+            "Successfully added to your list. You can now manage this in the My Jobs tab.",
+        })
+      );
+
+      const jobToAdd = {
+        title: el.title,
+        company: el.company,
+        salary: el.salary,
+        location: el.location,
+        description: el.description,
+      };
+
+      dispatch(addToLikedJobs(jobToAdd));
     }
-
-    dispatch(setNotification({
-      state: false,
-      status: "success",
-      message: "Successfully added to your list. You can now manage this in the My Jobs tab."
-    }))
-
-    const jobToAdd = {
-      title: el.title,
-      company: el.company,
-      salary: el.salary,
-      location: el.location,
-      description: el.description,
-    };
-
-    dispatch(addToLikedJobs(jobToAdd));
   };
 
   return (
