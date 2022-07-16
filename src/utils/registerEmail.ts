@@ -8,7 +8,7 @@ interface props {
 const registerEmail = async ({ firstName, lastName, email, password}: props) => {
 
   try {
-    const data = await fetch(`${process.env.SERVER_API}api/user`, {
+    const data = await fetch(`https://jobhack2.herokuapp.com/api/user`, {
       method: "POST",
       headers: {
         "Content-Type":"application/json"
