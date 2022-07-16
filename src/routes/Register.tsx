@@ -71,6 +71,7 @@ const Register = ({ isRegister = true }: props) => {
       setError("Failed logging in");
       return;
     }
+
     dispatch(setActiveUser(user));
     dispatch(
       setNotification({
