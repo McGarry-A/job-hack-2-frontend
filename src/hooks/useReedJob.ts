@@ -14,7 +14,7 @@ const useReedJob = (jobId: string = "") => {
             try {
               const options = {
                 method: "GET",
-                url: `${process.env.SERVER_API}reed/${jobId}`,
+                url: `${process.env.SERVER_API}api/reed/${jobId}`,
                 headers: {
                   "Content-Type":"application/json",
                 }
