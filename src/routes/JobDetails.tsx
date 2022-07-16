@@ -9,18 +9,47 @@ import { TiBusinessCard } from "react-icons/ti";
 import Footer from "../components/Footer/Footer";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
+import { useAppDispatch, useAppSelector } from "../store";
+import { setNotification } from "../store/notificationSlice";
+import { addToLikedJobs } from "../store/userSlice";
 
 const JobDetails = () => {
   const params = useParams();
   const getProfile = useReedJob(params.id);
 
   const { error, loading, jobProfile } = getProfile;
-
   const [profile, setProfile] = useState(jobProfile);
+  const state = useAppSelector(state => state.user)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (jobProfile) setProfile(jobProfile);
   }, [getProfile, jobProfile]);
+
+  
+  const handleAddToList = () => {
+    if (!profile) return
+    if (!state.isLoggedIn) {
+      dispatch(
+        setNotification({
+          state: false,
+          status: "error",
+          message:
+            "Please ensure that you are logged in before adding items to your wishlist.",
+        })
+      );
+    }
+
+    const jobToAdd = {
+      title: profile.jobTitle,
+      company: profile.employerName,
+      salary: profile.maximumSalary as number,
+      location: profile.locationName,
+      description: profile.jobDescription,
+    };
+
+    dispatch(addToLikedJobs(jobToAdd));
+  };
 
   const renderHero = () => {
     if (!profile) {
@@ -94,12 +123,12 @@ const JobDetails = () => {
         </div>
         <HTMLParser html={profile.jobDescription} />
         <div className="flex space-x-4 pt-10">
-          <a href={profile.jobUrl}>
-            <button className="text-white px-6 py-3 bg-sky-400 rounded flex items-center justify-center border-2 border-sky-400">
-              <TiBusinessCard className="mr-2 text-lg" />
-              Add to List
-            </button>
-          </a>
+          <button 
+            className="text-white px-6 py-3 bg-sky-400 rounded flex items-center justify-center border-2 border-sky-400"
+            onClick={() => handleAddToList()}>
+            <TiBusinessCard className="mr-2 text-lg" />
+            Add to List
+          </button>
           <a href={profile.jobUrl}>
             <button className="bg-white px-6 py-3 text-sky-400 rounded flex items-center justify-center border-sky-400 border-2">
               <AiOutlineEnter className="mr-2 text-lg" />

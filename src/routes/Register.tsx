@@ -21,8 +21,8 @@ interface props {
 const Register = ({ isRegister = true }: props) => {
   const [register, setRegister] = useState<boolean>(isRegister);
 
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [email, setEmail] = useState<string>("test@testing.com");
+  const [password, setPassword] = useState<string>("testtest");
   const [confirmPassword, setConfirmPassword] = useState<string>();
   const [error, setError] = useState<string>();
 
@@ -36,11 +36,6 @@ const Register = ({ isRegister = true }: props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (emailRef.current && passwordRef.current) {
-      emailRef.current.value = "test@testing.com";
-      passwordRef.current.value = "testtest";
-    }
-
     dispatch(
       setNotification({
         status: "success",
