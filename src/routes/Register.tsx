@@ -36,6 +36,11 @@ const Register = ({ isRegister = true }: props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (emailRef.current && passwordRef.current) {
+      emailRef.current.value = "test@testing.com";
+      passwordRef.current.value = "testtest";
+    }
+
     dispatch(
       setNotification({
         status: "success",
