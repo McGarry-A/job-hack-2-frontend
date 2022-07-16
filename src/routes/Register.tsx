@@ -1,5 +1,5 @@
 // import { FcGoogle } from "react-icons/fc";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import loginEmail from "../utils/loginEmail";
 import registerEmail from "../utils/registerEmail";
 import GoogleAuth from "../components/GoogleAuth";
@@ -29,8 +29,27 @@ const Register = ({ isRegister = true }: props) => {
   const [firstName, setFirstName] = useState<string>();
   const [lastName, setLastName] = useState<string>();
 
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (emailRef.current && passwordRef.current) {
+      emailRef.current.value = "test@testing.com";
+      passwordRef.current.value = "testtest";
+    }
+
+    dispatch(
+      setNotification({
+        status: "success",
+        state: false,
+        message:
+          "A demo user has already been entered for you to login, or create an account and test it yourself!",
+      })
+    );
+  }, []);
 
   useEffect(() => {
     setError("");
@@ -63,7 +82,9 @@ const Register = ({ isRegister = true }: props) => {
     navigate("/");
   };
 
-  const handleFormSubmitRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmitRegister = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     if (!password || !email || !confirmPassword || !firstName || !lastName) {
       setError("Please make sure all filds are filled.");
@@ -77,8 +98,8 @@ const Register = ({ isRegister = true }: props) => {
     }
 
     const user = await registerEmail({ firstName, lastName, email, password });
-    console.log(user)
-    dispatch(setActiveUser(user))
+    console.log(user);
+    dispatch(setActiveUser(user));
     dispatch(
       setNotification({
         state: false,
@@ -236,6 +257,7 @@ const Register = ({ isRegister = true }: props) => {
               <input
                 type={"email"}
                 className="w-full h-10"
+                ref={emailRef}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -244,6 +266,7 @@ const Register = ({ isRegister = true }: props) => {
               <input
                 type={"password"}
                 className="w-full h-10"
+                ref={passwordRef}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
