@@ -40,6 +40,12 @@ const JobDetails = () => {
       );
     }
 
+    dispatch(setNotification({
+      state: false,
+      status: "success",
+      message: "Successfully added to your list. You can now manage this in the My Jobs tab."
+    }))
+    
     const jobToAdd = {
       title: profile.jobTitle,
       company: profile.employerName,

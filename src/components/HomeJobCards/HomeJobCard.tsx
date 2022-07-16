@@ -33,6 +33,12 @@ const HomeJobCard = ({ el }: props) => {
       );
     }
 
+    dispatch(setNotification({
+      state: false,
+      status: "success",
+      message: "Successfully added to your list. You can now manage this in the My Jobs tab."
+    }))
+
     const jobToAdd = {
       title: el.title,
       company: el.company,
