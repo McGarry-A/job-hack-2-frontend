@@ -24,7 +24,7 @@ const useReed = ({ title , location , page }: props) => {
         try {
           const options = {
             method: "GET",
-            url: `${process.env.SERVER_API}api/reed`,
+            url: `${process.env.SERVER_API}`,
             params: { title, location, page },
             headers: {
               "Content-Type":"application/json",
