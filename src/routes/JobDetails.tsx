@@ -23,8 +23,9 @@ const JobDetails = () => {
 
   const { error, loading, jobProfile } = getProfile;
   const [profile, setProfile] = useState(jobProfile);
+  const [page, setPage] = useState<number>(1)
 
-  const { isLoading, error: jobError, jobs } = useReedEmployer(profile?.employerId);
+  const { isLoading, error: jobError, jobs } = useReedEmployer(profile?.employerId, page);
 
   const state = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
@@ -260,7 +261,9 @@ const JobDetails = () => {
             return <HomeJobCard el={el} key={index} />;
           })}
 
-          <button className="my-5 w-full border py-2 bg-sky-400 border-sky-400 text-gray-50 hover:bg-sky-300 hover:border-sky-300 rounded">
+          <button 
+            className="my-5 w-full border py-2 bg-sky-400 border-sky-400 text-gray-50 hover:bg-sky-300 hover:border-sky-300 rounded"
+            onClick={() => setPage(page + 1)}>
             Load more jobs
           </button>
         </motion.div>

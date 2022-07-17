@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { JobInterface } from "./jobs.model";
 
-const useReedEmployer = (employerId: number | undefined) => {
+const useReedEmployer = (employerId: number | undefined, page: number) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<unknown>();
   const [jobs, setJobs] = useState<JobInterface[]>();
@@ -11,7 +11,7 @@ const useReedEmployer = (employerId: number | undefined) => {
     setIsLoading(true);
     setError("");
     setJobs(undefined);
-  }, [employerId]);
+  }, [employerId, page]);
 
   useEffect(() => {
     const fetchReed = async () => {
@@ -19,6 +19,7 @@ const useReedEmployer = (employerId: number | undefined) => {
         const options = {
           method: "GET",
           url: `http://localhost:5001/api/reed/company/${employerId}`,
+          params: { page },
           headers: {
             "Content-Type": "application/json",
           },
@@ -40,7 +41,7 @@ const useReedEmployer = (employerId: number | undefined) => {
       }
     };
     fetchReed();
-  }, [employerId]);
+  }, [employerId, page]);
 
   return { isLoading, error, jobs };
 };
