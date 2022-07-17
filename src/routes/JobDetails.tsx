@@ -24,7 +24,7 @@ const JobDetails = () => {
   const { error, loading, jobProfile } = getProfile;
   const [profile, setProfile] = useState(jobProfile);
 
-  const { isLoading, error: jobError, jobs } = useReedEmployer(profile?.jobId);
+  const { isLoading, error: jobError, jobs } = useReedEmployer(profile?.employerId);
 
   const state = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();

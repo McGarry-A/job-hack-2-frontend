@@ -7,8 +7,6 @@ const useReedJob = (jobId: string = "") => {
     const [loading, setLoading] = useState(true)
     const [jobProfile, setJobProfile] = useState<ReedJobProfile>()
 
-    console.log(jobId)
-
     useEffect(() => {
         const fetchReed = async () => {
             try {
@@ -27,7 +25,6 @@ const useReedJob = (jobId: string = "") => {
               setError(false)
               setLoading(false)
             } catch (error) {
-              console.log(error)
               setJobProfile(undefined)
               setError(true)
               setLoading(false)
