@@ -44,13 +44,21 @@ App:
     > LOGOUT DONE 
 
 Animations: 
-> Animate cards on the homepage
-> Animate different routes
+> Animate cards on the homepage DONE
+> Animate different routes DONE
+> Add same animation to every page DONE
 
 UI:
-> Register redirects to the homepage
-> Logout redirects to the homepage
-> NEED TO MAKE THE APP RESPONSIVE.
+> Register redirects to the homepage DONE
+> Logout redirects to the homepage DONE
+> NEED TO MAKE THE APP RESPONSIVE
+
+Job Details
+> Create page DONE
+> Show job profile DONE
+> Show more jobs from that employer DONE
+> Allow option to load more DONE
+> 
 
 MyJobs: 
 > Drag and drop system to manage current jobs
@@ -58,15 +66,14 @@ MyJobs:
 >
 
 Food4Thought:
-> Search button on homepage is useless as it searches on change of state
-> Options look bad when they are ticked
 > Entry animation for the homepage?
 > Timeout that automatically closes notifications?
 > Make the response object we get include link and conform to both REED AND ADZUNA 
-> Are there any other good API'S that we can use? up 2 4 options would be good...
-
-
-Bonus: 
-> Find a better API with more information than Adzuna
+> Find a better API with more information than Adzuna DONE
 > Animations
 > Should give the user the option to choose between Adzuna and ReedAPI
+
+DO NEXT:
+> GOOGLE AUTH
+> DELETE USER ROUTE
+>
