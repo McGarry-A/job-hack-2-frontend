@@ -8,7 +8,7 @@ interface props {
   location: string;
 }
 
-const useReed = ({ title , location , page }: props) => {
+const useReed = ({title, location, page}: props) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<unknown>();
     const [jobs, setJobs] = useState<JobInterface[]>();
@@ -17,14 +17,14 @@ const useReed = ({ title , location , page }: props) => {
     setIsLoading(true)
     setError("")
     setJobs(undefined)
-    }, [page])
+    }, [page, title, location])
 
     useEffect(() => {
       const fetchReed = async () => {
         try {
           const options = {
             method: "GET",
-            url: `https://jobhack2.herokuapp.com/api/reed`,
+            url: `http://localhost:5001/api/reed`,
             params: { title, location, page },
             headers: {
               "Content-Type":"application/json",

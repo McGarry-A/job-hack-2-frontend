@@ -7,14 +7,12 @@ const useReedJob = (jobId: string = "") => {
     const [loading, setLoading] = useState(true)
     const [jobProfile, setJobProfile] = useState<ReedJobProfile>()
 
-    console.log(jobId)
-
     useEffect(() => {
         const fetchReed = async () => {
             try {
               const options = {
                 method: "GET",
-                url: `https://jobhack2.herokuapp.com/api/reed/${jobId}`,
+                url: `http://localhost:5001/api/reed/${jobId}`,
                 headers: {
                   "Content-Type":"application/json",
                 }
@@ -27,7 +25,6 @@ const useReedJob = (jobId: string = "") => {
               setError(false)
               setLoading(false)
             } catch (error) {
-              console.log(error)
               setJobProfile(undefined)
               setError(true)
               setLoading(false)
