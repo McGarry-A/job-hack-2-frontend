@@ -56,11 +56,11 @@ const Hero = () => {
 
     return (
       <motion.div
-        className="flex space-x-24 justify-center pt-10 pb-24 opacity-50 px-10"
+        className="flex space-x-24 justify-center pt-10 pb-24 opacity-50 px-10 overflow-hidden"
         initial=""
-        animate={{ x: "-50%" }}
+        animate={{ x: "30%" }}
         transition={{
-          duration:30,
+          duration: 30,
           repeat: Infinity,
           repeatType: "reverse",
           ease: "linear",

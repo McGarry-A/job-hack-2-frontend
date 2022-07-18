@@ -21,11 +21,11 @@ const Home = () => {
   const [job, setJob] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [pagination, setPagination] = useState<number>(1);
-  const [provider, setProvider] = useState<string>("")
+  const [provider, setProvider] = useState<string>("");
 
-  const titleRef = useRef<HTMLInputElement>(null)
-  const locationRef = useRef<HTMLInputElement>(null)
-  const providerRef = useRef<HTMLSelectElement>(null)
+  const titleRef = useRef<HTMLInputElement>(null);
+  const locationRef = useRef<HTMLInputElement>(null);
+  const providerRef = useRef<HTMLSelectElement>(null);
 
   const paginationOptions = { pagination, setPagination };
 
@@ -42,8 +42,6 @@ const Home = () => {
   // const { error, isLoading, jobs } = useJobs;
   const { error, isLoading, jobs } = useJobsReed;
 
-  
-
   useEffect(() => {
     if (error) {
       dispatch(
@@ -57,13 +55,13 @@ const Home = () => {
     }
   }, [error]);
 
-  const handleFormSubmit =(e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    if (titleRef.current) setJob(titleRef.current?.value)
-    if (locationRef.current) setLocation(locationRef.current?.value)
-    if (providerRef.current) setProvider(providerRef.current?.value)
-  }
+
+    if (titleRef.current) setJob(titleRef.current?.value);
+    if (locationRef.current) setLocation(locationRef.current?.value);
+    if (providerRef.current) setProvider(providerRef.current?.value);
+  };
 
   const renderForm = () => {
     return (
@@ -110,10 +108,10 @@ const Home = () => {
         </div>
         <div className="flex flex-col pb-1">
           <div className="invisible"></div>
-          <button 
+          <button
             className="flex justify-center items-center border border-sky-500 bg-sky-500 text-gray-50 font-semibold uppercase tracking-wide mt-auto py-2 px-2 text-sm lg:text-lg h-[42px] hover:bg-sky-400 hover:border-sky-400"
             type="submit"
-            >
+          >
             Search
           </button>
         </div>
