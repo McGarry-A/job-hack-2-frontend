@@ -179,7 +179,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="w-full overflow-hidden">
       <Hero />
       <BGWrapper>
         <ForegroundWrapper>
