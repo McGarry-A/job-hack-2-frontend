@@ -24,7 +24,7 @@ const useReed = ({title, location, page}: props) => {
         try {
           const options = {
             method: "GET",
-            url: `http://localhost:5001/api/reed`,
+            url: `https://jobhack2.herokuapp.com/api/reed`,
             params: { title, location, page },
             headers: {
               "Content-Type":"application/json",

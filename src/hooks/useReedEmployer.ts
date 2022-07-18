@@ -18,7 +18,7 @@ const useReedEmployer = (employerId: number | undefined, page: number) => {
       try {
         const options = {
           method: "GET",
-          url: `http://localhost:5001/api/reed/company/${employerId}`,
+          url: `https://jobhack2.herokuapp.com/api/reed/company/${employerId}`,
           params: { page },
           headers: {
             "Content-Type": "application/json",
@@ -26,8 +26,7 @@ const useReedEmployer = (employerId: number | undefined, page: number) => {
         };
 
         const response = await axios.request(options);
-
-        console.log(`http://localhost:5001/api/reed/company/${employerId}`)
+        
         if (response.data.jobs !== undefined) {
           setJobs(response.data.jobs);
           setError(false);

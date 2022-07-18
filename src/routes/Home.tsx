@@ -48,8 +48,7 @@ const Home = () => {
         setNotification({
           state: false,
           status: "error",
-          message:
-            "There was an error rendering cards. It's likely that we have reached the maximum calls to this API. Please choose another service provider.",
+          message: "There was an error rendering cards.",
         })
       );
     }
