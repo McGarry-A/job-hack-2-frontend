@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar/Navbar";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
 import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
+import PageTitle from "../components/PageTitle/PageTitle";
 
 // import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
@@ -10,12 +11,6 @@ const MyJobs = () => {
     { title: "Home", link: "/" },
     { title: "My Jobs", link: "/my-jobs" },
   ];
-
-  const renderHeader = () => (
-    <div className="my-10 mx-auto text-center">
-      <h2 className="text-5xl font-semibold">My Jobs</h2>
-    </div>
-  );
 
   // type droppableType = { title: string; id: string };
 
@@ -73,7 +68,7 @@ const MyJobs = () => {
         exit={{ opacity: 0 }}
       >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
-        {renderHeader()}
+        <PageTitle title="My Jobs" />
       </motion.div>
     </div>
   );

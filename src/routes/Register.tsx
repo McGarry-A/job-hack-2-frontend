@@ -12,6 +12,7 @@ import { setNotification } from "../store/notificationSlice";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
 import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
+import PageTitle from "../components/PageTitle/PageTitle";
 
 interface props {
   isRegister?: boolean;
@@ -115,14 +116,6 @@ const Register = ({ isRegister = true }: props) => {
     { title: "Register", link: "/register" },
   ];
 
-  const renderHero = () => {
-    return (
-      <div className="mb-10 mx-auto text-center">
-        <h2 className="text-5xl font-semibold">Register</h2>
-      </div>
-    );
-  };
-
   const renderNameFields = () => {
     if (!register) {
       return (
@@ -222,7 +215,7 @@ const Register = ({ isRegister = true }: props) => {
         exit={{ opacity: 0 }}
       >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
-        {renderHero()}
+        <PageTitle title={register ? "Login" : "Register"} />
         <div className="max-w-6xl w-full mx-auto pb-10 flex">
           <form
             className="p-12 border max-w-xl w-full"

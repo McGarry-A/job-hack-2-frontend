@@ -6,6 +6,7 @@ import { setNotification } from "../store/notificationSlice";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
 import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
+import PageTitle from "../components/PageTitle/PageTitle";
 
 const Contact = () => {
   const [subject, setSubject] = useState<string>();
@@ -30,9 +31,6 @@ const Contact = () => {
       return;
     }
 
-    // handle send email using emailjs
-
-    // setMessageSuccessSent(true);
     dispatch(
       setNotification({
         state: false,
@@ -47,14 +45,6 @@ const Contact = () => {
     { title: "Home", link: "/" },
     { title: "Contact", link: "/contact" },
   ];
-
-  const renderHero = () => {
-    return (
-      <div className="my-10 mx-auto text-center">
-        <h2 className="text-5xl font-semibold">Contact JobHack</h2>
-      </div>
-    );
-  };
 
   const renderContactDetails = () => {
     return (
@@ -186,7 +176,7 @@ const Contact = () => {
         exit={{ opacity: 0 }}
       >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
-        {renderHero()}
+        <PageTitle title="Contact" />
         {renderForm()}
       </motion.div>
       <Footer />

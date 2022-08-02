@@ -5,6 +5,7 @@ import { setNotification } from "../store/notificationSlice";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
 import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
+import PageTitle from "../components/PageTitle/PageTitle";
 
 const Account = () => {
   const state = useAppSelector((state) => state.user);
@@ -81,12 +82,6 @@ const Account = () => {
     { title: "Home", link: "/" },
     { title: "My Account", link: "/my-account" },
   ];
-
-  const renderHeader = () => (
-    <div className="my-10 mx-auto text-center">
-      <h2 className="text-5xl font-semibold">My Account</h2>
-    </div>
-  );
 
   const renderSectionHeader = (title: string) => (
     <div className="col-span-2 mb-3">
@@ -183,7 +178,7 @@ const Account = () => {
         exit={{ opacity: 0 }}
       >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
-        {renderHeader()}
+        <PageTitle title="My Account" />
         <BGWrapper>
           {renderUserDetails()}
           {renderDeleteUserAccount()}
