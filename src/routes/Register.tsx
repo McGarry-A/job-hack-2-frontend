@@ -6,13 +6,13 @@ import GoogleAuth from "../components/GoogleAuth";
 import { setActiveUser, userInterface } from "../store/userSlice";
 import { useAppDispatch } from "../store";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
+import Navbar from "../components/Layout/Navbar/Navbar";
+import Footer from "../components/Layout/Footer/Footer";
 import { setNotification } from "../store/notificationSlice";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
-import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
-import PageTitle from "../components/PageTitle/PageTitle";
+import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
+import PageTitle from "../components/Layout/PageTitle/PageTitle";
 
 interface props {
   isRegister?: boolean;

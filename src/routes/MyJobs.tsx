@@ -1,8 +1,8 @@
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../components/Layout/Navbar/Navbar";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
-import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
-import PageTitle from "../components/PageTitle/PageTitle";
+import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
+import PageTitle from "../components/Layout/PageTitle/PageTitle";
 
 // import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 

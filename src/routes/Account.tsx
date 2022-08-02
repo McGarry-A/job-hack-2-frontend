@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../components/Layout/Navbar/Navbar";
 import { useAppDispatch, useAppSelector } from "../store";
 import { setNotification } from "../store/notificationSlice";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
-import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
-import PageTitle from "../components/PageTitle/PageTitle";
+import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
+import PageTitle from "../components/Layout/PageTitle/PageTitle";
 
 const Account = () => {
   const state = useAppSelector((state) => state.user);

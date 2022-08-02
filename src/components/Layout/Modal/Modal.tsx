@@ -2,8 +2,8 @@ import React, { Dispatch, SetStateAction } from "react";
 import ReactDOM from "react-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { useAppDispatch } from "../../store";
-import { removeNotification } from "../../store/notificationSlice";
+import { useAppDispatch } from "../../../store";
+import { removeNotification } from "../../../store/notificationSlice";
 
 export interface Props {
   children: React.ReactNode;

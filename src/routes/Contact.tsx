@@ -1,12 +1,12 @@
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../components/Layout/Navbar/Navbar";
 import { useEffect, useState } from "react";
-import Footer from "../components/Footer/Footer";
+import Footer from "../components/Layout/Footer/Footer";
 import { useAppDispatch } from "../store";
 import { setNotification } from "../store/notificationSlice";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
-import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
-import PageTitle from "../components/PageTitle/PageTitle";
+import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
+import PageTitle from "../components/Layout/PageTitle/PageTitle";
 
 const Contact = () => {
   const [subject, setSubject] = useState<string>();

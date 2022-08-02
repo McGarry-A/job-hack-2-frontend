@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
-import Navbar from "../components/Navbar/Navbar";
+import Navbar from "../components/Layout/Navbar/Navbar";
 import useReedJob from "../hooks/useReedJob";
 import { useEffect, useState } from "react";
 import HTMLParser from "../components/HTMLParser/HTMLParser";
 import { AiOutlineEnter } from "react-icons/ai";
 import { TiBusinessCard } from "react-icons/ti";
-import Footer from "../components/Footer/Footer";
+import Footer from "../components/Layout/Footer/Footer";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
 import { useAppDispatch, useAppSelector } from "../store";
@@ -16,7 +16,7 @@ import { JobInterface } from "../hooks/jobs.model";
 import { jobContainerVariant } from "../Animations/JobCard";
 import useReedEmployer from "../hooks/useReedEmployer";
 import Loader from "../components/Loader/Loader";
-import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 
 const JobDetails = () => {
   const params = useParams();

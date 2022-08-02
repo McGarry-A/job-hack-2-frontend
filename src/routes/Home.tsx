@@ -1,15 +1,15 @@
-import Hero from "../components/Hero/Hero";
+import Hero from "../components/Layout/Hero/Hero";
 import React, { useEffect, useRef, useState } from "react";
-import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
+import PaginationWrapper from "../components/Paginate/PaginationWrapper/PaginationWrapper";
 import useReed from "../hooks/useReed";
-import Footer from "../components/Footer/Footer";
+import Footer from "../components/Layout/Footer/Footer";
 import HomeJobCard from "../components/HomeJobCards/HomeJobCard";
 import { motion } from "framer-motion";
 import { jobContainerVariant } from "../Animations/JobCard";
 import { useAppDispatch } from "../store";
 import { setNotification } from "../store/notificationSlice";
 import { JobInterface } from "../hooks/jobs.model";
-import JobSearchForm from "../components/JobSearchForm/JobSearchFrom";
+import JobSearchForm from "../components/Forms/JobSearchForm/JobSearchFrom";
 import Loader from "../components/Loader/Loader";
 
 const Home = () => {

@@ -2,7 +2,6 @@ import { useState } from "react";
 import reedLogo from "../../images/reedLogo.png";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { addToLikedJobs } from "../../store/userSlice";
-import Modal from "../Modal/Modal";
 import { motion } from "framer-motion";
 import { jobCardVariant } from "../../Animations/JobCard";
 import { setNotification } from "../../store/notificationSlice";
@@ -15,7 +14,6 @@ interface props {
 }
 
 const HomeJobCard = ({ el }: props) => {
-  const [modalIsHidden, setModalIsHidden] = useState<boolean>(true);
   const [showAddToWishList, setShowAddToWishList] = useState<boolean>(false);
 
   const state = useAppSelector((state) => state.user);
@@ -61,7 +59,7 @@ const HomeJobCard = ({ el }: props) => {
       variants={jobCardVariant}
     >
       <NavLink to={`/job-profile/${el.id}`} className="w-full">
-        <div onClick={() => setModalIsHidden(false)} className="flex w-full">
+        <div className="flex w-full">
           <div className="flex justify-center items-center py-2 px-4 mr-4">
             <img
               src={reedLogo}
