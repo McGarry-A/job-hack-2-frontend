@@ -1,9 +1,8 @@
 import Hero from "../components/Hero/Hero";
-import { AiOutlineSearch, AiOutlineForm } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 import { IoIosGitNetwork } from "react-icons/io";
-import { BiSortAlt2 } from "react-icons/bi";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
 import useReed from "../hooks/useReed";
 import Footer from "../components/Footer/Footer";
@@ -13,15 +12,12 @@ import { jobContainerVariant } from "../Animations/JobCard";
 import { useAppDispatch } from "../store";
 import { setNotification } from "../store/notificationSlice";
 import { JobInterface } from "../hooks/jobs.model";
-
-type sortType = "date" | "relevance" | "salary";
-type contractType = "full_time" | "part_time" | "contract" | "permanent";
+import JobSearchForm from "../components/JobSearchForm/JobSearchFrom";
 
 const Home = () => {
   const [job, setJob] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [pagination, setPagination] = useState<number>(1);
-  const [provider, setProvider] = useState<string>("");
 
   const titleRef = useRef<HTMLInputElement>(null);
   const locationRef = useRef<HTMLInputElement>(null);
@@ -37,9 +33,6 @@ const Home = () => {
 
   const dispatch = useAppDispatch();
 
-  console.log(useJobsReed);
-
-  // const { error, isLoading, jobs } = useJobs;
   const { error, isLoading, jobs } = useJobsReed;
 
   useEffect(() => {
@@ -54,68 +47,17 @@ const Home = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    setPagination(1);
+  }, [job, location]);
+
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (titleRef.current) setJob(titleRef.current?.value);
     if (locationRef.current) setLocation(locationRef.current?.value);
-    if (providerRef.current) setProvider(providerRef.current?.value);
-  };
 
-  const renderForm = () => {
-    return (
-      <form
-        className="grid grid-cols-4 gap-3 pt-2"
-        onSubmit={(e) => handleFormSubmit(e)}
-      >
-        <div className="flex flex-col">
-          <p className="opacity-60">Job Title</p>
-          <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-            <AiOutlineSearch className="mr-2 text-2xl" />
-            <input
-              className="w-full focus:outline-none text-[16px]"
-              ref={titleRef}
-              placeholder="Front-end Developer"
-            />
-          </div>
-        </div>
-        <div className="flex flex-col">
-          <p className="opacity-60">Location</p>
-          <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-            <GoLocation className="mr-2 text-2xl" />
-            <input
-              className="w-full focus:outline-none text-[16px]"
-              ref={locationRef}
-              placeholder="Manchester"
-            />
-          </div>
-        </div>
-        <div className="flex flex-col">
-          <p className="opacity-60">Search Provider</p>
-          <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-            <IoIosGitNetwork className="mr-2 text-2xl" />
-            <select
-              placeholder="input"
-              className="w-full focus:outline-none opacity-50 text-[16px]"
-              onChange={() => undefined}
-              ref={providerRef}
-            >
-              <option value={"reed"}>Reed</option>
-              <option value={"adzuna"}>Adzuna</option>
-            </select>
-          </div>
-        </div>
-        <div className="flex flex-col pb-1">
-          <div className="invisible"></div>
-          <button
-            className="flex justify-center items-center border border-sky-500 bg-sky-500 text-gray-50 font-semibold uppercase tracking-wide mt-auto py-2 px-2 text-sm lg:text-lg h-[42px] hover:bg-sky-400 hover:border-sky-400"
-            type="submit"
-          >
-            Search
-          </button>
-        </div>
-      </form>
-    );
+    return setPagination(1);
   };
 
   const renderCards = () => {
@@ -183,8 +125,12 @@ const Home = () => {
       <Hero />
       <BGWrapper>
         <ForegroundWrapper>
-          {renderForm()}
-          {/* {renderOptions()} */}
+          <JobSearchForm
+            handleFormSubmit={handleFormSubmit}
+            titleRef={titleRef}
+            locationRef={locationRef}
+            providerRef={providerRef}
+          />
           <PaginationWrapper {...paginationOptions}>
             {renderCards()}
           </PaginationWrapper>
