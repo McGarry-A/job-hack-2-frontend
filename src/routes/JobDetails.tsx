@@ -1,5 +1,4 @@
-import { useParams, NavLink } from "react-router-dom";
-import { GrFormNext } from "react-icons/gr";
+import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import useReedJob from "../hooks/useReedJob";
 import { useEffect, useState } from "react";

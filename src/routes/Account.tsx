@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { GrFormNext } from "react-icons/gr";
-import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import { useAppDispatch, useAppSelector } from "../store";
 import { setNotification } from "../store/notificationSlice";
