@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../store";
-import { setNotification } from "../../store/notificationSlice";
-import { removeActiveUser } from "../../store/userSlice";
+import { useAppDispatch, useAppSelector } from "../../../store";
+import { setNotification } from "../../../store/notificationSlice";
+import { removeActiveUser } from "../../../store/userSlice";
 
 const Navbar = () => {
   const user = useAppSelector((state) => state.user);

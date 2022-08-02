@@ -6,12 +6,13 @@ import GoogleAuth from "../components/GoogleAuth";
 import { setActiveUser, userInterface } from "../store/userSlice";
 import { useAppDispatch } from "../store";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
+import Navbar from "../components/Layout/Navbar/Navbar";
+import Footer from "../components/Layout/Footer/Footer";
 import { setNotification } from "../store/notificationSlice";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
-import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
+import PageTitle from "../components/Layout/PageTitle/PageTitle";
 
 interface props {
   isRegister?: boolean;
@@ -115,14 +116,6 @@ const Register = ({ isRegister = true }: props) => {
     { title: "Register", link: "/register" },
   ];
 
-  const renderHero = () => {
-    return (
-      <div className="mb-10 mx-auto text-center">
-        <h2 className="text-5xl font-semibold">Register</h2>
-      </div>
-    );
-  };
-
   const renderNameFields = () => {
     if (!register) {
       return (
@@ -222,7 +215,7 @@ const Register = ({ isRegister = true }: props) => {
         exit={{ opacity: 0 }}
       >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
-        {renderHero()}
+        <PageTitle title={register ? "Login" : "Register"} />
         <div className="max-w-6xl w-full mx-auto pb-10 flex">
           <form
             className="p-12 border max-w-xl w-full"

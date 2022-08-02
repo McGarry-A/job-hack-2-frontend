@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
-import Modal from "./components/Modal/Modal";
+import Modal from "./components/Layout/Modal/Modal";
 import Account from "./routes/Account";
 import Contact from "./routes/Contact";
 import Home from "./routes/Home";
