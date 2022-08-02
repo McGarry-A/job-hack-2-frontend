@@ -1,12 +1,11 @@
 import Navbar from "../components/Navbar/Navbar";
-import { GrFormNext } from "react-icons/gr";
-import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer/Footer";
 import { useAppDispatch } from "../store";
 import { setNotification } from "../store/notificationSlice";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
+import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
 
 const Contact = () => {
   const [subject, setSubject] = useState<string>();
@@ -44,25 +43,10 @@ const Contact = () => {
     );
   };
 
-  const renderBreadcrumbs = () => {
-    return (
-      <div className="flex space-x-2 items-center justify-center my-12">
-        <NavLink
-          to="/"
-          className="opacity-50 text-xs uppercase tracking-widest mt-1"
-        >
-          Home
-        </NavLink>
-        <GrFormNext size={"1.3rem"} className="opacity-50" />
-        <NavLink
-          to="/contact"
-          className="text-xs uppercase tracking-widest mt-1"
-        >
-          Contact
-        </NavLink>
-      </div>
-    );
-  };
+  const breadcrumbs = [
+    { title: "Home", link: "/" },
+    { title: "Contact", link: "/contact" },
+  ];
 
   const renderHero = () => {
     return (
@@ -201,7 +185,7 @@ const Contact = () => {
         animate="show"
         exit={{ opacity: 0 }}
       >
-        {renderBreadcrumbs()}
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
         {renderHero()}
         {renderForm()}
       </motion.div>
