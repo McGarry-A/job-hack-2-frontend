@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import loginEmail from "../utils/loginEmail";
 import registerEmail from "../utils/registerEmail";
-import GoogleAuth from "../components/GoogleAuth";
 import { setActiveUser, userInterface } from "../store/userSlice";
 import { useAppDispatch } from "../store";
 import { useNavigate } from "react-router-dom";
@@ -266,7 +265,6 @@ const Register = ({ isRegister = true }: props) => {
             >
               {register ? "Sign in" : "Register"}
             </button>
-            <GoogleAuth />
             {renderSwitchViews()}
           </form>
           <div className="bg-registerHero w-full hidden md:flex flex-grow border"></div>
