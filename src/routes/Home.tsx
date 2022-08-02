@@ -1,7 +1,4 @@
 import Hero from "../components/Hero/Hero";
-import { AiOutlineSearch } from "react-icons/ai";
-import { GoLocation } from "react-icons/go";
-import { IoIosGitNetwork } from "react-icons/io";
 import React, { useEffect, useRef, useState } from "react";
 import PaginationWrapper from "../components/PaginationWrapper/PaginationWrapper";
 import useReed from "../hooks/useReed";

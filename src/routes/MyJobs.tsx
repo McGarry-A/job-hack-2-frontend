@@ -1,31 +1,15 @@
-import { GrFormNext } from "react-icons/gr";
-import { NavLink } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
+import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
 
 // import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
 const MyJobs = () => {
-  const renderBreadcrumbs = () => {
-    return (
-      <div className="flex space-x-2 items-center justify-center my-12">
-        <NavLink
-          to="/"
-          className="opacity-50 text-xs uppercase tracking-widest mt-1"
-        >
-          Home
-        </NavLink>
-        <GrFormNext size={"1.3rem"} className="opacity-50" />
-        <NavLink
-          to="/my-jobs"
-          className="text-xs uppercase tracking-widest mt-1"
-        >
-          My Jobs
-        </NavLink>
-      </div>
-    );
-  };
+  const breadcrumbs = [
+    { title: "Home", link: "/" },
+    { title: "My Jobs", link: "/my-jobs" },
+  ];
 
   const renderHeader = () => (
     <div className="my-10 mx-auto text-center">
@@ -88,7 +72,7 @@ const MyJobs = () => {
         animate="show"
         exit={{ opacity: 0 }}
       >
-        {renderBreadcrumbs()}
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
         {renderHeader()}
       </motion.div>
     </div>

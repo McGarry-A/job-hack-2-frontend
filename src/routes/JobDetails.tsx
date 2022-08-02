@@ -1,5 +1,4 @@
-import { useParams, NavLink } from "react-router-dom";
-import { GrFormNext } from "react-icons/gr";
+import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import useReedJob from "../hooks/useReedJob";
 import { useEffect, useState } from "react";
@@ -17,6 +16,7 @@ import { JobInterface } from "../hooks/jobs.model";
 import { jobContainerVariant } from "../Animations/JobCard";
 import useReedEmployer from "../hooks/useReedEmployer";
 import Loader from "../components/Loader/Loader";
+import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
 
 const JobDetails = () => {
   const params = useParams();
@@ -38,6 +38,11 @@ const JobDetails = () => {
   useEffect(() => {
     if (jobProfile) setProfile(jobProfile);
   }, [getProfile, jobProfile]);
+
+  const breadcrumbs = [
+    { title: "Home", link: "/" },
+    { title: "Job Profile", link: "/contact" },
+  ];
 
   const handleAddToList = () => {
     if (!profile) return;
@@ -92,26 +97,6 @@ const JobDetails = () => {
           <span className="opacity-50">At</span> {profile.employerName}
         </h5>
         <div className="mt-5 border-b-8 border-sky-500 w-24 mx-auto"></div>
-      </div>
-    );
-  };
-
-  const renderBreadcrumbs = () => {
-    return (
-      <div className="flex space-x-2 items-center justify-center my-12">
-        <NavLink
-          to="/"
-          className="opacity-50 text-xs uppercase tracking-widest mt-1"
-        >
-          Home
-        </NavLink>
-        <GrFormNext size={"1.3rem"} className="opacity-50" />
-        <NavLink
-          to="/contact"
-          className="text-xs uppercase tracking-widest mt-1"
-        >
-          Job Profile
-        </NavLink>
       </div>
     );
   };
@@ -260,7 +245,7 @@ const JobDetails = () => {
         animate={loading ? "" : `show`}
         exit={{ opacity: 0 }}
       >
-        {renderBreadcrumbs()}
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
         {renderHero()}
         <div className="max-w-7xl mx-auto bg-white rounded-2xl flex mb-24 flex-col space-y-4 py-8 px-14 shadow pb-10">
           {renderJobDetails()}

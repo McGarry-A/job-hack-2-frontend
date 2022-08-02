@@ -3,16 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import loginEmail from "../utils/loginEmail";
 import registerEmail from "../utils/registerEmail";
 import GoogleAuth from "../components/GoogleAuth";
-import { NavLink } from "react-router-dom";
 import { setActiveUser, userInterface } from "../store/userSlice";
 import { useAppDispatch } from "../store";
 import { useNavigate } from "react-router-dom";
-import { GrFormNext } from "react-icons/gr";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import { setNotification } from "../store/notificationSlice";
 import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
+import Breadcrumbs from "../components/Breadcrumbs/Breadcrumbs";
 
 interface props {
   isRegister?: boolean;
@@ -111,25 +110,10 @@ const Register = ({ isRegister = true }: props) => {
     navigate("/");
   };
 
-  const renderBreadcrumbs = () => {
-    return (
-      <div className="flex space-x-2 items-center justify-center my-12">
-        <NavLink
-          to="/"
-          className="opacity-50 text-xs uppercase tracking-widest mt-1"
-        >
-          Home
-        </NavLink>
-        <GrFormNext size={"1.3rem"} className="opacity-50" />
-        <NavLink
-          to="/register"
-          className="text-xs uppercase tracking-widest mt-1"
-        >
-          Register
-        </NavLink>
-      </div>
-    );
-  };
+  const breadcrumbs = [
+    { title: "Home", link: "/" },
+    { title: "Register", link: "/register" },
+  ];
 
   const renderHero = () => {
     return (
@@ -237,7 +221,7 @@ const Register = ({ isRegister = true }: props) => {
         animate="show"
         exit={{ opacity: 0 }}
       >
-        {renderBreadcrumbs()}
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
         {renderHero()}
         <div className="max-w-6xl w-full mx-auto pb-10 flex">
           <form
