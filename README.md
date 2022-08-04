@@ -8,9 +8,9 @@ HomePage:
 > Pagination DONE
 > Link search to results DONE
 > Cards Clickable - show modal with details > add to apply list DONE
-> Skeleton while homepage cards are loading DONE (BASIC LOADER ADDED)
-> Mask on the hero image on the homepage to make it darker
-> WHAT CAN WE REPLACE THE APPLE LOGO ON EACH CARD WITH >.<
+> Loader when cards are rendering DONE 
+> Mask on the hero image on the homepage to make it darker DONE
+> WHAT CAN WE REPLACE THE APPLE LOGO ON EACH CARD WITH >.< REPLACED WITH REED LOGO DONE
 
 ContactPage:
 > Build page DONE
@@ -24,9 +24,9 @@ Register:
 > Toggle Login/Register DONE
 > Error handling in form DONE
 > Sign In With Email (Typescript backend?) DONE
-> Sign In With Google (Firebase?)
+> Sign In With Google 
 > Append state object to global state DONE
-> Find a better image for the sign in component
+> Find a better image for the sign in component DONE
 > Remember me box, if they check it their user comp should be saved to local storage
 
 App: 
@@ -58,7 +58,6 @@ Job Details
 > Show job profile DONE
 > Show more jobs from that employer DONE
 > Allow option to load more DONE
-> 
 
 MyJobs: 
 > Drag and drop system to manage current jobs
@@ -76,4 +75,3 @@ Food4Thought:
 DO NEXT:
 > GOOGLE AUTH
 > DELETE USER ROUTE
->

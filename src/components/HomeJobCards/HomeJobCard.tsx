@@ -7,6 +7,7 @@ import { jobCardVariant } from "../../Animations/JobCard";
 import { setNotification } from "../../store/notificationSlice";
 import { JobInterface } from "../../hooks/jobs.model";
 import { NavLink } from "react-router-dom";
+import { FaHeart } from "react-icons/fa";
 
 interface props {
   el: JobInterface;
@@ -51,6 +52,15 @@ const HomeJobCard = ({ el }: props) => {
     }
   };
 
+  const formatSalary = (salary: number): string => {
+    return salary
+      ? salary.toLocaleString("en-UK", {
+          style: "currency",
+          currency: "GBP",
+        })
+      : "NA";
+  };
+
   return (
     <motion.div
       className="border flex hover:cursor-pointer hover:shadow rounded border-l-4 overflow-hidden"
@@ -58,39 +68,40 @@ const HomeJobCard = ({ el }: props) => {
       onMouseLeave={() => setShowAddToWishList(false)}
       variants={jobCardVariant}
     >
-      <NavLink to={`/job-profile/${el.id}`} className="w-full">
+      <NavLink
+        to={`/job-profile/${el.id}`}
+        className={`w-full transition duration-150`}
+      >
         <div className="flex w-full">
-          <div className="flex justify-center items-center py-2 px-4 mr-4">
+          <div className="flex justify-center items-center py-2 px-4 mr-4 flex-shrink-0">
             <img
               src={reedLogo}
-              className="w-20"
+              className="w-20 min-w-20"
               alt="search-api-provider-logo"
             />
           </div>
           <div className="flex flex-col justify-center py-2">
-            <h5 className="text-2xl tracking-tight text-gray-900 whitespace-nowrap">
+            <h5 className="text-2xl tracking-tight text-gray-900 max-w-full">
               {el.title}
             </h5>
             <p className="opacity-50 text-lg">{el.company}</p>
           </div>
-          <div className="flex flex-col text-right ml-auto mr-3 py-2">
-            <h6 className="font-bold tracking-wide text-sky-400">
+          <div className="flex flex-col text-right ml-auto mr-3 justify-center">
+            <h6 className="tracking-widest text-sky-400 uppercase text-sm">
               {el.location}
             </h6>
-            <p>£{el.salary}</p>
-            <p className="text-green-500 font-bold uppercase text-sm">
-              {el.id}
-            </p>
+            <p className="text-sm tracking-wide">{formatSalary(el.salary)}</p>
+            <p className="text-green-500 uppercase text-sm">{el.contract}</p>
           </div>
         </div>
       </NavLink>
       <div
-        className={`transition duration-300 flex justify-center font-semibold items-center bg-sky-500 hover:bg-sky-400 text-gray-100 text-sm -p-3 ${
+        className={`transition duration-300 flex justify-center font-semibold items-center bg-sky-500 hover:bg-sky-400 hover:text-rose-500 text-gray-50 text-sm -p-3 ${
           showAddToWishList ? "w-1/12 translate-x-0" : "w-0 translate-x-24"
         }`}
         onClick={() => handleAddToList()}
       >
-        Add To List
+        <FaHeart />
       </div>
     </motion.div>
   );

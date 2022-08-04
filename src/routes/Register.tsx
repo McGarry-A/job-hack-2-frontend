@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import RouteVar from "../Animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
+import RegisterHero from "../images/register-hero.jpg";
 
 interface props {
   isRegister?: boolean;
@@ -215,9 +216,9 @@ const Register = ({ isRegister = true }: props) => {
       >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <PageTitle title={register ? "Login" : "Register"} />
-        <div className="max-w-6xl w-full mx-auto pb-10 flex">
+        <div className="max-w-6xl w-full mx-auto mb-10 flex shadow-sm">
           <form
-            className="p-12 border max-w-xl w-full"
+            className="p-12 outline-gray-500 max-w-xl w-full flex flex-col justify-center space-y-4 bg-gray-50"
             onSubmit={
               register
                 ? (e) => handleFormSubmitLogin(e)
@@ -267,7 +268,13 @@ const Register = ({ isRegister = true }: props) => {
             </button>
             {renderSwitchViews()}
           </form>
-          <div className="bg-registerHero w-full hidden md:flex flex-grow border"></div>
+          <div className="w-full hidden md:flex">
+            <img
+              src={RegisterHero}
+              alt="Register/Login"
+              className="object-cover"
+            />
+          </div>
         </div>
         <Footer />
       </motion.div>

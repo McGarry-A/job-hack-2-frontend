@@ -57,8 +57,12 @@ const Footer = () => {
       <div className="flex flex-col my-2">
         <ul className="space-y-2">
           <li className="text-xl font-bold">Join us</li>
-          <li className="opacity-50">Login</li>
-          <li className="opacity-50">Register</li>
+          <li className="opacity-50">
+            <NavLink to="/register">Login</NavLink>
+          </li>
+          <li className="opacity-50">
+            <NavLink to="/register">Register</NavLink>
+          </li>
         </ul>
       </div>
       <div>

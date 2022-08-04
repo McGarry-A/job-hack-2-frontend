@@ -21,4 +21,5 @@ const jobCardVariant = {
         x: 0,
     }
 }
+
 export { jobContainerVariant, jobCardVariant }
