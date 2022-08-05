@@ -201,7 +201,7 @@ const JobDetails = () => {
           })}
 
           <button
-            className="my-5 w-full border py-2 bg-sky-400 border-sky-400 text-gray-50 hover:bg-sky-300 hover:border-sky-300 rounded"
+            className="my-5 w-full border py-2 bg-sky-400 border-sky-400 text-gray-50 hover:bg-sky-300 hover:border-sky-300 rounded transition duration-150"
             onClick={() => setPage(page + 1)}
           >
             Load more jobs
