@@ -1,6 +1,6 @@
 import Navbar from "../components/Layout/Navbar/Navbar";
 import { motion } from "framer-motion";
-import RouteVar from "../Animations/Route";
+import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
 

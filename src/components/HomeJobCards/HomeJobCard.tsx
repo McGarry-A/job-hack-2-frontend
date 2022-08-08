@@ -3,7 +3,7 @@ import reedLogo from "../../images/reedLogo.png";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { addToLikedJobs } from "../../store/userSlice";
 import { motion } from "framer-motion";
-import { jobCardVariant } from "../../Animations/JobCard";
+import { jobCardVariant } from "../../animations/JobCard";
 import { setNotification } from "../../store/notificationSlice";
 import { JobInterface } from "../../hooks/jobs.model";
 import { NavLink } from "react-router-dom";

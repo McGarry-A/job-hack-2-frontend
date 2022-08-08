@@ -3,7 +3,7 @@ import Navbar from "../components/Layout/Navbar/Navbar";
 import { useAppDispatch, useAppSelector } from "../store";
 import { setNotification } from "../store/notificationSlice";
 import { motion } from "framer-motion";
-import RouteVar from "../Animations/Route";
+import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
 

@@ -24,7 +24,7 @@ import {
   SiPlaystation,
   SiHuawei,
 } from "react-icons/si";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../Layout/Navbar/Navbar";
 
 const Hero = () => {
   const renderIcons = () => {
