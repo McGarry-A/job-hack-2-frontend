@@ -19,7 +19,12 @@ const HomeJobCardContainer = ({ jobs, error, isLoading }: props) => {
     );
   }
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <div className="flex flex-col justify-center flex-grow ">
+        <Loader />
+      </div>
+    );
 
   if (jobs && jobs.length === 0) {
     return (

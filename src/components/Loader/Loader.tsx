@@ -21,7 +21,7 @@ const Loader = () => {
           fill="currentFill"
         />
       </svg>
-      Processing...
+      Loading..
     </button>
   );
 };

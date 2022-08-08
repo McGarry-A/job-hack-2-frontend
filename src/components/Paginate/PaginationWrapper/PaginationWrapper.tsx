@@ -14,7 +14,7 @@ const PaginationWrapper: React.FC<props> = (props) => {
   };
 
   return (
-    <div className="">
+    <div className="flex flex-grow flex-col">
       {props.children}
       <Pagination {...paginationProps} />
     </div>
