@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
+import ContactForm from "../components/Forms/ContactForm/ContactForm";
 
 const Contact = () => {
   const [subject, setSubject] = useState<string>();
@@ -85,82 +86,16 @@ const Contact = () => {
   const renderForm = () => {
     return (
       <div className="max-w-6xl mx-auto bg-white rounded flex mb-24">
-        <form
-          className="grid grid-cols-2 gap-3 p-8 flex-grow"
-          onSubmit={(e) => handleFormSubmit(e)}
-        >
-          <div className="gird-cols-2">
-            {error && <p className="text-red-500 text-sm">*{error}</p>}
-          </div>
-          <div className="col-span-2">
-            <label className="block">
-              Subject <span className="text-red-700 font-bold">*</span>
-            </label>
-            <input
-              type="text"
-              className="border w-full h-10 rounded border-gray-300 p-2"
-              onChange={(e) => setSubject(e.target.value)}
-            />
-          </div>
-          <div className="col-span-2">
-            <label className="block">
-              Message <span className="text-red-700 font-bold">*</span>
-            </label>
-            <textarea
-              rows={10}
-              className="border w-full rounded border-gray-300 p-2"
-              onChange={(e) => setMessage(e.target.value)}
-            />
-          </div>
-          <div className="col-span-1">
-            <label className="block">
-              First Name <span className="text-red-700 font-bold">*</span>
-            </label>
-            <input
-              type="text"
-              className="border w-full rounded border-gray-300 h-10 p-2"
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </div>
-          <div className="col-span-1">
-            <label className="block">
-              Last Name <span className="text-red-700 font-bold">*</span>
-            </label>
-            <input
-              type="text"
-              className="border w-full rounded border-gray-300 h-10 p-2"
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
-          <div className="col-span-1">
-            <label className="block">
-              Email <span className="text-red-700 font-bold">*</span>
-            </label>
-            <input
-              type="text"
-              className="border w-full rounded border-gray-300 h-10 p-2"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="col-span-1">
-            <label className="block">
-              Phone <span className="text-red-700 font-bold">*</span>
-            </label>
-            <input
-              type="text"
-              className="border w-full rounded border-gray-300 h-10 p-2"
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
-          <div className="my-10">
-            <button
-              className="px-3 py-2 border bg-sky-400 text-gray-50 border-sky-400 rounded"
-              type="submit"
-            >
-              Send Message
-            </button>
-          </div>
-        </form>
+        <ContactForm 
+          handleFormSubmit={handleFormSubmit} 
+          setEmail={setEmail} 
+          setPhone={setPhone} 
+          setFirstName={setFirstName} 
+          setLastName={setLastName} 
+          setMessage={setMessage} 
+          setSubject={setSubject} 
+          error={error}
+           />
         {renderContactDetails()}
       </div>
     );

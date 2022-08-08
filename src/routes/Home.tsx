@@ -83,7 +83,7 @@ const ForegroundWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <div className="w-4/5 mx-auto bg-white p-4 shadow-lg rounded -mt-14 mb-14">
+    <div className="w-4/5 mx-auto bg-white p-4 shadow-lg rounded -mt-14 mb-14 h-[1100px] flex flex-col justify-between relative">
       {children}
     </div>
   );
