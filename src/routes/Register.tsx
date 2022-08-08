@@ -34,9 +34,29 @@ const Register = ({ isRegister = true }: props) => {
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const googleAuthRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const handleCallbackResponse = () => {};
+
+  useEffect(() => {
+    if (googleAuthRef.current) {
+      /* global google */
+      //@ts-ignore
+      window.google.accounts.id.initialize({
+        client_id:
+          "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com",
+        callback: handleCallbackResponse,
+      });
+      //@ts-ignore
+      google.accounts.id.renderButton(
+        googleAuthRef.current,
+        { theme: "outline", size: "large", width: "100%" }
+      );
+    }
+  }, []);
 
   useEffect(() => {
     if (emailRef.current && passwordRef.current) {
@@ -269,6 +289,7 @@ const Register = ({ isRegister = true }: props) => {
             >
               {register ? "Sign in" : "Register"}
             </button>
+            <div id="googleSignInButton" ref={googleAuthRef}></div>
             {renderSwitchViews()}
           </form>
           <div className="w-full hidden md:flex">
