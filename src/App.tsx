@@ -11,15 +11,10 @@ import MyJobs from "./routes/MyJobs";
 import Register from "./routes/Register";
 import { useAppSelector } from "./store";
 
-const ContentWrapper: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  return <div className="max-w-[1920px] mx-auto -z-10">{children}</div>;
-};
-
 const App = () => {
-  const notificationState = useAppSelector((state) => state.notification);
   const location = useLocation();
+
+  const notificationState = useAppSelector((state) => state.notification);
   const {
     status: notifStatus,
     state: notifState,
@@ -52,7 +47,7 @@ const App = () => {
   return (
     <div className="w-screen font-leagueSpartan bg-gradient-to-b from-[#f2f2f2] to-[#ffffff]">
       <AnimatePresence>
-        <ContentWrapper>
+        <div className="max-w-[1920px] mx-auto -z-10">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
@@ -61,8 +56,9 @@ const App = () => {
             <Route path="/my-account" element={<Account />} />
             <Route path="/job-profile/:id" element={<JobDetails />} />
           </Routes>
-        </ContentWrapper>
+        </div>
       </AnimatePresence>
+
       {renderNotificationModal({
         status: notifStatus,
         message: notifMessage,

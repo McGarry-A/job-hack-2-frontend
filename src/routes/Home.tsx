@@ -1,16 +1,12 @@
-import Hero from "../components/Layout/Hero/Hero";
+import Hero from "../components/Hero/Hero";
 import React, { useEffect, useRef, useState } from "react";
 import PaginationWrapper from "../components/Paginate/PaginationWrapper/PaginationWrapper";
 import useReed from "../hooks/useReed";
 import Footer from "../components/Layout/Footer/Footer";
-import HomeJobCard from "../components/HomeJobCards/HomeJobCard";
-import { motion } from "framer-motion";
-import { jobContainerVariant } from "../Animations/JobCard";
 import { useAppDispatch } from "../store";
 import { setNotification } from "../store/notificationSlice";
-import { JobInterface } from "../hooks/jobs.model";
 import JobSearchForm from "../components/Forms/JobSearchForm/JobSearchFrom";
-import Loader from "../components/Loader/Loader";
+import HomeJobCardContainer from "../components/HomeJobCards/HomeJobCardContainer";
 
 const Home = () => {
   const [job, setJob] = useState<string>("");
@@ -31,7 +27,7 @@ const Home = () => {
 
   const dispatch = useAppDispatch();
 
-  const { error, isLoading, jobs } = useJobsReed;
+  const { error } = useJobsReed;
 
   useEffect(() => {
     if (error) {
@@ -58,40 +54,6 @@ const Home = () => {
     return setPagination(1);
   };
 
-  const renderCards = () => {
-    if (error) {
-      return (
-        <div className="text-center my-10 text-lg">
-          This search returned an error...
-        </div>
-      );
-    }
-
-    if (isLoading) return <div className="absolute -translate-x-1/2 -translate-y-1/2 top-[50%] left-[50%]"><Loader /></div>;
-
-    if (jobs && jobs.length === 0) {
-      return (
-        <div className="my-10 mx-auto text-lg text-center">
-          There are no results for your search...
-        </div>
-      );
-    }
-    if (jobs && jobs.length > 1) {
-      return (
-        <motion.div
-          className="space-y-4 border-t pt-4"
-          variants={jobContainerVariant}
-          initial="hidden"
-          animate="show"
-        >
-          {jobs.map((el: JobInterface, index: number) => {
-            return <HomeJobCard el={el} key={index} />;
-          })}
-        </motion.div>
-      );
-    }
-  };
-
   return (
     <div className="w-full overflow-hidden">
       <Hero />
@@ -104,7 +66,7 @@ const Home = () => {
             providerRef={providerRef}
           />
           <PaginationWrapper {...paginationOptions}>
-            {renderCards()}
+            <HomeJobCardContainer {...useJobsReed} />
           </PaginationWrapper>
         </ForegroundWrapper>
       </BGWrapper>

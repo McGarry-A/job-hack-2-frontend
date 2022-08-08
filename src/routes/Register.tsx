@@ -1,17 +1,20 @@
 // import { FcGoogle } from "react-icons/fc";
 import { useEffect, useRef, useState } from "react";
-import loginEmail from "../utils/loginEmail";
-import registerEmail from "../utils/registerEmail";
+
 import { setActiveUser, userInterface } from "../store/userSlice";
-import { useAppDispatch } from "../store";
-import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Layout/Navbar/Navbar";
-import Footer from "../components/Layout/Footer/Footer";
 import { setNotification } from "../store/notificationSlice";
-import { motion } from "framer-motion";
-import RouteVar from "../Animations/Route";
+import { useAppDispatch } from "../store";
+
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
+import Navbar from "../components/Layout/Navbar/Navbar";
+import Footer from "../components/Layout/Footer/Footer";
+
+import loginEmail from "../utils/loginEmail";
+import registerEmail from "../utils/registerEmail";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import RouteVar from "../animations/Route";
 import RegisterHero from "../images/register-hero.jpg";
 
 interface props {

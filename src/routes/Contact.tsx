@@ -4,7 +4,7 @@ import Footer from "../components/Layout/Footer/Footer";
 import { useAppDispatch } from "../store";
 import { setNotification } from "../store/notificationSlice";
 import { motion } from "framer-motion";
-import RouteVar from "../Animations/Route";
+import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
 import ContactForm from "../components/Forms/ContactForm/ContactForm";
