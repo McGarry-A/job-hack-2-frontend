@@ -1,4 +1,3 @@
-// import { FcGoogle } from "react-icons/fc";
 import { useEffect, useRef, useState } from "react";
 
 import { setActiveUser, userInterface } from "../store/userSlice";
@@ -16,6 +15,8 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import RouteVar from "../animations/Route";
 import RegisterHero from "../images/register-hero.jpg";
+
+import jwt_decode from "jwt-decode"
 
 interface props {
   isRegister?: boolean;
@@ -39,7 +40,29 @@ const Register = ({ isRegister = true }: props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleCallbackResponse = () => {};
+  const handleCallbackResponse = (res: any, error: any) => {
+    const userObject = jwt_decode(res.credential)
+    console.log(userObject)
+    
+
+    // need to create an account for this user
+  };
+
+// aud: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
+// azp: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
+// email: "atomcgarry@gmail.com"
+// email_verified: true
+// exp: 1659981039
+// family_name: "McGarry"
+// given_name: "Ahmed"
+// iat: 1659977439
+// iss: "https://accounts.google.com"
+// jti: "b0d13767f1f76ad1932406d9622b53f4b018eaa8"
+// name: "Ahmed McGarry"
+// nbf: 1659977139
+// picture: "https://lh3.googleusercontent.com/a/AItbvmkOGiR8XtPCSDanzArZtJGL9TJCHqvjV4ky8qab=s96-c"
+// sub: "115729128147296944785"
+
 
   useEffect(() => {
     if (googleAuthRef.current) {
@@ -50,6 +73,7 @@ const Register = ({ isRegister = true }: props) => {
           "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com",
         callback: handleCallbackResponse,
       });
+
       //@ts-ignore
       google.accounts.id.renderButton(
         googleAuthRef.current,
@@ -289,7 +313,7 @@ const Register = ({ isRegister = true }: props) => {
             >
               {register ? "Sign in" : "Register"}
             </button>
-            <div id="googleSignInButton" ref={googleAuthRef}></div>
+            <div id="googleSignInButton" ref={googleAuthRef} className="mx-auto"></div>
             {renderSwitchViews()}
           </form>
           <div className="w-full hidden md:flex">
