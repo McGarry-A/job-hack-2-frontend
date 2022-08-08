@@ -67,7 +67,7 @@ const Home = () => {
       );
     }
 
-    if (isLoading) return <Loader />;
+    if (isLoading) return <div className="absolute -translate-x-1/2 -translate-y-1/2 top-[50%] left-[50%]"><Loader /></div>;
 
     if (jobs && jobs.length === 0) {
       return (
@@ -79,7 +79,7 @@ const Home = () => {
     if (jobs && jobs.length > 1) {
       return (
         <motion.div
-          className="space-y-4 border-t pt-4 mt-4"
+          className="space-y-4 border-t pt-4"
           variants={jobContainerVariant}
           initial="hidden"
           animate="show"
@@ -121,7 +121,7 @@ const ForegroundWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <div className="w-4/5 mx-auto bg-white p-4 shadow-lg rounded -mt-14 mb-14">
+    <div className="w-4/5 mx-auto bg-white p-4 shadow-lg rounded -mt-14 mb-14 h-[1100px] flex flex-col justify-between relative">
       {children}
     </div>
   );

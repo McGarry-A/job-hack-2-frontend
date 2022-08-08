@@ -96,7 +96,7 @@ const HomeJobCard = ({ el }: props) => {
         </div>
       </NavLink>
       <div
-        className={`transition duration-300 flex justify-center font-semibold items-center bg-sky-500 hover:bg-sky-400 hover:text-rose-500 text-gray-50 text-sm -p-3 ${
+        className={`transition duration-300 flex justify-center font-semibold items-center bg-sky-500 hover:bg-sky-400 hover:text-rose-500 text-gray-50 text-sm -p-3 hover:shadow ${
           showAddToWishList ? "w-1/12 translate-x-0" : "w-0 translate-x-24"
         }`}
         onClick={() => handleAddToList()}
