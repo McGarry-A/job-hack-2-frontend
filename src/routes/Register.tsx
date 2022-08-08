@@ -17,7 +17,7 @@ import RouteVar from "../animations/Route";
 import RegisterHero from "../images/register-hero.jpg";
 
 import jwt_decode from "jwt-decode";
-import GoogleAuthFlow from "../utils/googleAuthFlow";
+// import GoogleAuthFlow from "../utils/googleAuthFlow";
 import { UserObjectInterface } from "../utils/GoogleAuthTypes";
 
 interface props {
@@ -46,11 +46,11 @@ const Register = ({ isRegister = true }: props) => {
     if (error) return
     
     const userObject: UserObjectInterface = jwt_decode(res.credential);
-    GoogleAuthFlow({
-      email: userObject.email,
-      lastName: userObject.family_name,
-      firstName: userObject.given_name,
-    });
+    // GoogleAuthFlow({
+    //   email: userObject.email,
+    //   lastName: userObject.family_name,
+    //   firstName: userObject.given_name,
+    // });
   };
 
   // aud: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
