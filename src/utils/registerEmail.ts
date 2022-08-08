@@ -27,7 +27,7 @@ const registerEmail = async ({ firstName, lastName, email, password}: props) => 
         console.error("Error response from server");
         return;
       }
-      return res.state
+      return res.newUser
     } catch (error) {
       console.error(error);
       return false

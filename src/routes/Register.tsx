@@ -16,7 +16,9 @@ import { motion } from "framer-motion";
 import RouteVar from "../animations/Route";
 import RegisterHero from "../images/register-hero.jpg";
 
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
+import GoogleAuthFlow from "../utils/googleAuthFlow";
+import { UserObjectInterface } from "../utils/GoogleAuthTypes";
 
 interface props {
   isRegister?: boolean;
@@ -41,28 +43,30 @@ const Register = ({ isRegister = true }: props) => {
   const navigate = useNavigate();
 
   const handleCallbackResponse = (res: any, error: any) => {
-    const userObject = jwt_decode(res.credential)
-    console.log(userObject)
+    if (error) return
     
-
-    // need to create an account for this user
+    const userObject: UserObjectInterface = jwt_decode(res.credential);
+    GoogleAuthFlow({
+      email: userObject.email,
+      lastName: userObject.family_name,
+      firstName: userObject.given_name,
+    });
   };
 
-// aud: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
-// azp: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
-// email: "atomcgarry@gmail.com"
-// email_verified: true
-// exp: 1659981039
-// family_name: "McGarry"
-// given_name: "Ahmed"
-// iat: 1659977439
-// iss: "https://accounts.google.com"
-// jti: "b0d13767f1f76ad1932406d9622b53f4b018eaa8"
-// name: "Ahmed McGarry"
-// nbf: 1659977139
-// picture: "https://lh3.googleusercontent.com/a/AItbvmkOGiR8XtPCSDanzArZtJGL9TJCHqvjV4ky8qab=s96-c"
-// sub: "115729128147296944785"
-
+  // aud: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
+  // azp: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
+  // email: "atomcgarry@gmail.com"
+  // email_verified: true
+  // exp: 1659981039
+  // family_name: "McGarry"
+  // given_name: "Ahmed"
+  // iat: 1659977439
+  // iss: "https://accounts.google.com"
+  // jti: "b0d13767f1f76ad1932406d9622b53f4b018eaa8"
+  // name: "Ahmed McGarry"
+  // nbf: 1659977139
+  // picture: "https://lh3.googleusercontent.com/a/AItbvmkOGiR8XtPCSDanzArZtJGL9TJCHqvjV4ky8qab=s96-c"
+  // sub: "115729128147296944785"
 
   useEffect(() => {
     if (googleAuthRef.current) {
@@ -75,10 +79,11 @@ const Register = ({ isRegister = true }: props) => {
       });
 
       //@ts-ignore
-      google.accounts.id.renderButton(
-        googleAuthRef.current,
-        { theme: "outline", size: "large", width: "100%" }
-      );
+      google.accounts.id.renderButton(googleAuthRef.current, {
+        theme: "outline",
+        size: "large",
+        width: "100%",
+      });
     }
   }, []);
 
@@ -147,6 +152,7 @@ const Register = ({ isRegister = true }: props) => {
 
     const user = await registerEmail({ firstName, lastName, email, password });
     console.log(user);
+
     dispatch(setActiveUser(user));
     dispatch(
       setNotification({
@@ -313,7 +319,11 @@ const Register = ({ isRegister = true }: props) => {
             >
               {register ? "Sign in" : "Register"}
             </button>
-            <div id="googleSignInButton" ref={googleAuthRef} className="mx-auto"></div>
+            <div
+              id="googleSignInButton"
+              ref={googleAuthRef}
+              className="mx-auto"
+            ></div>
             {renderSwitchViews()}
           </form>
           <div className="w-full hidden md:flex">
