@@ -14,7 +14,7 @@ interface params {
 
 const updateUser = async ({user, newUser}: params) => {
     try {
-        const response = await fetch(`https://jobhack2.herokuapp.com/api/user`, {
+        const response = await fetch(`http://localhost:5000/api/user`, {
             method: "PUT",
             headers: {
                 "Content-Type":"application/json"
