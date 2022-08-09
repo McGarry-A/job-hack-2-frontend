@@ -29,10 +29,10 @@ const Home = () => {
 
   const { error } = useJobsReed;
 
-  useEffect(() => {
-    //@ts-ignore
-    google.accounts.id.prompt()
-  }, [])
+  // useEffect(() => {
+  //   //@ts-ignore
+  //   google.accounts.id.prompt()
+  // }, [])
 
   useEffect(() => {
     if (error) {
