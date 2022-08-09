@@ -158,10 +158,7 @@ const Register = ({ isRegister = true }: props) => {
       password,
     });
 
-    const user = await loginEmail({ email, password });
-
-    if (register === false || typeof user === "boolean") return;
-    dispatch(setActiveUser(user));
+    if (register === false) return
 
     dispatch(
       setNotification({
