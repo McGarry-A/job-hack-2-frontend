@@ -43,16 +43,16 @@ const Register = ({ isRegister = true }: props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleCallbackResponse = (res: any, error: any) => {
-    if (error) return;
+  // const handleCallbackResponse = (res: any, error: any) => {
+  //   if (error) return;
 
-    const userObject: UserObjectInterface = jwt_decode(res.credential);
+  //   const userObject: UserObjectInterface = jwt_decode(res.credential);
     // GoogleAuthFlow({
     //   email: userObject.email,
     //   lastName: userObject.family_name,
     //   firstName: userObject.given_name,
     // });
-  };
+  // };
 
   // aud: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
   // azp: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
@@ -69,24 +69,24 @@ const Register = ({ isRegister = true }: props) => {
   // picture: "https://lh3.googleusercontent.com/a/AItbvmkOGiR8XtPCSDanzArZtJGL9TJCHqvjV4ky8qab=s96-c"
   // sub: "115729128147296944785"
 
-  useEffect(() => {
-    if (googleAuthRef.current) {
-      /* global google */
-      //@ts-ignore
-      window.google.accounts.id.initialize({
-        client_id:
-          "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com",
-        callback: handleCallbackResponse,
-      });
+  // useEffect(() => {
+  //   if (googleAuthRef.current) {
+  //     /* global google */
+  //     //@ts-ignore
+  //     window.google.accounts.id.initialize({
+  //       client_id:
+  //         "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com",
+  //       callback: handleCallbackResponse,
+  //     });
 
-      //@ts-ignore
-      google.accounts.id.renderButton(googleAuthRef.current, {
-        theme: "outline",
-        size: "large",
-        width: "100%",
-      });
-    }
-  }, []);
+  //     //@ts-ignore
+  //     google.accounts.id.renderButton(googleAuthRef.current, {
+  //       theme: "outline",
+  //       size: "large",
+  //       width: "100%",
+  //     });
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (emailRef.current && passwordRef.current) {
@@ -325,11 +325,11 @@ const Register = ({ isRegister = true }: props) => {
             >
               {register ? "Sign in" : "Register"}
             </button>
-            <div
+            {/* <div
               id="googleSignInButton"
               ref={googleAuthRef}
               className="mx-auto"
-            ></div>
+            ></div> */}
             {renderSwitchViews()}
           </form>
           <div className="w-full hidden md:flex">
