@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { ReedJobProfile } from "./jobs.model"
+import { ReedJobProfile } from "../types/ReedJobsTypes"
 
 const useReedJob = (jobId: string = "") => {
     const [error, setError] = useState(false)

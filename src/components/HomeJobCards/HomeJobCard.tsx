@@ -1,11 +1,11 @@
 import { useState } from "react";
 import reedLogo from "../../images/reedLogo.png";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { addToLikedJobs } from "../../store/userSlice";
+// import { addToLikedJobs } from "../../store/userSlice";
 import { motion } from "framer-motion";
 import { jobCardVariant } from "../../animations/JobCard";
 import { setNotification } from "../../store/notificationSlice";
-import { JobInterface } from "../../hooks/jobs.model";
+import { JobInterface } from "../../types/ReedJobsTypes";
 import { NavLink } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 
@@ -48,7 +48,7 @@ const HomeJobCard = ({ el }: props) => {
         description: el.description,
       };
 
-      dispatch(addToLikedJobs(jobToAdd));
+      // dispatch(addToLikedJobs(jobToAdd));
     }
   };
 

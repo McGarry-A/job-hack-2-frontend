@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { setActiveUser, userInterface } from "../store/userSlice";
+import { setActiveUser } from "../store/userSlice";
 import { setNotification } from "../store/notificationSlice";
 import { useAppDispatch } from "../store";
 
@@ -18,7 +18,8 @@ import RegisterHero from "../images/register-hero.jpg";
 
 import jwt_decode from "jwt-decode";
 // import GoogleAuthFlow from "../utils/googleAuthFlow";
-import { UserObjectInterface } from "../utils/GoogleAuthTypes";
+import { UserObjectInterface } from "../types/GoogleAuthTypes";
+import { UserStateInterface } from "../types/UserTypes";
 
 interface props {
   isRegister?: boolean;
@@ -43,8 +44,8 @@ const Register = ({ isRegister = true }: props) => {
   const navigate = useNavigate();
 
   const handleCallbackResponse = (res: any, error: any) => {
-    if (error) return
-    
+    if (error) return;
+
     const userObject: UserObjectInterface = jwt_decode(res.credential);
     // GoogleAuthFlow({
     //   email: userObject.email,
@@ -114,7 +115,7 @@ const Register = ({ isRegister = true }: props) => {
       return;
     }
 
-    const user: userInterface | boolean = await loginEmail({
+    const user: UserStateInterface | boolean = await loginEmail({
       email,
       password,
     });
@@ -150,10 +151,18 @@ const Register = ({ isRegister = true }: props) => {
       setError("Password must be at least 6 characters.");
     }
 
-    const user = await registerEmail({ firstName, lastName, email, password });
-    console.log(user);
+    const register = await registerEmail({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
 
+    const user = await loginEmail({ email, password });
+
+    if (register === false || typeof user === "boolean") return;
     dispatch(setActiveUser(user));
+
     dispatch(
       setNotification({
         state: false,

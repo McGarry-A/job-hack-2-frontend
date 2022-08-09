@@ -1,4 +1,4 @@
-import { JobInterface } from "../../hooks/jobs.model";
+import { JobInterface } from "../../types/ReedJobsTypes";
 import Loader from "../Loader/Loader";
 import HomeJobCard from "./HomeJobCard";
 import { motion } from "framer-motion";

@@ -1,11 +1,11 @@
-import { ReedJobProfile } from "../../hooks/jobs.model";
+import { ReedJobProfile } from "../../types/ReedJobsTypes";
 import Loader from "../Loader/Loader";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { setNotification } from "../../store/notificationSlice";
 import HTMLParser from "../HTMLParser/HTMLParser";
 import { TiBusinessCard } from "react-icons/ti";
 import { AiOutlineEnter } from "react-icons/ai";
-import { addToLikedJobs } from "../../store/userSlice";
+// import { addToLikedJobs } from "../../store/userSlice";
 
 interface props {
   profile: ReedJobProfile | undefined;
@@ -49,7 +49,7 @@ const JobProfile = ({ profile, error, isLoading }: props) => {
       description: profile.jobDescription,
     };
 
-    dispatch(addToLikedJobs(jobToAdd));
+    // dispatch(addToLikedJobs(jobToAdd));
   };
 
   if (isLoading) return <Loader />;

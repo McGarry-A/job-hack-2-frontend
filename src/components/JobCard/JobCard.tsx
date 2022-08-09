@@ -3,7 +3,9 @@ import { Draggable } from "react-beautiful-dnd";
 interface props {
   job: {
     id: string;
-    content: string;
+    title: string;
+    company: string;
+    link: string;
   };
   index: number;
 }
@@ -18,7 +20,7 @@ const JobCard = ({ job, index }: props) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {job.content}
+          {job.title}
         </div>
       )}
     </Draggable>

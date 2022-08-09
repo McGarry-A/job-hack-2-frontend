@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { JobInterface } from "./jobs.model";
+import { JobInterface } from "../types/ReedJobsTypes";
 
 const useReedEmployer = (employerId: number | undefined, page: number) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);

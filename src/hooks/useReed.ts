@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
-import { JobInterface } from "./jobs.model";
+import { JobInterface } from "../types/ReedJobsTypes";
 
 interface props {
   page: number;

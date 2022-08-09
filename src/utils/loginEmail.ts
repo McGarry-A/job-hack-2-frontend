@@ -1,11 +1,11 @@
-import { userInterface } from "../store/userSlice";
+import { UserStateInterface } from "../types/UserTypes";
 
 interface props {
     email: string;
     password: string;
 }
 
-const loginEmail = async ({email, password}: props): Promise<boolean | userInterface> => {
+const loginEmail = async ({email, password}: props): Promise<boolean | UserStateInterface> => {
     try {
         const data = await fetch(`https://jobhack2.herokuapp.com/api/login`, {
           method: "POST",

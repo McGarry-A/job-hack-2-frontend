@@ -1,17 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface userInterface {
-    isLoggedIn: boolean;
-    user: {
-        firstName: string;
-        lastName: string;
-        email: string;
-    }
-    savedJobs: {
-        likedJobs: JobInterface[];
-        appliedJobs: JobInterface[];
-    },
-}
+import { UserStateInterface } from "../types/UserTypes";
 
 export interface JobInterface {
     title: string;
@@ -20,7 +8,7 @@ export interface JobInterface {
     salary: number;
 }
 
-const initialState: userInterface = {
+const initialState: UserStateInterface = {
     isLoggedIn: false,
     user: {
         firstName: "",
@@ -28,8 +16,28 @@ const initialState: userInterface = {
         email: ""
     },
     savedJobs: {
-        likedJobs: [],
-        appliedJobs: []
+        jobs: {
+            "cleancloud": {
+                title: "Business development manager",
+                company: "cleancloud",
+                id: "cc1",
+                link: "www.cleancloudapp.com"
+            },
+            "JD": {
+                title: "Sales Assistant",
+                company: "JD",
+                id: "jd0",
+                link: "www.jdsports.com"
+            }
+        },
+        columns: {
+            "column-0": {
+                id: "column-0",
+                jobIds: ["cc1", "jd0"],
+                title: "Saved jobs"
+            }
+        },
+        columnOrder: ["column-0"]
     }
 }
 
@@ -37,7 +45,7 @@ const userSlice = createSlice({
     name: "user",
     initialState: initialState,
     reducers: {
-        setActiveUser: (state: userInterface, action: PayloadAction<userInterface>) => {
+        setActiveUser: (state: UserStateInterface, action: PayloadAction<UserStateInterface>) => {
             return state = {
                 isLoggedIn: true,
                 user: {
@@ -45,48 +53,45 @@ const userSlice = createSlice({
                     lastName: action.payload.user.lastName,
                     email: action.payload.user.email
                 },
-                savedJobs: {
-                    likedJobs: [],
-                    appliedJobs: [],
-                }
+                savedJobs: action.payload.savedJobs
             }
         },
-        removeActiveUser: (state: userInterface) => {
+        removeActiveUser: (state: UserStateInterface) => {
             return state = initialState
             
         },
-        addToLikedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {
-            return state = {
-                ...state,
-                savedJobs: {
-                    ...state.savedJobs,
-                    likedJobs: [
-                        ...state.savedJobs.likedJobs,
-                        action.payload
-                    ]
-                }
-            }
-        },
-        addToAppliedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {
-            return state = {
-                ...state,
-                savedJobs: {
-                    ...state.savedJobs,
-                    appliedJobs: {
-                        ...state.savedJobs.appliedJobs,
-                        ...action.payload
-                    }
-                }
-            }
-        }
+        // addToLikedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {
+        //     return state = {
+        //         ...state,
+        //         savedJobs: {
+        //             ...state.savedJobs,
+        //             likedJobs: [
+        //                 ...state.savedJobs.likedJobs,
+        //                 action.payload
+        //             ]
+        //         }
+        //     }
+        // },
+        // addToAppliedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {
+        //     return state = {
+        //         ...state,
+        //         savedJobs: {
+        //             ...state.savedJobs,
+        //             appliedJobs: {
+        //                 ...state.savedJobs.appliedJobs,
+        //                 ...action.payload
+        //             }
+        //         }
+        //     }
+        // }
     }
 })
 
 export const { 
         setActiveUser, 
         removeActiveUser, 
-        addToAppliedJobs, 
-        addToLikedJobs
+        // addToAppliedJobs, 
+        // addToLikedJobs
      } = userSlice.actions
 
 export default userSlice

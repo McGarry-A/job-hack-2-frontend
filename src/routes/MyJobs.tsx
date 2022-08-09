@@ -3,10 +3,11 @@ import { motion } from "framer-motion";
 import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
-import JobCard from "../components/JobCard/JobCard";
 import { useState } from "react";
 import Column from "../components/Column/Column";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import CreateColumn from "../components/CreateColumn/CreateColumn";
+import { useAppSelector } from "../store";
 
 // import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
@@ -14,7 +15,9 @@ interface TableInterface {
   jobs: {
     [key: string]: {
       id: string;
-      content: string;
+      company: string;
+      title: string;
+      link: string;
     };
   };
   columns: {
@@ -27,67 +30,12 @@ interface TableInterface {
   columnOrder: string[];
 }
 
-interface ResultInterface {
-  draggableId: string;
-  type: string;
-  reason: string;
-  source: {
-    droppableId: string;
-    index: number;
-  };
-  destination: {
-    droppableId: string;
-    index: number;
-  } | null;
-}
-
-const initialData: TableInterface = {
-  jobs: {
-    "job-1": {
-      id: "job-1",
-      content: "CleanCloud",
-    },
-    "job-2": {
-      id: "job-2",
-      content: "JD",
-    },
-    "job-3": {
-      id: "job-3",
-      content: "BeautyWorks",
-    },
-  },
-  columns: {
-    "column-1": {
-      id: "column-1",
-      title: "Saved Jobs",
-      jobIds: ["job-1", "job-2", "job-3"],
-    },
-    "column-2": {
-      id: "column-2",
-      title: "Applied",
-      jobIds: [],
-    },
-    "column-3": {
-      id: "column-3",
-      title: "Interview",
-      jobIds: [],
-    },
-    "column-4": {
-      id: "column-4",
-      title: "Accepted",
-      jobIds: [],
-    },
-    "column-5": {
-      id: "column-5",
-      title: "Rejected",
-      jobIds: [],
-    },
-  },
-  columnOrder: ["column-1", "column-2", "column-3", "column-4", "column-5"],
-};
-
 const MyJobs = () => {
-  const [table, setTable] = useState<TableInterface>(initialData);
+  const state = useAppSelector((state) => state.user.savedJobs);
+  console.log(state);
+  const userdata = useAppSelector((state) => state.user);
+  console.log(userdata);
+  const [table, setTable] = useState<TableInterface>({ ...state });
 
   const handleDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
@@ -173,14 +121,17 @@ const MyJobs = () => {
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <PageTitle title="My Jobs" />
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div className="flex max-w-6xl w-full mx-auto bg-white rounded mb-24 p-4 flex-wrap">
-            {initialData.columnOrder.map((columnId, index) => {
-              const column = table.columns[columnId];
-              const jobs = column.jobIds.map((jobIds) => table.jobs[jobIds]);
+          {table.columnOrder && (
+            <div className="flex max-w-6xl w-full mx-auto bg-white rounded mb-24 p-4 flex-wrap justify-center">
+              {table.columnOrder.map((columnId, index) => {
+                const column = table.columns[columnId];
+                const jobs = column.jobIds.map((jobIds) => table.jobs[jobIds]);
 
-              return <Column key={column.id} column={column} jobs={jobs} />;
-            })}
-          </div>
+                return <Column key={column.id} column={column} jobs={jobs} />;
+              })}
+              <CreateColumn />
+            </div>
+          )}
         </DragDropContext>
       </motion.div>
     </div>
