@@ -28,8 +28,8 @@ const loginEmail = async ({email, password}: props): Promise<boolean | UserState
 
         // Successfully logged in
         // Add user to global state
-
-        return res.user
+        const loggedInUser: UserStateInterface = res.user
+        return loggedInUser
       } catch (err) {
         console.error(err);
         return false
