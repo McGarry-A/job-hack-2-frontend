@@ -3,36 +3,22 @@ import { motion } from "framer-motion";
 import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
-import { useState } from "react";
+import { useReducer } from "react";
 import Column from "../components/Column/Column";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import CreateColumn from "../components/CreateColumn/CreateColumn";
 import { useAppSelector } from "../store";
+import { savedJobsInterface } from "../types/UserTypes";
 
 // import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
-interface TableInterface {
-  jobs: {
-    [key: string]: {
-      id: string;
-      company: string;
-      title: string;
-      link: string;
-    };
-  };
-  columns: {
-    [key: string]: {
-      id: string;
-      title: string;
-      jobIds: string[];
-    };
-  };
-  columnOrder: string[];
-}
-
 const MyJobs = () => {
-  const state = useAppSelector((state) => state.user.savedJobs);
-  const [table, setTable] = useState<TableInterface>({ ...state });
+  const initialState = useAppSelector((state) => state.user.savedJobs);
+
+  const tableReducer = (state: savedJobsInterface, action: any) => {
+    return state
+  }
+  const [table, dispatchTable] = useReducer(tableReducer, initialState);
 
   const handleDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
@@ -69,7 +55,7 @@ const MyJobs = () => {
         },
       };
 
-      setTable(newState);
+      // setTable(newState);
       return;
     }
 
@@ -98,7 +84,7 @@ const MyJobs = () => {
       },
     };
 
-    setTable(newState);
+    // setTable(newState);
   };
 
   const breadcrumbs = [
