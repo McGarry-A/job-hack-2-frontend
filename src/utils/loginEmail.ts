@@ -26,9 +26,9 @@ const loginEmail = async ({email, password}: props): Promise<boolean | UserState
           return false
         }
 
-        // Successfully logged in
-        // Add user to global state
         const loggedInUser: UserStateInterface = res.user
+        
+        console.log(loggedInUser)
         return loggedInUser
       } catch (err) {
         console.error(err);

@@ -28,6 +28,8 @@ const registerEmail = async ({ firstName, lastName, email, password}: props) => 
         return false
       }
 
+      console.log("Register email true")
+
       return true
     } catch (error) {
       console.error(error);
