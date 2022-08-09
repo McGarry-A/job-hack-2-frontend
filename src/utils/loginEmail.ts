@@ -7,7 +7,9 @@ interface props {
 
 const loginEmail = async ({email, password}: props): Promise<boolean | UserStateInterface> => {
     try {
-        const data = await fetch(`http://localhost:5000/api/login`, {
+
+        console.log(email, password)
+        const data = await fetch(`http://localhost:5001/api/login`, {
           method: "POST",
           headers: {
             "Content-Type":"application/json"
@@ -18,6 +20,8 @@ const loginEmail = async ({email, password}: props): Promise<boolean | UserState
           }),
         });
 
+        
+
         const res = await data.json();
         console.log(res)
 
@@ -26,10 +30,14 @@ const loginEmail = async ({email, password}: props): Promise<boolean | UserState
           return false
         }
 
-        const loggedInUser: UserStateInterface = res.user
+        const loggedInUser = res.user
+        const parsedUser = {
+          ...loggedInUser,
+          savedJobs: JSON.parse(loggedInUser.savedJobs)
+        }
 
-        console.log(loggedInUser)
-        return loggedInUser
+        console.log(parsedUser)
+        return parsedUser
       } catch (err) {
         console.error(err);
         return false

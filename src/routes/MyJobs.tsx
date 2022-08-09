@@ -32,9 +32,6 @@ interface TableInterface {
 
 const MyJobs = () => {
   const state = useAppSelector((state) => state.user.savedJobs);
-  console.log(state);
-  const userdata = useAppSelector((state) => state.user);
-  console.log(userdata);
   const [table, setTable] = useState<TableInterface>({ ...state });
 
   const handleDragEnd = (result: DropResult) => {
