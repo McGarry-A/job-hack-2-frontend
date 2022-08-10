@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { createColumn } from "../../store/savedJobsSlice";
 
 const CreateColumn = () => {
   const [active, setActive] = useState<boolean>(false);
-  const [newColumn, setNewColumn] = useState<string | undefined>();
+  const [newColumn, setNewColumn] = useState<string>("");
 
-  const state = useAppSelector((state) => state.user.savedJobs);
+  const state = useAppSelector((state) => state.jobs);
+  const dispatch = useAppDispatch()
 
   const handleCreateColumn = () => {
+    dispatch(createColumn({title: newColumn, id: "new-col-1"}))
     setActive(false);
   };
 

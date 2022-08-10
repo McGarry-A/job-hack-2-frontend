@@ -14,30 +14,6 @@ const initialState: UserStateInterface = {
         firstName: "",
         lastName: "",
         email: ""
-    },
-    savedJobs: {
-        jobs: {
-            "cleancloud": {
-                title: "Business development manager",
-                company: "cleancloud",
-                id: "cc1",
-                link: "www.cleancloudapp.com"
-            },
-            "JD": {
-                title: "Sales Assistant",
-                company: "JD",
-                id: "jd0",
-                link: "www.jdsports.com"
-            }
-        },
-        columns: {
-            "column-0": {
-                id: "column-0",
-                jobIds: ["cc1", "jd0"],
-                title: "Saved jobs"
-            }
-        },
-        columnOrder: ["column-0"]
     }
 }
 
@@ -53,37 +29,12 @@ const userSlice = createSlice({
                     lastName: action.payload.user.lastName,
                     email: action.payload.user.email
                 },
-                savedJobs: action.payload.savedJobs
             }
         },
         removeActiveUser: (state: UserStateInterface) => {
             return state = initialState
             
         },
-        // addToLikedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {
-        //     return state = {
-        //         ...state,
-        //         savedJobs: {
-        //             ...state.savedJobs,
-        //             likedJobs: [
-        //                 ...state.savedJobs.likedJobs,
-        //                 action.payload
-        //             ]
-        //         }
-        //     }
-        // },
-        // addToAppliedJobs: (state: userInterface, action: PayloadAction<JobInterface>) => {
-        //     return state = {
-        //         ...state,
-        //         savedJobs: {
-        //             ...state.savedJobs,
-        //             appliedJobs: {
-        //                 ...state.savedJobs.appliedJobs,
-        //                 ...action.payload
-        //             }
-        //         }
-        //     }
-        // }
     }
 })
 

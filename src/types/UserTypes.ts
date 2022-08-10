@@ -5,7 +5,6 @@ export interface UserStateInterface {
         lastName: string;
         email: string;
     }
-    savedJobs: savedJobsInterface
 }
 
 export interface savedJobsInterface {
