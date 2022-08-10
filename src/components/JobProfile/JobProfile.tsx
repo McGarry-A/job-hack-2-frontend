@@ -1,10 +1,11 @@
 import { ReedJobProfile } from "../../types/ReedJobsTypes";
 import Loader from "../Loader/Loader";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { setNotification } from "../../store/notificationSlice";
 import HTMLParser from "../HTMLParser/HTMLParser";
 import { TiBusinessCard } from "react-icons/ti";
 import { AiOutlineEnter } from "react-icons/ai";
+import { useToast } from "@chakra-ui/react";
+
 // import { addToLikedJobs } from "../../store/userSlice";
 
 interface props {
@@ -15,31 +16,28 @@ interface props {
 
 const JobProfile = ({ profile, error, isLoading }: props) => {
   const dispatch = useAppDispatch();
+  const toast = useToast();
   const state = useAppSelector((state) => state.user);
 
   const handleAddToList = () => {
     if (!profile) return;
     if (!state.isLoggedIn) {
-      dispatch(
-        setNotification({
-          state: false,
-          status: "error",
-          message:
-            "Please ensure that you are logged in before adding items to your wishlist.",
-        })
-      );
+      toast({
+        title: "Please log in",
+        status: "error",
+        description:
+          "Please ensure that you are logged in before adding items to your wishlist.",
+      });
 
       return;
     }
 
-    dispatch(
-      setNotification({
-        state: false,
-        status: "success",
-        message:
-          "Successfully added to your list. You can now manage this in the My Jobs tab.",
-      })
-    );
+    toast({
+      title: "Job Added To Your List",
+      status: "success",
+      description:
+        "Successfully added to your list. You can now manage this in the My Jobs tab.",
+    });
 
     const jobToAdd = {
       title: profile.jobTitle,
@@ -55,14 +53,12 @@ const JobProfile = ({ profile, error, isLoading }: props) => {
   if (isLoading) return <Loader />;
 
   if (error) {
-    dispatch(
-      setNotification({
-        state: false,
-        status: "error",
-        message:
-          "There was an error rending your cards, please reload the page.",
-      })
-    );
+    toast({
+      title: "Error",
+      status: "error",
+      description:
+        "There was an error rending your cards, please reload the page.",
+    });
     return <div>There was an error rendering your cards</div>;
   }
 

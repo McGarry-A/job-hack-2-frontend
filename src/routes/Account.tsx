@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Layout/Navbar/Navbar";
 import { useAppDispatch, useAppSelector } from "../store";
-import { setNotification } from "../store/notificationSlice";
+import { useToast } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
@@ -21,6 +21,7 @@ const Account = () => {
   const newPassConfRef = useRef<HTMLInputElement>(null);
 
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   useEffect(() => {
     if (firstNameRef.current) firstNameRef.current.value = state.user.firstName;
@@ -29,13 +30,11 @@ const Account = () => {
   });
 
   const handleDeleteAccount = () => {
-    dispatch(
-      setNotification({
-        state: false,
-        status: "success",
-        message: "Your account has been successfully deleted!",
-      })
-    );
+    toast({
+      status: "success",
+      title: "Account Deleted",
+      description: "Your account has been deleted",
+    });
   };
 
   const handleUpdateCustomer = (e: React.FormEvent<HTMLFormElement>) => {
@@ -61,13 +60,11 @@ const Account = () => {
       password: currentPassRef.current,
     };
 
-    dispatch(
-      setNotification({
-        state: false,
-        status: "success",
-        message: "Your account information has been succesfully updated!",
-      })
-    );
+    toast({
+      title: "Update Successful",
+      status: "success",
+      description: "Your account information has been succesfully updated!",
+    });
 
     return { user, newUser };
   };
@@ -109,12 +106,12 @@ const Account = () => {
         <PageTitle title="My Account" />
         <BGWrapper>
           {renderSectionHeader("Edit user information")}
-          <AccountForm 
-            emailRef={emailRef} 
-            firstNameRef={firstNameRef} 
-            lastNameRef={lastNameRef} 
+          <AccountForm
+            emailRef={emailRef}
+            firstNameRef={firstNameRef}
+            lastNameRef={lastNameRef}
             handleUpdateCustomer={handleUpdateCustomer}
-             />
+          />
           {renderDeleteUserAccount()}
         </BGWrapper>
       </motion.div>

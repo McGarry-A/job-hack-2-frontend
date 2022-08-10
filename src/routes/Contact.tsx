@@ -2,7 +2,7 @@ import Navbar from "../components/Layout/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import Footer from "../components/Layout/Footer/Footer";
 import { useAppDispatch } from "../store";
-import { setNotification } from "../store/notificationSlice";
+import { useToast } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
@@ -20,6 +20,7 @@ const Contact = () => {
   const [error, setError] = useState<string>("");
 
   const dispatch = useAppDispatch();
+  const toast = useToast()
 
   useEffect(() => {
     setError("");
@@ -32,14 +33,11 @@ const Contact = () => {
       return;
     }
 
-    dispatch(
-      setNotification({
-        state: false,
-        status: "success",
-        message:
-          "Your message has been successfully sent. Our team will reiview and get back to you as soon as possible.",
-      })
-    );
+    toast({
+      status: "success",
+      title: "Message Sent!",
+      description: "Your message has been successfully sent. Our team will reiview and get back to you as soon as possible.",
+    })
   };
 
   const breadcrumbs = [

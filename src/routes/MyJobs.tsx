@@ -90,7 +90,7 @@ const MyJobs = () => {
   const renderColumns = () => {
     if (savedJobs.columnOrder.length >= 1) {
       return (
-        <div className="flex max-w-6xl w-full mx-auto bg-white rounded mb-24 p-4 flex-wrap justify-center">
+        <>
           {savedJobs.columnOrder.map((columnId, index) => {
             const column = savedJobs.columns[columnId];
             const jobs = column.jobIds.map((jobIds) => savedJobs.jobs[jobIds]);
@@ -98,7 +98,7 @@ const MyJobs = () => {
             return <Column key={column.id} column={column} jobs={jobs} />;
           })}
           <CreateColumn />
-        </div>
+        </>
       );
     }
 
@@ -117,7 +117,9 @@ const MyJobs = () => {
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <PageTitle title="My Jobs" />
         <DragDropContext onDragEnd={handleDragEnd}>
+        <div className="flex max-w-6xl w-full mx-auto bg-white rounded mb-24 p-4 flex-wrap justify-center">
             {renderColumns()}
+        </div>
         </DragDropContext>
       </motion.div>
     </div>

@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { useAppDispatch } from "../../../store";
-import { removeNotification } from "../../../store/notificationSlice";
 
 export interface Props {
   children: React.ReactNode;
@@ -33,7 +32,6 @@ const Modal: React.FC<Props> = ({ children, isHidden, setIsHidden }) => {
                 className="opacity-50"
                 onClick={() => {
                   if (setIsHidden) setIsHidden(true);
-                  else dispatch(removeNotification());
                 }}
               />
             </button>

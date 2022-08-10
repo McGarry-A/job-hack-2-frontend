@@ -2,47 +2,15 @@ import { AnimatePresence } from "framer-motion";
 import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
-import Modal from "./components/Layout/Modal/Modal";
 import Account from "./routes/Account";
 import Contact from "./routes/Contact";
 import Home from "./routes/Home";
 import JobDetails from "./routes/JobDetails";
 import MyJobs from "./routes/MyJobs";
 import Register from "./routes/Register";
-import { useAppSelector } from "./store";
 
 const App = () => {
   const location = useLocation();
-
-  const notificationState = useAppSelector((state) => state.notification);
-  const {
-    status: notifStatus,
-    state: notifState,
-    message: notifMessage,
-  } = notificationState;
-
-  const renderNotificationModal = ({
-    status,
-    message,
-  }: {
-    status: "error" | "success";
-    message: string;
-  }) => {
-    return (
-      <Modal isHidden={notifState}>
-        <div className="flex flex-col space-y-1">
-          <h3
-            className={`text-xl font-semibold ${
-              status === "error" ? "text-rose-600" : "text-sky-500"
-            }`}
-          >
-            {status === "error" ? "There was an error" : "Success"}
-          </h3>
-          <p className="text-sm opacity-50">{message}</p>
-        </div>
-      </Modal>
-    );
-  };
 
   return (
     <div className="w-screen font-leagueSpartan bg-gradient-to-b from-[#f2f2f2] to-[#ffffff]">
@@ -58,11 +26,6 @@ const App = () => {
           </Routes>
         </div>
       </AnimatePresence>
-
-      {renderNotificationModal({
-        status: notifStatus,
-        message: notifMessage,
-      })}
     </div>
   );
 };

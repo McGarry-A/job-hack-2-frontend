@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../store";
-import { setNotification } from "../../../store/notificationSlice";
+import { useToast } from "@chakra-ui/react";
 import { removeActiveUser } from "../../../store/userSlice";
 
 const Navbar = () => {
@@ -9,17 +9,17 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const toast = useToast();
 
   const [isHome] = useState<boolean>(location.pathname === "/" ? true : false);
 
   const handleLogout = () => {
-    dispatch(
-      setNotification({
-        state: false,
-        status: "success",
-        message: "Successfully logged out of your account.",
-      })
-    );
+    toast({
+      title: "Log out succesful",
+      status: "success",
+      description: "You have been logged out of your account",
+    });
+
     dispatch(removeActiveUser());
     navigate("/");
   };

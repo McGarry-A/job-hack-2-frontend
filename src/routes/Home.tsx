@@ -4,9 +4,9 @@ import PaginationWrapper from "../components/Paginate/PaginationWrapper/Paginati
 import useReed from "../hooks/useReed";
 import Footer from "../components/Layout/Footer/Footer";
 import { useAppDispatch } from "../store";
-import { setNotification } from "../store/notificationSlice";
 import JobSearchForm from "../components/Forms/JobSearchForm/JobSearchFrom";
 import HomeJobCardContainer from "../components/HomeJobCards/HomeJobCardContainer";
+import { useToast } from "@chakra-ui/react";
 
 const Home = () => {
   const [job, setJob] = useState<string>("");
@@ -26,6 +26,7 @@ const Home = () => {
   });
 
   const dispatch = useAppDispatch();
+  const toast = useToast()
 
   const { error } = useJobsReed;
 
@@ -36,13 +37,13 @@ const Home = () => {
 
   useEffect(() => {
     if (error) {
-      dispatch(
-        setNotification({
-          state: false,
-          status: "error",
-          message: "There was an error rendering cards.",
-        })
-      );
+      toast({
+        status: "error",
+        title: "Error",
+        description: "There was an error rendering cards",
+        duration: 5000,
+        isClosable: true
+      })
     }
   }, [error]);
 

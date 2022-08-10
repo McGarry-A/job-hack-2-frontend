@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
 import { setActiveUser } from "../store/userSlice";
-import { setNotification } from "../store/notificationSlice";
 import { useAppDispatch } from "../store";
 
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
@@ -15,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import RouteVar from "../animations/Route";
 import RegisterHero from "../images/register-hero.jpg";
+import { useToast } from "@chakra-ui/react";
 
 import jwt_decode from "jwt-decode";
 // import GoogleAuthFlow from "../utils/googleAuthFlow";
@@ -42,16 +42,17 @@ const Register = ({ isRegister = true }: props) => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const toast = useToast();
 
   // const handleCallbackResponse = (res: any, error: any) => {
   //   if (error) return;
 
   //   const userObject: UserObjectInterface = jwt_decode(res.credential);
-    // GoogleAuthFlow({
-    //   email: userObject.email,
-    //   lastName: userObject.family_name,
-    //   firstName: userObject.given_name,
-    // });
+  // GoogleAuthFlow({
+  //   email: userObject.email,
+  //   lastName: userObject.family_name,
+  //   firstName: userObject.given_name,
+  // });
   // };
 
   // aud: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
@@ -94,14 +95,15 @@ const Register = ({ isRegister = true }: props) => {
       passwordRef.current.value = "testtest";
     }
 
-    dispatch(
-      setNotification({
-        status: "success",
-        state: false,
-        message:
-          "A demo user has already been entered for you to login, or create an account and test it yourself!",
-      })
-    );
+    toast({
+      title: "Demo User",
+      description:
+        "A demo user has already been entered for you to login, or create an account and test it yourself!",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+      position: "top-right",
+    });
   }, []);
 
   useEffect(() => {
@@ -126,13 +128,14 @@ const Register = ({ isRegister = true }: props) => {
     }
 
     dispatch(setActiveUser(user));
-    dispatch(
-      setNotification({
-        state: false,
-        status: "success",
-        message: "Successfully logged into your account with Jobhack!",
-      })
-    );
+    toast({
+      title: "Success",
+      description: "Successfully Logged In",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+      position: "top-right",
+    });
     navigate("/");
   };
 
@@ -158,15 +161,16 @@ const Register = ({ isRegister = true }: props) => {
       password,
     });
 
-    if (register === false) return
+    if (register === false) return;
 
-    dispatch(
-      setNotification({
-        state: false,
-        status: "success",
-        message: "Successfully created a new account with Jobhack!",
-      })
-    );
+    toast({
+      title: "Success",
+      description: "Account has been created",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+      position: "top-right",
+    })
     navigate("/");
   };
 

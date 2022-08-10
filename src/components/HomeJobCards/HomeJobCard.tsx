@@ -4,10 +4,10 @@ import { useAppDispatch, useAppSelector } from "../../store";
 // import { addToLikedJobs } from "../../store/userSlice";
 import { motion } from "framer-motion";
 import { jobCardVariant } from "../../animations/JobCard";
-import { setNotification } from "../../store/notificationSlice";
 import { JobInterface } from "../../types/ReedJobsTypes";
 import { NavLink } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
+import { useToast } from "@chakra-ui/react";
 
 interface props {
   el: JobInterface;
@@ -16,29 +16,32 @@ interface props {
 
 const HomeJobCard = ({ el }: props) => {
   const [showAddToWishList, setShowAddToWishList] = useState<boolean>(false);
+  const toast = useToast();
 
   const state = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   const handleAddToList = () => {
     if (state.isLoggedIn === false) {
-      dispatch(
-        setNotification({
-          state: false,
-          status: "error",
-          message:
-            "Please ensure that you are logged in before adding items to your wishlist.",
-        })
-      );
+      toast({
+        title: "Error",
+        description:
+          "Make sure that you are logged in before adding items to your list.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
     } else {
-      dispatch(
-        setNotification({
-          state: false,
-          status: "success",
-          message:
-            "Successfully added to your list. You can now manage this in the My Jobs tab.",
-        })
-      );
+      toast({
+        title: "Success",
+        description:
+          "Successfully added to your list. You can now manage this in the My Jobs tab.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
 
       const jobToAdd = {
         title: el.title,
