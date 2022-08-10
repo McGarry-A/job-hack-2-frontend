@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction } from "react";
 import ReactDOM from "react-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { useAppDispatch } from "../../../store";
 
 export interface Props {
   children: React.ReactNode;
@@ -12,7 +11,6 @@ export interface Props {
 
 const Modal: React.FC<Props> = ({ children, isHidden, setIsHidden }) => {
   const target = document.getElementById("root")!;
-  const dispatch = useAppDispatch();
 
   return isHidden === true ? (
     <></>

@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import PaginationWrapper from "../components/Paginate/PaginationWrapper/PaginationWrapper";
 import useReed from "../hooks/useReed";
 import Footer from "../components/Layout/Footer/Footer";
-import { useAppDispatch } from "../store";
 import JobSearchForm from "../components/Forms/JobSearchForm/JobSearchFrom";
 import HomeJobCardContainer from "../components/HomeJobCards/HomeJobCardContainer";
 import { useToast } from "@chakra-ui/react";
@@ -25,7 +24,6 @@ const Home = () => {
     location: location,
   });
 
-  const dispatch = useAppDispatch();
   const toast = useToast()
 
   const { error } = useJobsReed;

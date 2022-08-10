@@ -1,6 +1,6 @@
 import { useState } from "react";
 import reedLogo from "../../images/reedLogo.png";
-import { useAppDispatch, useAppSelector } from "../../store";
+import { useAppSelector } from "../../store";
 // import { addToLikedJobs } from "../../store/userSlice";
 import { motion } from "framer-motion";
 import { jobCardVariant } from "../../animations/JobCard";
@@ -19,7 +19,6 @@ const HomeJobCard = ({ el }: props) => {
   const toast = useToast();
 
   const state = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
 
   const handleAddToList = () => {
     if (state.isLoggedIn === false) {

@@ -1,6 +1,6 @@
 import { ReedJobProfile } from "../../types/ReedJobsTypes";
 import Loader from "../Loader/Loader";
-import { useAppDispatch, useAppSelector } from "../../store";
+import { useAppSelector } from "../../store";
 import HTMLParser from "../HTMLParser/HTMLParser";
 import { TiBusinessCard } from "react-icons/ti";
 import { AiOutlineEnter } from "react-icons/ai";
@@ -15,7 +15,6 @@ interface props {
 }
 
 const JobProfile = ({ profile, error, isLoading }: props) => {
-  const dispatch = useAppDispatch();
   const toast = useToast();
   const state = useAppSelector((state) => state.user);
 

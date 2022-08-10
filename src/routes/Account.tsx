@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Layout/Navbar/Navbar";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppSelector } from "../store";
 import { useToast } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import RouteVar from "../animations/Route";
@@ -19,8 +19,7 @@ const Account = () => {
   const currentPassRef = useRef<HTMLInputElement>(null);
   const newPassRef = useRef<HTMLInputElement>(null);
   const newPassConfRef = useRef<HTMLInputElement>(null);
-
-  const dispatch = useAppDispatch();
+  
   const toast = useToast();
 
   useEffect(() => {

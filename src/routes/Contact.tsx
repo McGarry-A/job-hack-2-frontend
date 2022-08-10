@@ -1,7 +1,6 @@
 import Navbar from "../components/Layout/Navbar/Navbar";
 import { useEffect, useState } from "react";
 import Footer from "../components/Layout/Footer/Footer";
-import { useAppDispatch } from "../store";
 import { useToast } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import RouteVar from "../animations/Route";
@@ -19,7 +18,6 @@ const Contact = () => {
 
   const [error, setError] = useState<string>("");
 
-  const dispatch = useAppDispatch();
   const toast = useToast()
 
   useEffect(() => {
