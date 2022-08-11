@@ -20,6 +20,7 @@ import jwt_decode from "jwt-decode";
 // import GoogleAuthFlow from "../utils/googleAuthFlow";
 import { UserObjectInterface } from "../types/GoogleAuthTypes";
 import { UserStateInterface } from "../types/UserTypes";
+import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 
 interface props {
   isRegister?: boolean;
@@ -44,16 +45,16 @@ const Register = ({ isRegister = true }: props) => {
   const navigate = useNavigate();
   const toast = useToast();
 
-  // const handleCallbackResponse = (res: any, error: any) => {
-  //   if (error) return;
+  const handleCallbackResponse = (res: any, error: any) => {
+    if (error) return;
 
-  //   const userObject: UserObjectInterface = jwt_decode(res.credential);
-  // GoogleAuthFlow({
-  //   email: userObject.email,
-  //   lastName: userObject.family_name,
-  //   firstName: userObject.given_name,
-  // });
-  // };
+    const userObject: UserObjectInterface = jwt_decode(res.credential);
+    // GoogleAuthFlow({
+    //   email: userObject.email,
+    //   lastName: userObject.family_name,
+    //   firstName: userObject.given_name,
+    // });
+  };
 
   // aud: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
   // azp: "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com"
@@ -70,24 +71,24 @@ const Register = ({ isRegister = true }: props) => {
   // picture: "https://lh3.googleusercontent.com/a/AItbvmkOGiR8XtPCSDanzArZtJGL9TJCHqvjV4ky8qab=s96-c"
   // sub: "115729128147296944785"
 
-  // useEffect(() => {
-  //   if (googleAuthRef.current) {
-  //     /* global google */
-  //     //@ts-ignore
-  //     window.google.accounts.id.initialize({
-  //       client_id:
-  //         "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com",
-  //       callback: handleCallbackResponse,
-  //     });
+  useEffect(() => {
+    if (googleAuthRef.current) {
+      /* global google */
+      //@ts-ignore
+      window.google.accounts.id.initialize({
+        client_id:
+          "721662196942-9bnq2ileopd4mb4c0a7qi4brqbuqmpfo.apps.googleusercontent.com",
+        callback: handleCallbackResponse,
+      });
 
-  //     //@ts-ignore
-  //     google.accounts.id.renderButton(googleAuthRef.current, {
-  //       theme: "outline",
-  //       size: "large",
-  //       width: "100%",
-  //     });
-  //   }
-  // }, []);
+      //@ts-ignore
+      google.accounts.id.renderButton(googleAuthRef.current, {
+        theme: "outline",
+        size: "large",
+        width: "100%",
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (emailRef.current && passwordRef.current) {
@@ -170,7 +171,7 @@ const Register = ({ isRegister = true }: props) => {
       duration: 5000,
       isClosable: true,
       position: "top-right",
-    })
+    });
     navigate("/");
   };
 
@@ -269,84 +270,86 @@ const Register = ({ isRegister = true }: props) => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      <Navbar />
-      <motion.div
-        variants={RouteVar}
-        initial="hidden"
-        animate="show"
-        exit={{ opacity: 0 }}
-      >
-        <Breadcrumbs breadcrumbs={breadcrumbs} />
-        <PageTitle title={register ? "Login" : "Register"} />
-        <div className="max-w-6xl w-full mx-auto mb-10 flex shadow-sm">
-          <form
-            className="p-12 outline-gray-500 max-w-xl w-full flex flex-col justify-center space-y-4 bg-gray-50"
-            onSubmit={
-              register
-                ? (e) => handleFormSubmitLogin(e)
-                : (e) => handleFormSubmitRegister(e)
-            }
-          >
-            {renderHeaders()}
-            <div>
-              <p className="text-sm text-red-600 mt-1">{error}</p>
-            </div>
-            {renderNameFields()}
-            <div className="mt-4">
-              <label className="block">Email</label>
-              <input
-                type={"email"}
-                className="w-full h-10 p-2"
-                ref={emailRef}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="mt-2">
-              <label className="block">Password</label>
-              <input
-                type={"password"}
-                className="w-full h-10 p-2"
-                ref={passwordRef}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            {renderSecondPassword()}
-            <div className="flex justify-between mt-3">
-              <div className="">
-                <input type="checkbox" className="mr-2" />
-                <label>Remember me</label>
-              </div>
-              <div className="">
-                <a href="www.google.com" className="text-sm">
-                  Forgot password
-                </a>
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="w-full py-2 text-semibold bg-sky-400 text-gray-50 rounded mt-2 hover:bg-sky-300"
+    <ContentWrapper>
+      <div className="flex flex-col h-screen">
+        <Navbar />
+        <motion.div
+          variants={RouteVar}
+          initial="hidden"
+          animate="show"
+          exit={{ opacity: 0 }}
+        >
+          <Breadcrumbs breadcrumbs={breadcrumbs} />
+          <PageTitle title={register ? "Login" : "Register"} />
+          <div className="max-w-6xl w-full mx-auto mb-10 flex shadow-sm">
+            <form
+              className="p-12 outline-gray-500 max-w-xl w-full flex flex-col justify-center space-y-4 bg-gray-50"
+              onSubmit={
+                register
+                  ? (e) => handleFormSubmitLogin(e)
+                  : (e) => handleFormSubmitRegister(e)
+              }
             >
-              {register ? "Sign in" : "Register"}
-            </button>
-            {/* <div
-              id="googleSignInButton"
-              ref={googleAuthRef}
-              className="mx-auto"
-            ></div> */}
-            {renderSwitchViews()}
-          </form>
-          <div className="w-full hidden md:flex">
-            <img
-              src={RegisterHero}
-              alt="Register/Login"
-              className="object-cover"
-            />
+              {renderHeaders()}
+              <div>
+                <p className="text-sm text-red-600 mt-1">{error}</p>
+              </div>
+              {renderNameFields()}
+              <div className="mt-4">
+                <label className="block">Email</label>
+                <input
+                  type={"email"}
+                  className="w-full h-10 p-2"
+                  ref={emailRef}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="mt-2">
+                <label className="block">Password</label>
+                <input
+                  type={"password"}
+                  className="w-full h-10 p-2"
+                  ref={passwordRef}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              {renderSecondPassword()}
+              <div className="flex justify-between mt-3">
+                <div className="">
+                  <input type="checkbox" className="mr-2" />
+                  <label>Remember me</label>
+                </div>
+                <div className="">
+                  <a href="www.google.com" className="text-sm">
+                    Forgot password
+                  </a>
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="w-full py-2 text-semibold bg-sky-400 text-gray-50 rounded mt-2 hover:bg-sky-300"
+              >
+                {register ? "Sign in" : "Register"}
+              </button>
+              <div
+                id="googleSignInButton"
+                ref={googleAuthRef}
+                className="mx-auto"
+              ></div>
+              {renderSwitchViews()}
+            </form>
+            <div className="w-full hidden md:flex">
+              <img
+                src={RegisterHero}
+                alt="Register/Login"
+                className="object-cover"
+              />
+            </div>
           </div>
-        </div>
-        <Footer />
-      </motion.div>
-    </div>
+          <Footer />
+        </motion.div>
+      </div>
+    </ContentWrapper>
   );
 };
 

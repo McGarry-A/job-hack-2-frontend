@@ -8,6 +8,7 @@ import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import CreateColumn from "../components/CreateColumn/CreateColumn";
 import { useAppDispatch, useAppSelector } from "../store";
 import { setJobs } from "../store/savedJobsSlice";
+import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 
 // import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
@@ -102,11 +103,11 @@ const MyJobs = () => {
       );
     }
 
-      return <CreateColumn />;
+    return <CreateColumn />;
   };
 
   return (
-    <div>
+    <ContentWrapper>
       <Navbar />
       <motion.div
         variants={RouteVar}
@@ -117,12 +118,12 @@ const MyJobs = () => {
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <PageTitle title="My Jobs" />
         <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="flex max-w-6xl w-full mx-auto bg-white rounded mb-24 p-4 flex-wrap justify-center">
+          <div className="flex max-w-6xl w-full mx-auto bg-white rounded mb-24 p-4 flex-wrap justify-center">
             {renderColumns()}
-        </div>
+          </div>
         </DragDropContext>
       </motion.div>
-    </div>
+    </ContentWrapper>
   );
 };
 

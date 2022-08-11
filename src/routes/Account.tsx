@@ -9,6 +9,7 @@ import PageTitle from "../components/Layout/PageTitle/PageTitle";
 import AccountForm from "../components/Forms/AccountForm/AccountForm";
 import { removeActiveUser } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
+import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 
 const Account = () => {
   const state = useAppSelector((state) => state.user);
@@ -123,7 +124,7 @@ const Account = () => {
   };
 
   return (
-    <div>
+    <ContentWrapper>
       <Navbar />
       <motion.div
         variants={RouteVar}
@@ -145,7 +146,7 @@ const Account = () => {
           {renderDeleteUserAccount()}
         </BGWrapper>
       </motion.div>
-    </div>
+    </ContentWrapper>
   );
 };
 

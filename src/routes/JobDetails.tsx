@@ -10,6 +10,7 @@ import Loader from "../components/Loader/Loader";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import HomeJobCardContainer from "../components/HomeJobCards/HomeJobCardContainer";
 import JobProfile from "../components/JobProfile/JobProfile";
+import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 
 const JobDetails = () => {
   const params = useParams();
@@ -86,7 +87,7 @@ const JobDetails = () => {
   };
 
   return (
-    <div>
+    <ContentWrapper>
       <Navbar />
       <motion.div
         variants={RouteVar}
@@ -103,7 +104,7 @@ const JobDetails = () => {
         </div>
       </motion.div>
       <Footer />
-    </div>
+    </ContentWrapper>
   );
 };
 

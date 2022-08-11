@@ -27,12 +27,12 @@ const JobCard = ({ job, index }: props) => {
             <p>{job.company}</p>
             <NavLink
               to={`/job-profile/${job.id}`}
-              className="text-sm text-sky-400 underline"
+              className="text-xs text-sky-400 underline"
             >
               See Job Description
             </NavLink>
           </div>
-          <div className="">
+          <div className="ml-1">
             <a href={job.link}>
               <RiExternalLinkLine />
             </a>

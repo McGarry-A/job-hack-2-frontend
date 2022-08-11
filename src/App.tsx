@@ -15,7 +15,7 @@ const App = () => {
   return (
     <div className="w-screen font-leagueSpartan bg-gradient-to-b from-[#f2f2f2] to-[#ffffff]">
       <AnimatePresence>
-        <div className="max-w-[1920px] mx-auto -z-10">
+        <div>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />

@@ -6,6 +6,7 @@ import Footer from "../components/Layout/Footer/Footer";
 import JobSearchForm from "../components/Forms/JobSearchForm/JobSearchFrom";
 import HomeJobCardContainer from "../components/HomeJobCards/HomeJobCardContainer";
 import { useToast } from "@chakra-ui/react";
+import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 
 const Home = () => {
   const [job, setJob] = useState<string>("");
@@ -61,20 +62,22 @@ const Home = () => {
   return (
     <div className="w-full overflow-hidden">
       <Hero />
-      <BGWrapper>
-        <ForegroundWrapper>
-          <JobSearchForm
-            handleFormSubmit={handleFormSubmit}
-            titleRef={titleRef}
-            locationRef={locationRef}
-            providerRef={providerRef}
-          />
-          <PaginationWrapper {...paginationOptions}>
-            <HomeJobCardContainer {...useJobsReed} />
-          </PaginationWrapper>
-        </ForegroundWrapper>
-      </BGWrapper>
-      <Footer />
+      <ContentWrapper>
+        <BGWrapper>
+          <ForegroundWrapper>
+            <JobSearchForm
+              handleFormSubmit={handleFormSubmit}
+              titleRef={titleRef}
+              locationRef={locationRef}
+              providerRef={providerRef}
+            />
+            <PaginationWrapper {...paginationOptions}>
+              <HomeJobCardContainer {...useJobsReed} />
+            </PaginationWrapper>
+          </ForegroundWrapper>
+        </BGWrapper>
+        <Footer />
+      </ContentWrapper>
     </div>
   );
 };

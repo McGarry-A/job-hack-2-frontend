@@ -7,6 +7,7 @@ import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
 import ContactForm from "../components/Forms/ContactForm/ContactForm";
+import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 
 const Contact = () => {
   const [subject, setSubject] = useState<string>();
@@ -18,7 +19,7 @@ const Contact = () => {
 
   const [error, setError] = useState<string>("");
 
-  const toast = useToast()
+  const toast = useToast();
 
   useEffect(() => {
     setError("");
@@ -34,8 +35,9 @@ const Contact = () => {
     toast({
       status: "success",
       title: "Message Sent!",
-      description: "Your message has been successfully sent. Our team will reiview and get back to you as soon as possible.",
-    })
+      description:
+        "Your message has been successfully sent. Our team will reiview and get back to you as soon as possible.",
+    });
   };
 
   const breadcrumbs = [
@@ -82,23 +84,23 @@ const Contact = () => {
   const renderForm = () => {
     return (
       <div className="max-w-6xl mx-auto bg-white rounded flex mb-24">
-        <ContactForm 
-          handleFormSubmit={handleFormSubmit} 
-          setEmail={setEmail} 
-          setPhone={setPhone} 
-          setFirstName={setFirstName} 
-          setLastName={setLastName} 
-          setMessage={setMessage} 
-          setSubject={setSubject} 
+        <ContactForm
+          handleFormSubmit={handleFormSubmit}
+          setEmail={setEmail}
+          setPhone={setPhone}
+          setFirstName={setFirstName}
+          setLastName={setLastName}
+          setMessage={setMessage}
+          setSubject={setSubject}
           error={error}
-           />
+        />
         {renderContactDetails()}
       </div>
     );
   };
 
   return (
-    <div>
+    <ContentWrapper>
       <Navbar />
       <motion.div
         variants={RouteVar}
@@ -111,7 +113,7 @@ const Contact = () => {
         {renderForm()}
       </motion.div>
       <Footer />
-    </div>
+    </ContentWrapper>
   );
 };
 
