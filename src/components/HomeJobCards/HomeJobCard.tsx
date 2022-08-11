@@ -1,6 +1,6 @@
 import { useState } from "react";
 import reedLogo from "../../images/reedLogo.png";
-import { useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 // import { addToLikedJobs } from "../../store/userSlice";
 import { motion } from "framer-motion";
 import { jobCardVariant } from "../../animations/JobCard";
@@ -8,6 +8,7 @@ import { JobInterface } from "../../types/ReedJobsTypes";
 import { NavLink } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { useToast } from "@chakra-ui/react";
+import { addJob } from "../../store/savedJobsSlice";
 
 interface props {
   el: JobInterface;
@@ -17,6 +18,7 @@ interface props {
 const HomeJobCard = ({ el }: props) => {
   const [showAddToWishList, setShowAddToWishList] = useState<boolean>(false);
   const toast = useToast();
+  const dispatch = useAppDispatch();
 
   const state = useAppSelector((state) => state.user);
 
@@ -45,12 +47,11 @@ const HomeJobCard = ({ el }: props) => {
       const jobToAdd = {
         title: el.title,
         company: el.company,
-        salary: el.salary,
-        location: el.location,
-        description: el.description,
+        link: el.url,
+        id: String(el.id),
       };
 
-      // dispatch(addToLikedJobs(jobToAdd));
+      dispatch(addJob(jobToAdd));
     }
   };
 

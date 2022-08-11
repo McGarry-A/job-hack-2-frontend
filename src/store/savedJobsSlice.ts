@@ -63,12 +63,32 @@ const savedJobsSlice = createSlice({
 
       return newState
     },
-    addJob: (state, action: PayloadAction) => {},
-    removeJob: (state, action: PayloadAction) => {},
-    moveJob: (state, action: PayloadAction) => {},
+    addJob: (state, action: PayloadAction<{ title: string, company: string, link: string, id: string}>) => {
+      const job = action.payload
+      console.log("adding to list")
+
+      const newState = state
+      newState.jobs[job.id] = job
+      newState.columns["column-0"].jobIds.push(job.id)
+
+      return newState
+    },
+    removeJob: (state, action: PayloadAction<{id: string}>) => {
+      const { id } = action.payload
+
+      state.columnOrder.map(el => {
+        if (state.columns[el].jobIds.includes(id)) {
+          return state.columns[el].jobIds.filter(el => el === id)
+        }
+
+        return el
+      })
+
+      delete state.jobs[id]
+    },
   },
 });
 
-export const { setJobs, createColumn, removeColumn } = savedJobsSlice.actions;
+export const { setJobs, createColumn, removeColumn, addJob } = savedJobsSlice.actions;
 
 export default savedJobsSlice;
