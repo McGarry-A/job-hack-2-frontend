@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Layout/Navbar/Navbar";
-import { useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 import { useToast } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
 import AccountForm from "../components/Forms/AccountForm/AccountForm";
+import { removeActiveUser } from "../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Account = () => {
   const state = useAppSelector((state) => state.user);
@@ -19,8 +21,10 @@ const Account = () => {
   const currentPassRef = useRef<HTMLInputElement>(null);
   const newPassRef = useRef<HTMLInputElement>(null);
   const newPassConfRef = useRef<HTMLInputElement>(null);
-  
+
   const toast = useToast();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (firstNameRef.current) firstNameRef.current.value = state.user.firstName;
@@ -34,6 +38,17 @@ const Account = () => {
       title: "Account Deleted",
       description: "Your account has been deleted",
     });
+  };
+
+  const handleLogout = () => {
+    toast({
+      title: "Log out succesful",
+      status: "success",
+      description: "You have been logged out of your account",
+    });
+
+    dispatch(removeActiveUser());
+    navigate("/");
   };
 
   const handleUpdateCustomer = (e: React.FormEvent<HTMLFormElement>) => {
@@ -92,6 +107,21 @@ const Account = () => {
     </div>
   );
 
+  const renderLogOut = () => {
+    const { isLoggedIn } = state;
+
+    if (isLoggedIn) {
+      return (
+        <button
+          onClick={() => handleLogout()}
+          className={`border-2 px-4 py-1 ml-4 rounded text-rose-600 border-rose-600 hover:text-rose-500 hover:border-rose-500`}
+        >
+          Log out
+        </button>
+      );
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -111,6 +141,7 @@ const Account = () => {
             lastNameRef={lastNameRef}
             handleUpdateCustomer={handleUpdateCustomer}
           />
+          {renderLogOut()}
           {renderDeleteUserAccount()}
         </BGWrapper>
       </motion.div>

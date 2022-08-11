@@ -22,7 +22,7 @@ const Column = ({ column, jobs }: props) => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="bg-gray-50 p-3 rounded max-w-xs w-full m-2 flex flex-col">
+    <div className="bg-gray-50 p-3 rounded max-w-xs w-full m-2 flex flex-col h-52">
       <div className="flex justify-between items-center mb-2">
         <h5 className="text-lg font-semibold ">{column.title}</h5>
         <button className="mb-2">
@@ -35,7 +35,7 @@ const Column = ({ column, jobs }: props) => {
       <Droppable droppableId={column.id}>
         {(provided) => (
           <div
-            className={`space-y-4 flex flex-grow flex-col`}
+            className={`space-y-2 flex flex-grow flex-col`}
             {...provided.droppableProps}
             ref={provided.innerRef}
           >

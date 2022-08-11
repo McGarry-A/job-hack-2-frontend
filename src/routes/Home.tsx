@@ -24,7 +24,7 @@ const Home = () => {
     location: location,
   });
 
-  const toast = useToast()
+  const toast = useToast();
 
   const { error } = useJobsReed;
 
@@ -40,8 +40,8 @@ const Home = () => {
         title: "Error",
         description: "There was an error rendering cards",
         duration: 5000,
-        isClosable: true
-      })
+        isClosable: true,
+      });
     }
   }, [error]);
 
@@ -87,7 +87,7 @@ const ForegroundWrapper: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <div className="w-4/5 mx-auto border-2 bg-white p-4 shadow-lg rounded -mt-14 mb-14 h-[1105px] flex flex-col justify-between relative">
+    <div className="w-4/5 mx-auto border-2 bg-white p-4 shadow-lg rounded -mt-14 mb-14 min-h-[1115px] flex flex-col justify-between relative">
       {children}
     </div>
   );
