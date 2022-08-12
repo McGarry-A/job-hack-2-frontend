@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import useUniqueId from "../../hooks/useUniqueId";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { createColumn } from "../../store/savedJobsSlice";
 
@@ -9,9 +10,10 @@ const CreateColumn = () => {
 
   const state = useAppSelector((state) => state.jobs);
   const dispatch = useAppDispatch()
+  const newColId = useUniqueId()
 
   const handleCreateColumn = () => {
-    dispatch(createColumn({title: newColumn, id: "new-col-1"}))
+    dispatch(createColumn({title: newColumn, id: newColId}))
     setActive(false);
   };
 

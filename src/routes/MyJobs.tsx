@@ -14,6 +14,7 @@ import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 
 const MyJobs = () => {
   const savedJobs = useAppSelector((state) => state.jobs);
+  const userEmail = useAppSelector((state) => state.user.user.email)
   const dispatch = useAppDispatch();
 
   const handleDragEnd = (result: DropResult) => {

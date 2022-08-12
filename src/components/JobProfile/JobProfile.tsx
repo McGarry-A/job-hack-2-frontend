@@ -1,10 +1,11 @@
 import { ReedJobProfile } from "../../types/ReedJobsTypes";
 import Loader from "../Loader/Loader";
-import { useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import HTMLParser from "../HTMLParser/HTMLParser";
 import { TiBusinessCard } from "react-icons/ti";
 import { AiOutlineEnter } from "react-icons/ai";
 import { useToast } from "@chakra-ui/react";
+import { addJob } from "../../store/savedJobsSlice";
 
 // import { addToLikedJobs } from "../../store/userSlice";
 
@@ -17,6 +18,7 @@ interface props {
 const JobProfile = ({ profile, error, isLoading }: props) => {
   const toast = useToast();
   const state = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch()
 
   const handleAddToList = () => {
     if (!profile) return;
@@ -41,12 +43,11 @@ const JobProfile = ({ profile, error, isLoading }: props) => {
     const jobToAdd = {
       title: profile.jobTitle,
       company: profile.employerName,
-      salary: profile.maximumSalary as number,
-      location: profile.locationName,
-      description: profile.jobDescription,
+      link: profile.externalUrl,
+      id: String(profile.jobId)
     };
 
-    // dispatch(addToLikedJobs(jobToAdd));
+    dispatch(addJob(jobToAdd));
   };
 
   if (isLoading) return <Loader />;

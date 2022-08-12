@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { setActiveUser } from "../store/userSlice";
-import { useAppDispatch } from "../store";
+import { useAppDispatch, useAppSelector } from "../store";
 
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
@@ -21,6 +21,7 @@ import jwt_decode from "jwt-decode";
 import { UserObjectInterface } from "../types/GoogleAuthTypes";
 import { UserStateInterface } from "../types/UserTypes";
 import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
+import { setJobs } from "../store/savedJobsSlice";
 
 interface props {
   isRegister?: boolean;
@@ -40,6 +41,8 @@ const Register = ({ isRegister = true }: props) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const googleAuthRef = useRef<HTMLDivElement>(null);
+
+  const jobs = useAppSelector((state) => state.jobs)
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -129,6 +132,8 @@ const Register = ({ isRegister = true }: props) => {
     }
 
     dispatch(setActiveUser(user));
+    dispatch(setJobs(jobs));
+
     toast({
       title: "Success",
       description: "Successfully Logged In",
