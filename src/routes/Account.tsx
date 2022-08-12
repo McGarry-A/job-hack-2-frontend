@@ -96,31 +96,28 @@ const Account = () => {
     </div>
   );
 
-  const renderDeleteUserAccount = () => (
-    <div>
-      {renderSectionHeader("Delete your account")}
-      <button
-        className="px-3 py-2 border bg-rose-600 text-gray-50 border-rose-600 rounded hover:bg-rose-500 hover:border-rose-500"
-        onClick={() => handleDeleteAccount()}
-      >
-        Delete Account
-      </button>
-    </div>
-  );
-
-  const renderLogOut = () => {
+  const renderDeleteUserAccount = () => {
     const { isLoggedIn } = state;
 
-    if (isLoggedIn) {
-      return (
+    return (
+      <div className="">
+        {renderSectionHeader("Manage Your Account")}
         <button
-          onClick={() => handleLogout()}
-          className={`border-2 px-4 py-1 ml-4 rounded text-rose-600 border-rose-600 hover:text-rose-500 hover:border-rose-500`}
+          className="w-40 py-2 border bg-rose-600 text-gray-50 border-rose-600 rounded hover:bg-rose-500 hover:border-rose-500"
+          onClick={() => handleDeleteAccount()}
         >
-          Log out
+          Delete Account
         </button>
-      );
-    }
+        {isLoggedIn && (
+          <button
+            onClick={() => handleLogout()}
+            className={`border-2 w-40 py-2 rounded text-rose-600 border-rose-600 hover:text-rose-500 hover:border-rose-500 ml-4`}
+          >
+            Log out
+          </button>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -142,7 +139,6 @@ const Account = () => {
             lastNameRef={lastNameRef}
             handleUpdateCustomer={handleUpdateCustomer}
           />
-          {renderLogOut()}
           {renderDeleteUserAccount()}
         </BGWrapper>
       </motion.div>
