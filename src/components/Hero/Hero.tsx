@@ -81,8 +81,8 @@ const Hero = () => {
   };
 
   return (
-    <div className="bg-hero w-full text-gray-50 [mask-image:linear-gradient(to bottom, transparent 100%, black)]">
-      <div className="bg-gradient-to-b from-transparent via-transparent to-black">
+    <div className="bg-hero w-full text-gray-50 bg-no-repeat bg-cover bg-center">
+      <div className="bg-gradient-to-b from-transparent to-black">
         <ContentWrapper>
           <Navbar />
           <div className=" w-full h-full flex justify-center flex-col items-center py-10">
