@@ -193,7 +193,7 @@ const Register = ({ isRegister = true }: props) => {
             <label className="block">First Name</label>
             <input
               type={"text"}
-              className="w-full h-10"
+              className="w-full h-10 p-2"
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
@@ -201,7 +201,7 @@ const Register = ({ isRegister = true }: props) => {
             <label className="block">Last Name</label>
             <input
               type={"text"}
-              className="w-full h-10"
+              className="w-full h-10 p-2"
               onChange={(e) => setLastName(e.target.value)}
             />
           </div>
@@ -239,7 +239,7 @@ const Register = ({ isRegister = true }: props) => {
           <label className="block">Confrim password</label>
           <input
             type={"password"}
-            className="w-full h-10"
+            className="w-full h-10 p-2"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
