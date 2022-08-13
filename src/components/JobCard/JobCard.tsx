@@ -24,7 +24,7 @@ const JobCard = ({ job, index }: props) => {
         >
           <div>
             <h6>{job.title}</h6>
-            <p>{job.company}</p>
+            <p className="opacity-50 mt-1 text-sm italic">{job.company}</p>
             <NavLink
               to={`/job-profile/${job.id}`}
               className="text-xs text-sky-400 underline"
