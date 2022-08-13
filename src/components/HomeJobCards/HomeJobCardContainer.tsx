@@ -13,7 +13,7 @@ interface props {
 const HomeJobCardContainer = ({ jobs, error, isLoading }: props) => {
   if (error) {
     return (
-      <div className="text-center my-10 text-lg">
+      <div className="text-center my-10 text-lg flex-grow flex justify-center items-center">
         This search returned an error...
       </div>
     );
@@ -28,7 +28,7 @@ const HomeJobCardContainer = ({ jobs, error, isLoading }: props) => {
 
   if (jobs && jobs.length === 0) {
     return (
-      <div className="my-10 mx-auto text-lg text-center">
+      <div className="my-10 mx-auto text-lg text-center flex justify-center items-center">
         There are no results for your search...
       </div>
     );

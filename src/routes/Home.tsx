@@ -9,8 +9,8 @@ import { useToast } from "@chakra-ui/react";
 import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 
 const Home = () => {
-  const [job, setJob] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
+  const [job, setJob] = useState<string>("React");
+  const [location, setLocation] = useState<string>("Manchester");
   const [pagination, setPagination] = useState<number>(1);
 
   const titleRef = useRef<HTMLInputElement>(null);

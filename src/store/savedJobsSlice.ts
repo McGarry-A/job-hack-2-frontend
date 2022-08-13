@@ -8,35 +8,17 @@ export interface NotificationInterface {
 }
 
 const initialState: savedJobsInterface = {
-  jobs: {
-    cc1: {
-      title: "Business development manager",
-      company: "cleancloud",
-      id: "cc1",
-      link: "www.cleancloudapp.com",
-    },
-    jd0: {
-      title: "Sales Assistant",
-      company: "JD",
-      id: "jd0",
-      link: "www.jdsports.com",
-    },
-  },
-  columns: {
-    "column-0": {
-      id: "column-0",
-      jobIds: ["cc1", "jd0"],
-      title: "Saved jobs",
-    },
-  },
-  columnOrder: ["column-0"],
+  jobs: {},
+  columns: {},
+  columnOrder: [],
 };
 
 const savedJobsSlice = createSlice({
   name: "jobs",
   initialState: initialState,
   reducers: {
-    setJobs: (state, action: PayloadAction<savedJobsInterface>) => {
+    setJobs: (_, action: PayloadAction<savedJobsInterface>) => {
+      console.log("setting jobs")
       return action.payload;
     },
     createColumn: (

@@ -1,11 +1,9 @@
-import { UserStateInterface } from "../types/UserTypes";
-
 interface props {
     email: string;
     password: string;
 }
 
-const loginEmail = async ({email, password}: props): Promise<boolean | UserStateInterface> => {
+const loginEmail = async ({email, password}: props)=> {
     try {
 
         console.log(email, password)

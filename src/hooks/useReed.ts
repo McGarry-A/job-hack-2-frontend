@@ -8,7 +8,7 @@ interface props {
   location: string;
 }
 
-const useReed = ({title, location, page}: props) => {
+const useReed = ({title, location, page = 1}: props) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<unknown>();
     const [jobs, setJobs] = useState<JobInterface[]>();

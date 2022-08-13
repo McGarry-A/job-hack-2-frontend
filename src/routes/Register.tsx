@@ -42,7 +42,7 @@ const Register = ({ isRegister = true }: props) => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const googleAuthRef = useRef<HTMLDivElement>(null);
 
-  const jobs = useAppSelector((state) => state.jobs)
+  const jobs = useAppSelector((state) => state.user)
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -121,7 +121,7 @@ const Register = ({ isRegister = true }: props) => {
       return;
     }
 
-    const user: UserStateInterface | boolean = await loginEmail({
+    const user = await loginEmail({
       email,
       password,
     });
@@ -131,8 +131,9 @@ const Register = ({ isRegister = true }: props) => {
       return;
     }
 
+    
     dispatch(setActiveUser(user));
-    dispatch(setJobs(jobs));
+    dispatch(setJobs(user.savedJobs));
 
     toast({
       title: "Success",
