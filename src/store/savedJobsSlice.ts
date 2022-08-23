@@ -27,6 +27,8 @@ const savedJobsSlice = createSlice({
     ) => {
       const { title, id } = action.payload;
 
+      if (Object.keys(state.columns).includes(id)) return state 
+
       state.columnOrder.push(id)
       state.columns[id] = {
           id: id,
