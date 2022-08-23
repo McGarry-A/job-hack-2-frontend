@@ -75,3 +75,7 @@ Food4Thought:
 DO NEXT:
 > GOOGLE AUTH
 > DELETE USER ROUTE
+
+
+TEST
+> add card only, log out, does card persist

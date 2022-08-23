@@ -8,12 +8,11 @@ const CreateColumn = () => {
   const [active, setActive] = useState<boolean>(false);
   const [newColumn, setNewColumn] = useState<string>("");
 
-  const state = useAppSelector((state) => state.jobs);
-  const dispatch = useAppDispatch()
-  const newColId = useUniqueId()
+  const dispatch = useAppDispatch();
+  const newColId = useUniqueId();
 
-  const handleCreateColumn = () => {
-    dispatch(createColumn({title: newColumn, id: newColId}))
+  const handleCreateColumn = async () => {
+    dispatch(createColumn({ title: newColumn, id: newColId }));
     setActive(false);
   };
 

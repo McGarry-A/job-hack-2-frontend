@@ -47,6 +47,8 @@ const savedJobsSlice = createSlice({
     },
     addJob: (state, action: PayloadAction<{ title: string, company: string, link: string, id: string}>) => {
       const job = action.payload
+
+      if (Object.keys(state.jobs).includes(job.id)) return state
       console.log("adding to list")
 
       const newState = state

@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { useToast } from "@chakra-ui/react";
 import { addJob } from "../../store/savedJobsSlice";
+import updateJobs from "../../utils/updateJobs";
 
 interface props {
   el: JobInterface;
@@ -21,8 +22,9 @@ const HomeJobCard = ({ el }: props) => {
   const dispatch = useAppDispatch();
 
   const state = useAppSelector((state) => state.user);
+  const jobsState = useAppSelector((state) => state.jobs);
 
-  const handleAddToList = () => {
+  const handleAddToList = async () => {
     if (state.isLoggedIn === false) {
       toast({
         title: "Error",
@@ -52,6 +54,7 @@ const HomeJobCard = ({ el }: props) => {
       };
 
       dispatch(addJob(jobToAdd));
+      updateJobs({ newJobsState: jobsState, email: state.user.email });
     }
   };
 
