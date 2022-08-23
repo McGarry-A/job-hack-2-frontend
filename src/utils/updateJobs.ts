@@ -3,7 +3,7 @@ import { savedJobsInterface } from "../types/UserTypes";
 
 interface props {
   newJobsState: savedJobsInterface;
-  email: number;
+  email: string;
 }
 
 const updateJobs = async ({newJobsState, email}: props) => {
@@ -14,16 +14,18 @@ const updateJobs = async ({newJobsState, email}: props) => {
         Headers: {
             "Content-Type":"application/json"
         },
-        body: JSON.stringify({
+        data: {
             newJobs: newJobsState,
             email
-        })        
+        }        
     }
 
     const response = await axios.request(options)
-    return response
+    if (response.status === 200) return true
+    else return false
+
   } catch (error) {
-    console.error(error);
+    return false
   }
 };
 

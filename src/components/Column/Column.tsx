@@ -40,7 +40,14 @@ const Column = ({ column, jobs }: props) => {
             ref={provided.innerRef}
           >
             {jobs.map((job, index) => {
-              return <JobCard key={job.id} job={job} index={index} />;
+              return (
+                <JobCard
+                  key={job.id}
+                  job={job}
+                  index={index}
+                  columnId={column.id}
+                />
+              );
             })}
             {provided.placeholder}
           </div>

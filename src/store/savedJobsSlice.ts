@@ -55,22 +55,19 @@ const savedJobsSlice = createSlice({
 
       return newState
     },
-    removeJob: (state, action: PayloadAction<{id: string}>) => {
-      const { id } = action.payload
-
-      state.columnOrder.map(el => {
-        if (state.columns[el].jobIds.includes(id)) {
-          return state.columns[el].jobIds.filter(el => el === id)
-        }
-
-        return el
-      })
-
-      delete state.jobs[id]
+    removeJob: (state, action: PayloadAction<{id: string, columnId: string}>) => {
+      const { id, columnId } = action.payload;
+      const newState = state
+      
+      delete newState.jobs[id]
+      const newColumnJobIds = newState.columns[columnId].jobIds.filter(el => el !== id)
+      newState.columns[columnId].jobIds = newColumnJobIds
+      
+      return newState
     },
   },
 });
 
-export const { setJobs, createColumn, removeColumn, addJob } = savedJobsSlice.actions;
+export const { setJobs, createColumn, removeColumn, addJob, removeJob } = savedJobsSlice.actions;
 
 export default savedJobsSlice;

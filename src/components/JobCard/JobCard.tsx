@@ -1,6 +1,9 @@
 import { Draggable } from "react-beautiful-dnd";
+import { AiOutlineClose } from "react-icons/ai";
 import { RiExternalLinkLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
+import { useAppDispatch } from "../../store";
+import { removeJob } from "../../store/savedJobsSlice";
 
 interface props {
   job: {
@@ -10,9 +13,21 @@ interface props {
     link: string;
   };
   index: number;
+  columnId: string;
 }
 
-const JobCard = ({ job, index }: props) => {
+interface DeleteProps {
+  id: string;
+  columnId: string;
+}
+
+const JobCard = ({ job, index, columnId }: props) => {
+  const dispatch = useAppDispatch();
+
+  const handleDeleteCard = ({ id, columnId }: DeleteProps) => {
+    dispatch(removeJob({ id: job.id, columnId: columnId }));
+  };
+
   return (
     <Draggable draggableId={job.id} index={index}>
       {(provided) => (
@@ -32,10 +47,19 @@ const JobCard = ({ job, index }: props) => {
               See Job Description
             </NavLink>
           </div>
-          <div className="ml-1">
-            <a href={job.link}>
-              <RiExternalLinkLine />
-            </a>
+          <div className="flex flex-col justify-between ml-2 opacity-50">
+            <div className="cursor-pointer">
+              <AiOutlineClose
+                onClick={() =>
+                  handleDeleteCard({ id: job.id, columnId: columnId })
+                }
+              />
+            </div>
+            <div className="cursor-pointer">
+              <a href={job.link}>
+                <RiExternalLinkLine />
+              </a>
+            </div>
           </div>
         </div>
       )}

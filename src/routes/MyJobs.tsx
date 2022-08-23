@@ -9,15 +9,17 @@ import CreateColumn from "../components/CreateColumn/CreateColumn";
 import { useAppDispatch, useAppSelector } from "../store";
 import { setJobs } from "../store/savedJobsSlice";
 import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
+import updateJobs from "../utils/updateJobs";
 
 // import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
 const MyJobs = () => {
   const savedJobs = useAppSelector((state) => state.jobs);
-  const userEmail = useAppSelector((state) => state.user.user.email)
+  const userEmail = useAppSelector((state) => state.user.user.email);
+  console.log(`user email ${userEmail}`);
   const dispatch = useAppDispatch();
 
-  const handleDragEnd = (result: DropResult) => {
+  const handleDragEnd = async (result: DropResult) => {
     const { destination, source, draggableId } = result;
 
     if (!destination) return;
@@ -52,7 +54,12 @@ const MyJobs = () => {
         },
       };
 
-      dispatch(setJobs(newState));
+      const updatedDB = await updateJobs({
+        newJobsState: newState,
+        email: userEmail,
+      });
+      console.log(`updated DB? ${updatedDB}`);
+      if (updatedDB) dispatch(setJobs(newState));
       return;
     }
 
@@ -81,7 +88,11 @@ const MyJobs = () => {
       },
     };
 
-    dispatch(setJobs(newState));
+    const updatedDB = await updateJobs({
+      newJobsState: newState,
+      email: userEmail,
+    });
+    if (updatedDB) dispatch(setJobs(newState));
   };
 
   const breadcrumbs = [
