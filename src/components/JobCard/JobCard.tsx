@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { removeJob } from "../../store/savedJobsSlice";
 import updateJobs from "../../utils/updateJobs";
+import { removeJob as getNewState } from "../../utils/ManageJobsTable/removeJob";
 
 interface props {
   job: {
@@ -26,9 +27,15 @@ const JobCard = ({ job, index, columnId }: props) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
 
-  const handleDeleteCard = ({ id, columnId }: DeleteProps) => {
-    dispatch(removeJob({ id, columnId }));
-    updateJobs({ newJobsState: state.jobs, email: state.user.user.email });
+  const handleDeleteCard = async ({ id, columnId }: DeleteProps) => {
+    const payload = { id, columnId };
+    const newState = getNewState(state.jobs, payload);
+    const updatedDB = await updateJobs({
+      newJobsState: newState,
+      email: state.user.user.email,
+    });
+
+    if (updatedDB) dispatch(removeJob(newState));
   };
 
   return (

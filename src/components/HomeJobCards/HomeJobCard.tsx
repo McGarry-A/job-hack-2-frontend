@@ -34,7 +34,7 @@ const HomeJobCard = ({ el }: props) => {
         status: "error",
         duration: 5000,
         isClosable: true,
-        position: "top-right",
+        position: "bottom",
       });
     } else {
       toast({
@@ -44,7 +44,7 @@ const HomeJobCard = ({ el }: props) => {
         status: "success",
         duration: 5000,
         isClosable: true,
-        position: "top-right",
+        position: "bottom",
       });
 
       const jobToAdd = {

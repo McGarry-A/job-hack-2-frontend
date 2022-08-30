@@ -59,15 +59,15 @@ const savedJobsSlice = createSlice({
 
       return action.payload
     },
-    removeJob: (state, action: PayloadAction<{id: string, columnId: string}>) => {
-      const { id, columnId } = action.payload;
-      const newState = state
+    removeJob: (state, action: PayloadAction<savedJobsInterface>) => {
+      // const { id, columnId } = action.payload;
+      // const newState = state
       
-      delete newState.jobs[id]
-      const newColumnJobIds = newState.columns[columnId].jobIds.filter(el => el !== id)
-      newState.columns[columnId].jobIds = newColumnJobIds
+      // delete newState.jobs[id]
+      // const newColumnJobIds = newState.columns[columnId].jobIds.filter(el => el !== id)
+      // newState.columns[columnId].jobIds = newColumnJobIds
       
-      return newState
+      return action.payload
     },
   },
 });
