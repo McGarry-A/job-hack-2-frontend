@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { useToast } from "@chakra-ui/react";
 import { addJob } from "../../store/savedJobsSlice";
+import { addJob as getNewState } from "../../utils/ManageJobsTable/addJob";
 import updateJobs from "../../utils/updateJobs";
 
 interface props {
@@ -53,8 +54,13 @@ const HomeJobCard = ({ el }: props) => {
         id: String(el.id),
       };
 
-      dispatch(addJob(jobToAdd));
-      updateJobs({ newJobsState: jobsState, email: state.user.email });
+      const newState = getNewState(jobsState, jobToAdd);
+      const updatedDB = await updateJobs({
+        newJobsState: newState,
+        email: state.user.email,
+      });
+
+      if (updatedDB) dispatch(addJob(newState));
     }
   };
 

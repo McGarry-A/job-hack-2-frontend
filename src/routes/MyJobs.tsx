@@ -58,8 +58,8 @@ const MyJobs = () => {
         newJobsState: newState,
         email: userEmail,
       });
-      console.log(`updated DB? ${updatedDB}`);
       if (updatedDB) dispatch(setJobs(newState));
+
       return;
     }
 
@@ -130,7 +130,7 @@ const MyJobs = () => {
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <PageTitle title="My Jobs" />
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div className="flex max-w-6xl w-full mx-auto bg-white rounded mb-24 p-4 flex-wrap justify-center">
+          <div className="flex max-w-7xl w-full mx-auto bg-white rounded mb-24 p-4 flex-wrap justify-center">
             {renderColumns()}
           </div>
         </DragDropContext>

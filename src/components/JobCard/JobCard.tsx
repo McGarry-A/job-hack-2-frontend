@@ -2,8 +2,9 @@ import { Draggable } from "react-beautiful-dnd";
 import { AiOutlineClose } from "react-icons/ai";
 import { RiExternalLinkLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
-import { useAppDispatch } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { removeJob } from "../../store/savedJobsSlice";
+import updateJobs from "../../utils/updateJobs";
 
 interface props {
   job: {
@@ -23,16 +24,18 @@ interface DeleteProps {
 
 const JobCard = ({ job, index, columnId }: props) => {
   const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
 
   const handleDeleteCard = ({ id, columnId }: DeleteProps) => {
-    dispatch(removeJob({ id: job.id, columnId: columnId }));
+    dispatch(removeJob({ id, columnId }));
+    updateJobs({ newJobsState: state.jobs, email: state.user.user.email });
   };
 
   return (
     <Draggable draggableId={job.id} index={index}>
       {(provided) => (
         <div
-          className="bg-gray-50 w-64 py-2 px-2 rounded shadow cursor-grabbing flex justify-between"
+          className="bg-gray-50 w-72 py-2 px-2 rounded shadow cursor-grabbing flex justify-between"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}

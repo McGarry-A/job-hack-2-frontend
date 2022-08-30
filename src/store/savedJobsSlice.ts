@@ -47,17 +47,17 @@ const savedJobsSlice = createSlice({
 
       return newState
     },
-    addJob: (state, action: PayloadAction<{ title: string, company: string, link: string, id: string}>) => {
-      const job = action.payload
+    addJob: (state, action: PayloadAction<savedJobsInterface>) => {
+      // const job = action.payload
 
-      if (Object.keys(state.jobs).includes(job.id)) return state
-      console.log("adding to list")
+      // if (Object.keys(state.jobs).includes(job.id)) return state
+      // console.log("adding to list")
 
-      const newState = state
-      newState.jobs[job.id] = job
-      newState.columns["column-0"].jobIds.push(job.id)
+      // const newState = state
+      // newState.jobs[job.id] = job
+      // newState.columns["column-0"].jobIds.push(job.id)
 
-      return newState
+      return action.payload
     },
     removeJob: (state, action: PayloadAction<{id: string, columnId: string}>) => {
       const { id, columnId } = action.payload;

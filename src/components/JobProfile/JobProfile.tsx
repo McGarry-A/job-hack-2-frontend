@@ -6,6 +6,8 @@ import { TiBusinessCard } from "react-icons/ti";
 import { AiOutlineEnter } from "react-icons/ai";
 import { useToast } from "@chakra-ui/react";
 import { addJob } from "../../store/savedJobsSlice";
+import { addJob as getNewState } from "../../utils/ManageJobsTable/addJob";
+import updateJobs from "../../utils/updateJobs";
 
 // import { addToLikedJobs } from "../../store/userSlice";
 
@@ -18,9 +20,10 @@ interface props {
 const JobProfile = ({ profile, error, isLoading }: props) => {
   const toast = useToast();
   const state = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch()
+  const jobsState = useAppSelector((state) => state.jobs);
+  const dispatch = useAppDispatch();
 
-  const handleAddToList = () => {
+  const handleAddToList = async () => {
     if (!profile) return;
     if (!state.isLoggedIn) {
       toast({
@@ -44,10 +47,18 @@ const JobProfile = ({ profile, error, isLoading }: props) => {
       title: profile.jobTitle,
       company: profile.employerName,
       link: profile.externalUrl,
-      id: String(profile.jobId)
+      id: String(profile.jobId),
     };
 
-    dispatch(addJob(jobToAdd));
+    const newState = getNewState(jobsState, jobToAdd);
+    const updatedDB = await updateJobs({
+      newJobsState: newState,
+      email: state.user.email,
+    });
+
+    console.log(`${updatedDB} is updateddb`);
+
+    if (updatedDB) dispatch(addJob(newState));
   };
 
   if (isLoading) return <Loader />;

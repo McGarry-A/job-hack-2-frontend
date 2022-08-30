@@ -35,7 +35,7 @@ const Column = ({ column, jobs }: props) => {
       <Droppable droppableId={column.id}>
         {(provided) => (
           <div
-            className={`space-y-2 flex flex-grow flex-col`}
+            className={`space-y-4 flex flex-grow flex-col`}
             {...provided.droppableProps}
             ref={provided.innerRef}
           >

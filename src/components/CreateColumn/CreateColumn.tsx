@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import useUniqueId from "../../hooks/useUniqueId";
-import { useAppDispatch, useAppSelector } from "../../store";
+import { useAppDispatch } from "../../store";
 import { createColumn } from "../../store/savedJobsSlice";
 
 const CreateColumn = () => {

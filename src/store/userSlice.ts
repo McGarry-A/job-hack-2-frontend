@@ -41,8 +41,6 @@ const userSlice = createSlice({
 export const { 
         setActiveUser, 
         removeActiveUser, 
-        // addToAppliedJobs, 
-        // addToLikedJobs
      } = userSlice.actions
 
 export default userSlice
