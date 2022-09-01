@@ -13,6 +13,7 @@ import { useAppSelector } from "./store";
 const App = () => {
   const location = useLocation();
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+
   return (
     <div className="w-screen font-leagueSpartan bg-gradient-to-b from-[#f2f2f2] to-[#ffffff]">
       <AnimatePresence>

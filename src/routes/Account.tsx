@@ -10,6 +10,7 @@ import AccountForm from "../components/Forms/AccountForm/AccountForm";
 import { removeActiveUser } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
+import deleteUser from "../utils/deleteUser";
 
 const Account = () => {
   const state = useAppSelector((state) => state.user);
@@ -33,11 +34,24 @@ const Account = () => {
     if (emailRef.current) emailRef.current.value = state.user.email;
   });
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
+    const isDeleted = await deleteUser(state.user.email);
+
+    if (isDeleted) {
+      toast({
+        status: "success",
+        title: "Account Deleted",
+        description: "Your account has been deleted",
+      });
+
+      return;
+    }
+
     toast({
-      status: "success",
-      title: "Account Deleted",
-      description: "Your account has been deleted",
+      status: "error",
+      title: "Error",
+      description:
+        "There was a problem deleting your account, plase try again later.",
     });
   };
 
