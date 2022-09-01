@@ -125,8 +125,17 @@ const Register = ({ isRegister = true }: props) => {
       password,
     });
 
+    console.log(user);
     if (typeof user === "boolean" || typeof user === "undefined") {
-      setError("Failed logging in");
+      toast({
+        title: "Error Logging In",
+        description: "Please ensure you entered the correct details",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+
       return;
     }
 

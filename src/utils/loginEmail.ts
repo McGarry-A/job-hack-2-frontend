@@ -21,10 +21,9 @@ const loginEmail = async ({email, password}: props)=> {
         
 
         const res = await data.json();
-        console.log(res)
 
-        if (res.message !== "Success") {
-          console.log("Error fetching from server");
+        if (res.status === 401) {
+          console.log("Unauthorized")
           return false
         }
 
