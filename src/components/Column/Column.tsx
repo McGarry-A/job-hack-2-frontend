@@ -1,8 +1,10 @@
 import { Droppable } from "react-beautiful-dnd";
 import { BsX } from "react-icons/bs";
-import { useAppDispatch } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { removeColumn } from "../../store/savedJobsSlice";
 import JobCard from "../JobCard/JobCard";
+import { removeColumn as getNewState } from "../../utils/ManageJobsTable/removeColumn";
+import updateJobs from "../../utils/updateJobs";
 
 interface props {
   column: {
@@ -20,6 +22,19 @@ interface props {
 
 const Column = ({ column, jobs }: props) => {
   const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state);
+
+  const handleDeleteColumn = async (newColId: string) => {
+    const { jobs } = state;
+
+    const newState = getNewState(jobs, { id: newColId });
+    const updatedDB = await updateJobs({
+      newJobsState: newState,
+      email: state.user.user.email,
+    });
+
+    if (updatedDB) dispatch(removeColumn(newState));
+  };
 
   return (
     <div className="bg-gray-50 p-3 rounded max-w-xs w-full m-2 flex flex-col min-h-52">
@@ -28,7 +43,7 @@ const Column = ({ column, jobs }: props) => {
         <button className="mb-2">
           <BsX
             className="text-lg"
-            onClick={() => dispatch(removeColumn({ id: column.id }))}
+            onClick={() => handleDeleteColumn(column.id)}
           />
         </button>
       </div>

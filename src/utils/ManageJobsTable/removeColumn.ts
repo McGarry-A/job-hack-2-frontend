@@ -1,18 +1,16 @@
 import { savedJobsInterface } from "../../types/UserTypes";
 
-const removeColumn = (
+export const removeColumn = (
     state: savedJobsInterface,
     payload: { id: string }
   ) => {
       const { id } = payload;
 
-      const newState = state
-      const newColumnOrder = newState.columnOrder.filter((el) => el !== id);
+      const newState = JSON.parse(JSON.stringify(state))
+      const newColumnOrder = newState.columnOrder.filter((el: string) => el !== id);
       
       delete newState.columns[id];
       newState.columnOrder = newColumnOrder
 
       return newState
 }
-
-export default removeColumn;

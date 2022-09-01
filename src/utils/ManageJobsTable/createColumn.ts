@@ -1,6 +1,6 @@
 import { savedJobsInterface } from "../../types/UserTypes";
 
-const createColumn = (
+export const createColumn = (
     state: savedJobsInterface,
     payload: { title: string; id: string }
   ) => {
@@ -8,7 +8,8 @@ const createColumn = (
 
     if (Object.keys(state.columns).includes(id)) return state 
 
-    const newState = state
+    const newState = JSON.parse(JSON.stringify(state))
+    
     newState.columnOrder.push(id)
     newState.columns[id] = {
         id: id,
@@ -19,5 +20,3 @@ const createColumn = (
     return newState
 
 }
-
-export default createColumn;

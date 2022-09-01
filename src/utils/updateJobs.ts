@@ -6,7 +6,7 @@ interface props {
   email: string;
 }
 
-const updateJobs = async ({newJobsState, email}: props) => {
+const updateJobs = async ({ newJobsState, email }: props) => {
   try {
     const options = {
         url: "http://localhost:5001/api/jobs",
