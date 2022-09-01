@@ -30,10 +30,10 @@ const registerEmail = async ({ firstName, lastName, email, password}: props) => 
 
       console.log("Register email true")
 
-      return true
+      return res.user
     } catch (error) {
       console.error(error);
-      return false
+      return null
     }
   };
 

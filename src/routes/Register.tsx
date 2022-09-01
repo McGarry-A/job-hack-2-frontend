@@ -19,7 +19,6 @@ import { useToast } from "@chakra-ui/react";
 import jwt_decode from "jwt-decode";
 // import GoogleAuthFlow from "../utils/googleAuthFlow";
 import { UserObjectInterface } from "../types/GoogleAuthTypes";
-import { UserStateInterface } from "../types/UserTypes";
 import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 import { setJobs } from "../store/savedJobsSlice";
 
@@ -160,14 +159,28 @@ const Register = ({ isRegister = true }: props) => {
       setError("Password must be at least 6 characters.");
     }
 
-    const register = await registerEmail({
+    const user = await registerEmail({
       firstName,
       lastName,
       email,
       password,
     });
 
-    if (register === false) return;
+    if (user === null) {
+      toast({
+        title: "Error",
+        description:
+          "There was a problem registering your account. Please try again later.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+
+      return;
+    }
+
+    dispatch(setActiveUser(user));
 
     toast({
       title: "Success",
@@ -177,6 +190,7 @@ const Register = ({ isRegister = true }: props) => {
       isClosable: true,
       position: "bottom",
     });
+
     navigate("/");
   };
 
