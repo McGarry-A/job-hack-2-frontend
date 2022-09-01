@@ -1,20 +1,20 @@
-import { RefObject } from "react";
+import { Dispatch, RefObject, SetStateAction } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
-import { IoIosGitNetwork } from "react-icons/io";
+import { BiSortUp } from "react-icons/bi";
 
 interface props {
   handleFormSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   titleRef: RefObject<HTMLInputElement>;
   locationRef: RefObject<HTMLInputElement>;
-  providerRef: RefObject<HTMLSelectElement>;
+  setSort: Dispatch<SetStateAction<string | null>>;
 }
 
 const JobSearchForm = ({
   handleFormSubmit,
   titleRef,
   locationRef,
-  providerRef,
+  setSort,
 }: props) => {
   return (
     <form
@@ -44,17 +44,18 @@ const JobSearchForm = ({
         </div>
       </div>
       <div className="flex flex-col">
-        <p className="opacity-60">Search Provider</p>
+        <p className="opacity-60">Sort</p>
         <div className="flex border py-2 items-center px-2 text-sm lg:text-lg">
-          <IoIosGitNetwork className="mr-2 text-2xl" />
+          <BiSortUp className="mr-2 text-2xl" />
           <select
             placeholder="input"
             className="w-full focus:outline-none opacity-50 text-[16px]"
-            onChange={() => undefined}
-            ref={providerRef}
+            onChange={(e) => setSort(e.target.value)}
           >
-            <option value={"reed"}>Reed</option>
-            <option value={"adzuna"}>Adzuna</option>
+            <option value={""}>Most Relevant</option>
+            <option value={"sort_alpha"}>Alphabetically (A - Z)</option>
+            <option value={"sort_ascending"}>Salary (Acending)</option>
+            <option value={"sort_decending"}>Salary (Decending)</option>
           </select>
         </div>
       </div>

@@ -12,17 +12,18 @@ const Home = () => {
   const [job, setJob] = useState<string>("React");
   const [location, setLocation] = useState<string>("Manchester");
   const [pagination, setPagination] = useState<number>(1);
+  const [sort, setSort] = useState<string | null>("");
 
   const titleRef = useRef<HTMLInputElement>(null);
   const locationRef = useRef<HTMLInputElement>(null);
-  const providerRef = useRef<HTMLSelectElement>(null);
 
   const paginationOptions = { pagination, setPagination };
 
   const useJobsReed = useReed({
     page: pagination,
     title: job,
-    location: location,
+    location,
+    sort,
   });
 
   const toast = useToast();
@@ -69,7 +70,7 @@ const Home = () => {
               handleFormSubmit={handleFormSubmit}
               titleRef={titleRef}
               locationRef={locationRef}
-              providerRef={providerRef}
+              setSort={setSort}
             />
             <PaginationWrapper {...paginationOptions}>
               <HomeJobCardContainer {...useJobsReed} />

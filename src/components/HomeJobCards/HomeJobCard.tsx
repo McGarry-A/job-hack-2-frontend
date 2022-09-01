@@ -64,13 +64,13 @@ const HomeJobCard = ({ el }: props) => {
     }
   };
 
-  const formatSalary = (salary: number): string => {
+  const formatSalary = (salary: number): string | null => {
     return salary
       ? salary.toLocaleString("en-UK", {
           style: "currency",
           currency: "GBP",
         })
-      : "NA";
+      : null;
   };
 
   return (

@@ -6,9 +6,10 @@ interface props {
   page: number;
   title: string;
   location: string;
+  sort?: string | null ;
 }
 
-const useReed = ({title, location, page = 1}: props) => {
+const useReed = ({ title, location, page = 1, sort = "" }: props) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<unknown>();
     const [jobs, setJobs] = useState<JobInterface[]>();
@@ -25,7 +26,7 @@ const useReed = ({title, location, page = 1}: props) => {
           const options = {
             method: "GET",
             url: `http://localhost:5001/api/reed`,
-            params: { title, location, page },
+            params: { title, location, page, sort },
             headers: {
               "Content-Type":"application/json",
             }
