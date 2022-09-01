@@ -42,7 +42,7 @@ const Register = ({ isRegister = true }: props) => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const googleAuthRef = useRef<HTMLDivElement>(null);
 
-  const jobs = useAppSelector((state) => state.user)
+  const jobs = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -106,7 +106,7 @@ const Register = ({ isRegister = true }: props) => {
       status: "success",
       duration: 5000,
       isClosable: true,
-      position: "top-right",
+      position: "bottom",
     });
   }, []);
 
@@ -131,7 +131,6 @@ const Register = ({ isRegister = true }: props) => {
       return;
     }
 
-    
     dispatch(setActiveUser(user));
     dispatch(setJobs(user.savedJobs));
 
@@ -141,7 +140,7 @@ const Register = ({ isRegister = true }: props) => {
       status: "success",
       duration: 5000,
       isClosable: true,
-      position: "top-right",
+      position: "bottom",
     });
     navigate("/");
   };
@@ -176,7 +175,7 @@ const Register = ({ isRegister = true }: props) => {
       status: "success",
       duration: 5000,
       isClosable: true,
-      position: "top-right",
+      position: "bottom",
     });
     navigate("/");
   };

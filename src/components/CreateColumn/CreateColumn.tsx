@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import useUniqueId from "../../hooks/useUniqueId";
-import { useAppDispatch } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { createColumn } from "../../store/savedJobsSlice";
+import { createColumn as getNewState } from "../../utils/ManageJobsTable/createColumn";
+import updateJobs from "../../utils/updateJobs";
 
 const CreateColumn = () => {
   const [active, setActive] = useState<boolean>(false);
@@ -10,10 +12,23 @@ const CreateColumn = () => {
 
   const dispatch = useAppDispatch();
   const newColId = useUniqueId();
+  const state = useAppSelector((state) => state);
 
   const handleCreateColumn = async () => {
-    dispatch(createColumn({ title: newColumn, id: newColId }));
-    setActive(false);
+    const {
+      jobs,
+      user: {
+        user: { email },
+      },
+    } = state;
+
+    const newState = getNewState(jobs, { title: newColumn, id: newColId });
+    const updatedDB = await updateJobs({
+      newJobsState: newState,
+      email: email,
+    });
+
+    if (updatedDB) dispatch(createColumn(newState));
   };
 
   const renderContent = () => {

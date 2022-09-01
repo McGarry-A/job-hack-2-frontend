@@ -56,8 +56,6 @@ const JobProfile = ({ profile, error, isLoading }: props) => {
       email: state.user.email,
     });
 
-    console.log(`${updatedDB} is updateddb`);
-
     if (updatedDB) dispatch(addJob(newState));
   };
 

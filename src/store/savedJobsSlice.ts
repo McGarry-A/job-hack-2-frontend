@@ -23,50 +23,25 @@ const savedJobsSlice = createSlice({
     },
     createColumn: (
       state,
-      action: PayloadAction<{ title: string; id: string }>
+      action: PayloadAction<savedJobsInterface>
     ) => {
-      const { title, id } = action.payload;
-
-      if (Object.keys(state.columns).includes(id)) return state 
-
-      state.columnOrder.push(id)
-      state.columns[id] = {
-          id: id,
-          title: title,
-          jobIds: []
-      }
+      return action.payload
     },
-    removeColumn: (state, action: PayloadAction<{ id: string }>) => {
-      const { id } = action.payload;
-
-      const newState = state
-      const newColumnOrder = newState.columnOrder.filter((el) => el !== id);
-      
-      delete newState.columns[id];
-      newState.columnOrder = newColumnOrder
-
-      return newState
-    },
-    addJob: (state, action: PayloadAction<savedJobsInterface>) => {
-      // const job = action.payload
-
-      // if (Object.keys(state.jobs).includes(job.id)) return state
-      // console.log("adding to list")
+    removeColumn: (state, action: PayloadAction<savedJobsInterface>) => {
+      // const { id } = action.payload;
 
       // const newState = state
-      // newState.jobs[job.id] = job
-      // newState.columns["column-0"].jobIds.push(job.id)
+      // const newColumnOrder = newState.columnOrder.filter((el) => el !== id);
+      
+      // delete newState.columns[id];
+      // newState.columnOrder = newColumnOrder
 
       return action.payload
     },
+    addJob: (state, action: PayloadAction<savedJobsInterface>) => {
+      return action.payload
+    },
     removeJob: (state, action: PayloadAction<savedJobsInterface>) => {
-      // const { id, columnId } = action.payload;
-      // const newState = state
-      
-      // delete newState.jobs[id]
-      // const newColumnJobIds = newState.columns[columnId].jobIds.filter(el => el !== id)
-      // newState.columns[columnId].jobIds = newColumnJobIds
-      
       return action.payload
     },
   },
