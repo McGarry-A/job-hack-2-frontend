@@ -7,6 +7,7 @@ import Contact from "./routes/Contact";
 import Home from "./routes/Home";
 import JobDetails from "./routes/JobDetails";
 import MyJobs from "./routes/MyJobs";
+import NotFound from "./routes/NotFound";
 import Register from "./routes/Register";
 import { useAppSelector } from "./store";
 
@@ -29,7 +30,7 @@ const App = () => {
                 <Route path="/my-account" element={<Account />} />
               </>
             )}
-            <Route path="*" element={<div>404</div>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </AnimatePresence>
