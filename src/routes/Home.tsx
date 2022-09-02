@@ -49,7 +49,7 @@ const Home = () => {
 
   useEffect(() => {
     setPagination(1);
-  }, [job, location]);
+  }, [job, location, sort]);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
