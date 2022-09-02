@@ -222,7 +222,7 @@ const Register = ({ isRegister = true }: props) => {
             <label className="block">First Name</label>
             <input
               type={"text"}
-              className="w-full h-10 p-2"
+              className="w-full h-10 p-2 focus-visible:outline-sky-300"
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
@@ -230,7 +230,7 @@ const Register = ({ isRegister = true }: props) => {
             <label className="block">Last Name</label>
             <input
               type={"text"}
-              className="w-full h-10 p-2"
+              className="w-full h-10 p-2 focus-visible:outline-sky-300"
               onChange={(e) => setLastName(e.target.value)}
             />
           </div>
@@ -268,7 +268,7 @@ const Register = ({ isRegister = true }: props) => {
           <label className="block">Confrim password</label>
           <input
             type={"password"}
-            className="w-full h-10 p-2"
+            className="w-full h-10 p-2 focus-visible:outline-sky-300"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
@@ -333,7 +333,7 @@ const Register = ({ isRegister = true }: props) => {
                 <label className="block">Email</label>
                 <input
                   type={"email"}
-                  className="w-full h-10 p-2"
+                  className="w-full h-10 p-2 focus-visible:outline-sky-300"
                   ref={emailRef}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -342,7 +342,7 @@ const Register = ({ isRegister = true }: props) => {
                 <label className="block">Password</label>
                 <input
                   type={"password"}
-                  className="w-full h-10 p-2"
+                  className="w-full h-10 p-2 focus-visible:outline-sky-300"
                   ref={passwordRef}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -350,7 +350,7 @@ const Register = ({ isRegister = true }: props) => {
               {renderSecondPassword()}
               <div className="flex justify-between mt-3">
                 <div className="">
-                  <input type="checkbox" className="mr-2" onChange={(e) => setRememberMe(e.target.checked)}/>
+                  <input type="checkbox" className="mr-2 checked:accent-sky-900" onChange={(e) => setRememberMe(e.target.checked)}/>
                   <label>Remember me</label>
                 </div>
                 <div className="">

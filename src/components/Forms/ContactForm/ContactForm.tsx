@@ -26,7 +26,7 @@ const ContactForm = ({handleFormSubmit, setSubject, setMessage, setFirstName, se
               </label>
               <input
                 type="text"
-                className="border w-full h-10 rounded border-gray-300 p-2"
+                className="border w-full h-10 rounded border-gray-300 p-2 focus-visible:outline-sky-300"
                 onChange={(e) => setSubject(e.target.value)}
               />
             </div>
@@ -36,7 +36,7 @@ const ContactForm = ({handleFormSubmit, setSubject, setMessage, setFirstName, se
               </label>
               <textarea
                 rows={10}
-                className="border w-full rounded border-gray-300 p-2"
+                className="border w-full rounded border-gray-300 p-2 focus-visible:outline-sky-300"
                 onChange={(e) => setMessage(e.target.value)}
               />
             </div>
@@ -46,7 +46,7 @@ const ContactForm = ({handleFormSubmit, setSubject, setMessage, setFirstName, se
               </label>
               <input
                 type="text"
-                className="border w-full rounded border-gray-300 h-10 p-2"
+                className="border w-full rounded border-gray-300 h-10 p-2 focus-visible:outline-sky-300"
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
@@ -56,7 +56,7 @@ const ContactForm = ({handleFormSubmit, setSubject, setMessage, setFirstName, se
               </label>
               <input
                 type="text"
-                className="border w-full rounded border-gray-300 h-10 p-2"
+                className="border w-full rounded border-gray-300 h-10 p-2 focus-visible:outline-sky-300"
                 onChange={(e) => setLastName(e.target.value)}
               />
             </div>
@@ -66,7 +66,7 @@ const ContactForm = ({handleFormSubmit, setSubject, setMessage, setFirstName, se
               </label>
               <input
                 type="text"
-                className="border w-full rounded border-gray-300 h-10 p-2"
+                className="border w-full rounded border-gray-300 h-10 p-2 focus-visible:outline-sky-300"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -76,7 +76,7 @@ const ContactForm = ({handleFormSubmit, setSubject, setMessage, setFirstName, se
               </label>
               <input
                 type="text"
-                className="border w-full rounded border-gray-300 h-10 p-2"
+                className="border w-full rounded border-gray-300 h-10 p-2 focus-visible:outline-sky-300"
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>

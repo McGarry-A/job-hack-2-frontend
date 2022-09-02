@@ -15,7 +15,7 @@ const AccountForm = ({handleUpdateCustomer, firstNameRef, lastNameRef, emailRef}
           <input
             type="text"
             ref={firstNameRef}
-            className="border w-full h-10 rounded border-gray-300 p-2"
+            className="border w-full h-10 rounded border-gray-300 p-2 focus-visible:outline-sky-300"
           />
         </div>
         <div>
@@ -23,7 +23,7 @@ const AccountForm = ({handleUpdateCustomer, firstNameRef, lastNameRef, emailRef}
           <input
             type="text"
             ref={lastNameRef}
-            className="border w-full h-10 rounded border-gray-300 p-2"
+            className="border w-full h-10 rounded border-gray-300 p-2 focus-visible:outline-sky-300"
           />
         </div>
         <div className="col-span-2">
@@ -31,14 +31,14 @@ const AccountForm = ({handleUpdateCustomer, firstNameRef, lastNameRef, emailRef}
           <input
             type="text"
             ref={emailRef}
-            className="border w-full h-10 rounded border-gray-300 p-2"
+            className="border w-full h-10 rounded border-gray-300 p-2 focus-visible:outline-sky-300"
           />
         </div>
         <div className="">
           <label className="block">Confirm Current Password</label>
           <input
             type="password"
-            className="border w-full h-10 rounded border-gray-300 p-2"
+            className="border w-full h-10 rounded border-gray-300 p-2 focus-visible:outline-sky-300"
           />
         </div>
         <div></div>
@@ -46,19 +46,19 @@ const AccountForm = ({handleUpdateCustomer, firstNameRef, lastNameRef, emailRef}
           <label className="block">New Password</label>
           <input
             type="password"
-            className="border w-full h-10 rounded border-gray-300 p-2"
+            className="border w-full h-10 rounded border-gray-300 p-2 focus-visible:outline-sky-300"
           />
         </div>
         <div className="">
           <label className="block">Confirm New Password</label>
           <input
             type="password"
-            className="border w-full h-10 rounded border-gray-300 p-2"
+            className="border w-full h-10 rounded border-gray-300 p-2 focus-visible:outline-sky-300"
           />
         </div>
         <div className="my-10">
           <button
-            className="px-3 py-2 border bg-sky-400 text-gray-50 border-sky-400 rounded hover:bg-sky-300 hover:border-sky-300"
+            className="px-3 py-2 border bg-sky-400 text-gray-50 border-sky-400 rounded hover:bg-sky-300 hover:border-sky-300 focus-visible:outline-sky-300"
             type="submit"
           >
             Update User
