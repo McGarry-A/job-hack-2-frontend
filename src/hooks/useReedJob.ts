@@ -12,7 +12,7 @@ const useReedJob = (jobId: string = "") => {
             try {
               const options = {
                 method: "GET",
-                url: `http://localhost:5001/api/reed/${jobId}`,
+                url: `${process.env.SERVER_API}/api/reed/${jobId}`,
                 headers: {
                   "Content-Type":"application/json",
                 }

@@ -9,7 +9,7 @@ interface props {
 const updateJobs = async ({ newJobsState, email }: props) => {
   try {
     const options = {
-        url: "http://localhost:5001/api/jobs",
+        url: `${process.env.SERVER_API}/api/jobs`,
         method: "POST",
         Headers: {
             "Content-Type":"application/json"

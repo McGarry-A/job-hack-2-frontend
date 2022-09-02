@@ -8,7 +8,7 @@ interface props {
 const registerEmail = async ({ firstName, lastName, email, password}: props) => {
 
   try {
-    const data = await fetch(`http://localhost:5001/api/user`, {
+    const data = await fetch(`${process.env.SERVER_API}/api/user`, {
       method: "POST",
       headers: {
         "Content-Type":"application/json"

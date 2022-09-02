@@ -3,7 +3,7 @@ import axios from "axios"
 const deleteUser = async (email: string) => {
     try {
         const options = {
-            url: "http://localhost:5001/api/user",
+            url: `${process.env.SERVER_API}/api/user`,
             method: "DELETE", 
             headers: {
                 "Content-Type":"application/json"

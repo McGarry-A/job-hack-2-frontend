@@ -14,7 +14,7 @@ interface params {
 
 const updateUser = async ({user, newUser}: params) => {
     try {
-        const response = await fetch(`http://localhost:5001/api/user`, {
+        const response = await fetch(`${process.env.SERVER_API}/api/user`, {
             method: "PUT",
             headers: {
                 "Content-Type":"application/json"

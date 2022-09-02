@@ -18,7 +18,7 @@ const useReedEmployer = (employerId: number | undefined, page: number) => {
       try {
         const options = {
           method: "GET",
-          url: `http://localhost:5001/api/reed/company/${employerId}`,
+          url: `${process.env.SERVER_API}/api/reed/company/${employerId}`,
           params: { page },
           headers: {
             "Content-Type": "application/json",

@@ -28,7 +28,7 @@ const HomeJobCardContainer = ({ jobs, error, isLoading }: props) => {
 
   if (jobs && jobs.length === 0) {
     return (
-      <div className="my-10 mx-auto text-lg text-center flex justify-center items-center">
+      <div className="my-10 mx-auto text-lg text-center flex justify-center items-center flex-grow">
         There are no results for your search...
       </div>
     );

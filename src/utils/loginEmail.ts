@@ -7,7 +7,7 @@ const loginEmail = async ({email, password}: props)=> {
     try {
 
         console.log(email, password)
-        const data = await fetch(`http://localhost:5001/api/login`, {
+        const data = await fetch(`${process.env.SERVER_API}/api/login`, {
           method: "POST",
           headers: {
             "Content-Type":"application/json"
