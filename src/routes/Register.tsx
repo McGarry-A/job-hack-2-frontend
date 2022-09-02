@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { setActiveUser } from "../store/userSlice";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch } from "../store";
 
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
@@ -16,9 +16,9 @@ import RouteVar from "../animations/Route";
 import RegisterHero from "../images/register-hero.jpg";
 import { useToast } from "@chakra-ui/react";
 
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 // import GoogleAuthFlow from "../utils/googleAuthFlow";
-import { UserObjectInterface } from "../types/GoogleAuthTypes";
+// import { UserObjectInterface } from "../types/GoogleAuthTypes";
 import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 import { setJobs } from "../store/savedJobsSlice";
 
@@ -42,7 +42,7 @@ const Register = ({ isRegister = true }: props) => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const googleAuthRef = useRef<HTMLDivElement>(null);
 
-  const jobs = useAppSelector((state) => state.user);
+  // const jobs = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const Register = ({ isRegister = true }: props) => {
   const handleCallbackResponse = (res: any, error: any) => {
     if (error) return;
 
-    const userObject: UserObjectInterface = jwt_decode(res.credential);
+    // const userObject: UserObjectInterface = jwt_decode(res.credential);
     // GoogleAuthFlow({
     //   email: userObject.email,
     //   lastName: userObject.family_name,

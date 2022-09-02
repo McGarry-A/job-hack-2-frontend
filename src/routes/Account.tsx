@@ -7,12 +7,11 @@ import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
 import AccountForm from "../components/Forms/AccountForm/AccountForm";
-import { removeActiveUser, setActiveUser } from "../store/userSlice";
+import { removeActiveUser } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 import deleteUser from "../utils/deleteUser";
 import updateUser from "../utils/updateUser";
-import loginEmail from "../utils/loginEmail";
 
 const Account = () => {
   const state = useAppSelector((state) => state.user);
@@ -80,8 +79,6 @@ const Account = () => {
       setError("Passwords do not match.");
       return
     }
-
-    const variables = [firstNameRef.current?.value, lastNameRef.current?.value, emailRef.current?.value, currentPassRef.current?.value]
 
     const user = {
       firstName: firstName,
