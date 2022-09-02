@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { savedJobsInterface } from "../types/UserTypes";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface NotificationInterface {
   state: boolean;
@@ -27,7 +27,7 @@ const savedJobsSlice = createSlice({
         localStorage.setItem("jobhack_user", JSON.stringify(newCache))
       }
 
-      return payload;
+      return payload
     }
   },
 });
