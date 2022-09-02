@@ -26,9 +26,11 @@ const updateUser = async ({user, newUser}: params) => {
         })
 
         const data = await response.json()
-        console.log(data)
+
+        return data.status === 200 ? true : false
     } catch (error) {
         if (error) console.error("Error updating customer")
+        return false
     }
 }
 

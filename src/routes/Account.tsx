@@ -7,10 +7,12 @@ import RouteVar from "../animations/Route";
 import Breadcrumbs from "../components/Layout/Breadcrumbs/Breadcrumbs";
 import PageTitle from "../components/Layout/PageTitle/PageTitle";
 import AccountForm from "../components/Forms/AccountForm/AccountForm";
-import { removeActiveUser } from "../store/userSlice";
+import { removeActiveUser, setActiveUser } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 import deleteUser from "../utils/deleteUser";
+import updateUser from "../utils/updateUser";
+import loginEmail from "../utils/loginEmail";
 
 const Account = () => {
   const state = useAppSelector((state) => state.user);
@@ -67,7 +69,7 @@ const Account = () => {
     navigate("/");
   };
 
-  const handleUpdateCustomer = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUpdateCustomer = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const {
@@ -76,7 +78,11 @@ const Account = () => {
 
     if (newPassRef.current !== newPassConfRef.current) {
       setError("Passwords do not match.");
+      return
     }
+
+    const variables = [firstNameRef.current?.value, lastNameRef.current?.value, emailRef.current?.value, currentPassRef.current?.value]
+
     const user = {
       firstName: firstName,
       lastName: lastName,
@@ -84,19 +90,21 @@ const Account = () => {
     };
 
     const newUser = {
-      firstName: firstNameRef.current,
-      lastName: lastNameRef.current,
-      email: emailRef.current,
-      password: currentPassRef.current,
+      firstName: firstNameRef.current?.value as string,
+      lastName: lastNameRef.current?.value as string,
+      email: emailRef.current?.value as string,
+      password: currentPassRef.current?.value as string,
     };
 
-    toast({
-      title: "Update Successful",
-      status: "success",
-      description: "Your account information has been succesfully updated!",
-    });
+    const updateDb = await updateUser({ user, newUser })
 
-    return { user, newUser };
+    if (updateDb) {
+      toast({
+        title: "Update Successful",
+        status: "success",
+        description: "Your account information has been succesfully updated!",
+      });
+    }
   };
 
   const breadcrumbs = [

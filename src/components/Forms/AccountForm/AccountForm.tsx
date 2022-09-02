@@ -56,7 +56,6 @@ const AccountForm = ({handleUpdateCustomer, firstNameRef, lastNameRef, emailRef}
             className="border w-full h-10 rounded border-gray-300 p-2"
           />
         </div>
-
         <div className="my-10">
           <button
             className="px-3 py-2 border bg-sky-400 text-gray-50 border-sky-400 rounded hover:bg-sky-300 hover:border-sky-300"
