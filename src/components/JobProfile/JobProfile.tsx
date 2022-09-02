@@ -74,15 +74,15 @@ const JobProfile = ({ profile, error, isLoading }: props) => {
   if (profile === undefined) {
     return <div>No results returned for this jobID</div>;
   }
+  
 
   return (
     <>
-      <a
-        href={profile.externalUrl}
-        className="text-sky-400 cursor-pointer hover:underline w-max"
+      <p
+        className="text-sky-400 w-max mb-4"
       >
-        View company profile
-      </a>
+        Job Description
+      </p>
       <div>
         <h2 className="text-4xl tracking-tight font-semibold text-gray-700">
           {profile.employerName} is hiring a {profile.jobTitle}

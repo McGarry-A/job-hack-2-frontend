@@ -74,16 +74,38 @@ const JobDetails = () => {
     return (
       <>
         <HomeJobCardContainer {...useReedEmployerJobs} />
-        {jobs && jobs.length > 1 && (
+      </>
+    );
+  };
+
+  const renderLoadMoreButton = () => {
+    console.log(jobs)
+    if (jobs && jobs.length === (page * 5)) {
+      return (
+        <>
           <button
             className="my-5 w-full border py-2 bg-sky-400 border-sky-400 text-gray-50 hover:bg-sky-300 hover:border-sky-300 rounded transition duration-150"
             onClick={() => setPage(page + 1)}
           >
             Load more jobs
           </button>
-        )}
-      </>
-    );
+        </>
+      );
+    }
+
+    if (jobs && jobs.length < (page * 5)) {
+      return (
+        <>
+          <button
+            className="my-5 w-full border py-2 text-sky-400 border-sky-400 bg-gray-50 hover:border-sky-300 rounded transition duration-150"
+            disabled
+          >
+            No more Jobs
+          </button>
+        </>
+      )
+
+    }
   };
 
   return (
@@ -101,6 +123,7 @@ const JobDetails = () => {
           {renderJobDetails()}
           {renderMoreFromThisEmployer()}
           {renderCards()}
+          {renderLoadMoreButton()}
         </div>
       </motion.div>
       <Footer />
