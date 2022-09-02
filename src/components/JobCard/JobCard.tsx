@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import updateJobs from "../../utils/updateJobs";
 import { removeJob as getNewState } from "../../utils/ManageJobsTable/removeJob";
 import { setJobs } from "../../store/savedJobsSlice";
+import { useToast } from "@chakra-ui/react";
 
 interface props {
   job: {
@@ -24,18 +25,29 @@ interface DeleteProps {
 }
 
 const JobCard = ({ job, index, columnId }: props) => {
+  const toast = useToast()
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state);
 
   const handleDeleteCard = async ({ id, columnId }: DeleteProps) => {
     const payload = { id, columnId };
     const newState = getNewState(state.jobs, payload);
+    
+    dispatch(setJobs(newState));
+    
     const updatedDB = await updateJobs({
       newJobsState: newState,
       email: state.user.user.email,
     });
 
-    if (updatedDB) dispatch(setJobs(newState));
+    if (!updatedDB) {
+      toast({
+        status: "error",
+        description: "There was an error updating your cards",
+        position: "bottom",
+        duration: 5000
+      })
+    }
   };
 
   return (
