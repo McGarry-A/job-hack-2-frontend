@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../store";
 import { setJobs } from "../store/savedJobsSlice";
 import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 import updateJobs from "../utils/updateJobs";
+import { useToast } from "@chakra-ui/react";
 
 // import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
 
@@ -18,6 +19,8 @@ const MyJobs = () => {
   const userEmail = useAppSelector((state) => state.user.user.email);
   console.log(`user email ${userEmail}`);
   const dispatch = useAppDispatch();
+
+  const toast = useToast()
 
   const handleDragEnd = async (result: DropResult) => {
     const { destination, source, draggableId } = result;
@@ -54,13 +57,21 @@ const MyJobs = () => {
         },
       };
 
+      dispatch(setJobs(newState));
+    
       const updatedDB = await updateJobs({
         newJobsState: newState,
         email: userEmail,
       });
-      if (updatedDB) dispatch(setJobs(newState));
-
-      return;
+  
+      if (!updatedDB) {
+        toast({
+          status: "error",
+          description: "There was an error updating your cards",
+          position: "bottom",
+          duration: 5000
+        })
+      }
     }
 
     //REORDER ACCROSS COLUMNS
@@ -88,11 +99,21 @@ const MyJobs = () => {
       },
     };
 
+    dispatch(setJobs(newState));
+    
     const updatedDB = await updateJobs({
       newJobsState: newState,
       email: userEmail,
     });
-    if (updatedDB) dispatch(setJobs(newState));
+
+    if (!updatedDB) {
+      toast({
+        status: "error",
+        description: "There was an error updating your cards",
+        position: "bottom",
+        duration: 5000
+      })
+    }
   };
 
   const breadcrumbs = [
@@ -131,7 +152,6 @@ const MyJobs = () => {
         <PageTitle title="My Jobs" />
         <DragDropContext onDragEnd={handleDragEnd}>
           <div className="flex max-w-full w-full mx-auto bg-white rounded mb-24 py-4 flex-wrap px-12 relative">
-            <button className="absolute top-2 right-2 border-2 uppercase text-sm">Clear Jobs</button>
             {renderColumns()}
           </div>
         </DragDropContext>
