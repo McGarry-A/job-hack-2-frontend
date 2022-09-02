@@ -3,7 +3,7 @@ import axios from "axios"
 const deleteUser = async (email: string) => {
     try {
         const options = {
-            url: `${process.env.SERVER_API}/api/user`,
+            url: `https://jobhack2.herokuapp.com/api/user`,
             method: "DELETE", 
             headers: {
                 "Content-Type":"application/json"

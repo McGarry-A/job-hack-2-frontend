@@ -7,7 +7,7 @@ const loginEmail = async ({email, password}: props)=> {
     try {
 
         console.log(email, password)
-        const data = await fetch(`${process.env.SERVER_API}/api/login`, {
+        const data = await fetch(`https://jobhack2.herokuapp.com/api/login`, {
           method: "POST",
           headers: {
             "Content-Type":"application/json"

@@ -9,7 +9,7 @@ interface props {
 const updateJobs = async ({ newJobsState, email }: props) => {
   try {
     const options = {
-        url: `${process.env.SERVER_API}/api/jobs`,
+        url: `https://jobhack2.herokuapp.com/api/jobs`,
         method: "POST",
         Headers: {
             "Content-Type":"application/json"

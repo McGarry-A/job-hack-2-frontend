@@ -18,7 +18,7 @@ const useReedEmployer = (employerId: number | undefined, page: number) => {
       try {
         const options = {
           method: "GET",
-          url: `${process.env.SERVER_API}/api/reed/company/${employerId}`,
+          url: `https://jobhack2.herokuapp.com/api/reed/company/${employerId}`,
           params: { page },
           headers: {
             "Content-Type": "application/json",
