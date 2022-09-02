@@ -130,7 +130,8 @@ const MyJobs = () => {
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <PageTitle title="My Jobs" />
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div className="flex max-w-full w-full mx-auto bg-white rounded mb-24 py-4 flex-wrap px-12">
+          <div className="flex max-w-full w-full mx-auto bg-white rounded mb-24 py-4 flex-wrap px-12 relative">
+            <button className="absolute top-2 right-2 border-2 uppercase text-sm">Clear Jobs</button>
             {renderColumns()}
           </div>
         </DragDropContext>
