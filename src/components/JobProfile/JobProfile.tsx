@@ -5,9 +5,9 @@ import HTMLParser from "../HTMLParser/HTMLParser";
 import { TiBusinessCard } from "react-icons/ti";
 import { AiOutlineEnter } from "react-icons/ai";
 import { useToast } from "@chakra-ui/react";
-import { addJob } from "../../store/savedJobsSlice";
 import { addJob as getNewState } from "../../utils/ManageJobsTable/addJob";
 import updateJobs from "../../utils/updateJobs";
+import { setJobs } from "../../store/savedJobsSlice";
 
 // import { addToLikedJobs } from "../../store/userSlice";
 
@@ -56,7 +56,7 @@ const JobProfile = ({ profile, error, isLoading }: props) => {
       email: state.user.email,
     });
 
-    if (updatedDB) dispatch(addJob(newState));
+    if (updatedDB) dispatch(setJobs(newState));
   };
 
   if (isLoading) return <Loader />;

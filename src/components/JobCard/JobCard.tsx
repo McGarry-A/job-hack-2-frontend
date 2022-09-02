@@ -3,9 +3,9 @@ import { AiOutlineClose } from "react-icons/ai";
 import { RiExternalLinkLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { removeJob } from "../../store/savedJobsSlice";
 import updateJobs from "../../utils/updateJobs";
 import { removeJob as getNewState } from "../../utils/ManageJobsTable/removeJob";
+import { setJobs } from "../../store/savedJobsSlice";
 
 interface props {
   job: {
@@ -35,7 +35,7 @@ const JobCard = ({ job, index, columnId }: props) => {
       email: state.user.user.email,
     });
 
-    if (updatedDB) dispatch(removeJob(newState));
+    if (updatedDB) dispatch(setJobs(newState));
   };
 
   return (

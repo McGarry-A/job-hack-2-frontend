@@ -8,9 +8,9 @@ import { JobInterface } from "../../types/ReedJobsTypes";
 import { NavLink } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { useToast } from "@chakra-ui/react";
-import { addJob } from "../../store/savedJobsSlice";
 import { addJob as getNewState } from "../../utils/ManageJobsTable/addJob";
 import updateJobs from "../../utils/updateJobs";
+import { setJobs } from "../../store/savedJobsSlice";
 
 interface props {
   el: JobInterface;
@@ -60,7 +60,7 @@ const HomeJobCard = ({ el }: props) => {
         email: state.user.email,
       });
 
-      if (updatedDB) dispatch(addJob(newState));
+      if (updatedDB) dispatch(setJobs(newState));
     }
   };
 

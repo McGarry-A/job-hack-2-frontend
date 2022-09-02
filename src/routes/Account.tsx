@@ -59,9 +59,10 @@ const Account = () => {
     toast({
       title: "Log out succesful",
       status: "success",
-      description: "You have been logged out of your account",
+      description: "Logging out also deletes your details from localstorage so you will need to log in again.",
     });
 
+    localStorage.removeItem("jobhack_user")
     dispatch(removeActiveUser());
     navigate("/");
   };

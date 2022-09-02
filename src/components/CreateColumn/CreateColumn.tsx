@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import useUniqueId from "../../hooks/useUniqueId";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { createColumn } from "../../store/savedJobsSlice";
+import { setJobs } from "../../store/savedJobsSlice";
 import { createColumn as getNewState } from "../../utils/ManageJobsTable/createColumn";
 import updateJobs from "../../utils/updateJobs";
 
@@ -29,7 +29,7 @@ const CreateColumn = () => {
     });
 
     if (updatedDB) {
-      dispatch(createColumn(newState));
+      dispatch(setJobs(newState));
       setActive(false);
       setNewColumn("");
     }

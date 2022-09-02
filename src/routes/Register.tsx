@@ -33,6 +33,7 @@ const Register = ({ isRegister = true }: props) => {
   const [password, setPassword] = useState<string>("testtest");
   const [confirmPassword, setConfirmPassword] = useState<string>();
   const [error, setError] = useState<string>();
+  const [rememberMe, setRememberMe] = useState<boolean>(false)
 
   const [firstName, setFirstName] = useState<string>();
   const [lastName, setLastName] = useState<string>();
@@ -141,6 +142,11 @@ const Register = ({ isRegister = true }: props) => {
 
     dispatch(setActiveUser(user));
     dispatch(setJobs(user.savedJobs));
+
+    // save to cache
+    if (rememberMe) {
+      localStorage.setItem("jobhack_user", JSON.stringify(user))
+    }
 
     toast({
       title: "Success",
@@ -344,7 +350,7 @@ const Register = ({ isRegister = true }: props) => {
               {renderSecondPassword()}
               <div className="flex justify-between mt-3">
                 <div className="">
-                  <input type="checkbox" className="mr-2" />
+                  <input type="checkbox" className="mr-2" onChange={(e) => setRememberMe(e.target.checked)}/>
                   <label>Remember me</label>
                 </div>
                 <div className="">
@@ -359,11 +365,11 @@ const Register = ({ isRegister = true }: props) => {
               >
                 {register ? "Sign in" : "Register"}
               </button>
-              <div
+              {/* <div
                 id="googleSignInButton"
                 ref={googleAuthRef}
                 className="mx-auto"
-              ></div>
+              ></div> */}
               {renderSwitchViews()}
             </form>
             <div className="w-full hidden md:flex">

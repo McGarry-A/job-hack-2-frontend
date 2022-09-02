@@ -8,14 +8,14 @@ export interface JobInterface {
     salary: number;
 }
 
-const initialState: UserStateInterface = {
+const initialState: UserStateInterface = localStorage.getItem("jobhack_user") === null ? {
     isLoggedIn: false,
     user: {
         firstName: "",
         lastName: "",
         email: ""
-    }
-}
+    } 
+} : JSON.parse(localStorage.getItem("jobhack_user") as string) 
 
 const userSlice = createSlice({
     name: "user",
@@ -32,7 +32,14 @@ const userSlice = createSlice({
             }
         },
         removeActiveUser: (state: UserStateInterface) => {
-            return state = initialState
+            return state = {
+                isLoggedIn: false,
+                user: {
+                    firstName: "",
+                    lastName: "",
+                    email: ""
+                },
+            }
             
         },
     }

@@ -7,46 +7,31 @@ export interface NotificationInterface {
   message: string;
 }
 
-const initialState: savedJobsInterface = {
+const initialState: savedJobsInterface = localStorage.getItem("jobhack_user") === null ? {
   jobs: {},
   columns: {},
   columnOrder: [],
-};
+} : JSON.parse(localStorage.getItem("jobhack_user") as string).savedJobs || null
 
 const savedJobsSlice = createSlice({
   name: "jobs",
   initialState: initialState,
   reducers: {
     setJobs: (_, action: PayloadAction<savedJobsInterface>) => {
-      console.log("setting jobs")
-      return action.payload;
-    },
-    createColumn: (
-      state,
-      action: PayloadAction<savedJobsInterface>
-    ) => {
-      return action.payload
-    },
-    removeColumn: (state, action: PayloadAction<savedJobsInterface>) => {
-      // const { id } = action.payload;
+      const { payload } = action;
 
-      // const newState = state
-      // const newColumnOrder = newState.columnOrder.filter((el) => el !== id);
-      
-      // delete newState.columns[id];
-      // newState.columnOrder = newColumnOrder
+      if (localStorage.getItem("jobhack_user") !== null) {
+        const oldCache = JSON.parse(localStorage.getItem("jobhack_user") as string)
+        const newCache = oldCache
+        newCache.savedJobs = payload
+        localStorage.setItem("jobhack_user", JSON.stringify(newCache))
+      }
 
-      return action.payload
-    },
-    addJob: (state, action: PayloadAction<savedJobsInterface>) => {
-      return action.payload
-    },
-    removeJob: (state, action: PayloadAction<savedJobsInterface>) => {
-      return action.payload
-    },
+      return payload;
+    }
   },
 });
 
-export const { setJobs, createColumn, removeColumn, addJob, removeJob } = savedJobsSlice.actions;
+export const { setJobs } = savedJobsSlice.actions;
 
 export default savedJobsSlice;

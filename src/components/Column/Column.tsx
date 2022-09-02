@@ -1,10 +1,10 @@
 import { Droppable } from "react-beautiful-dnd";
 import { BsX } from "react-icons/bs";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { removeColumn } from "../../store/savedJobsSlice";
 import JobCard from "../JobCard/JobCard";
 import { removeColumn as getNewState } from "../../utils/ManageJobsTable/removeColumn";
 import updateJobs from "../../utils/updateJobs";
+import { setJobs } from "../../store/savedJobsSlice";
 
 interface props {
   column: {
@@ -33,7 +33,7 @@ const Column = ({ column, jobs }: props) => {
       email: state.user.user.email,
     });
 
-    if (updatedDB) dispatch(removeColumn(newState));
+    if (updatedDB) dispatch(setJobs(newState));
   };
 
   return (
