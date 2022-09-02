@@ -39,7 +39,7 @@ const Column = ({ column, jobs }: props) => {
   return (
     <div className="bg-gray-50 p-3 rounded max-w-xs w-full m-2 flex flex-col min-h-52">
       <div className="flex justify-between items-center mb-2">
-        <h5 className="text-lg font-semibold text-slate-700">{column.title}</h5>
+        <h5 className="text-lg font-semibold text-slate-600">{column.title}</h5>
         <button className="mb-2">
           <BsX
             className="text-lg"

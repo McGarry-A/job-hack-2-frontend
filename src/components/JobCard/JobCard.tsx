@@ -42,7 +42,7 @@ const JobCard = ({ job, index, columnId }: props) => {
     <Draggable draggableId={job.id} index={index}>
       {(provided) => (
         <div
-          className="bg-gray-50 w-72 py-2 px-2 rounded shadow cursor-grabbing flex justify-between"
+          className="w-72 py-2 px-2 rounded shadow cursor-grabbing flex justify-between bg-white"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}

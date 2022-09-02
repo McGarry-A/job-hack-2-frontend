@@ -130,7 +130,7 @@ const MyJobs = () => {
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <PageTitle title="My Jobs" />
         <DragDropContext onDragEnd={handleDragEnd}>
-          <div className="flex max-w-7xl w-full mx-auto bg-white rounded mb-24 p-4 flex-wrap justify-center">
+          <div className="flex max-w-full w-full mx-auto bg-white rounded mb-24 py-4 flex-wrap px-12">
             {renderColumns()}
           </div>
         </DragDropContext>

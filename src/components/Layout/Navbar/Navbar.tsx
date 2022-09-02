@@ -114,10 +114,10 @@ const Navbar = () => {
   );
 
   return (
-    <header className="flex justify-between p-8 bg-transparent items-center">
+    <header className="flex justify-between p-8 bg-transparent items-center ">
       {renderWelcomeName()}
       <nav className="flex justify-end">
-        <ul className="flex space-x-8 items-center">
+        <ul className="flex space-x-10 items-center">
           {renderNavLinks()}
           {renderNotLoggedInTabs()}
           {renderIsLoggedInTabs()}

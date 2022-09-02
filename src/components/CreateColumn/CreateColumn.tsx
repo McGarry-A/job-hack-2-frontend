@@ -28,7 +28,11 @@ const CreateColumn = () => {
       email: email,
     });
 
-    if (updatedDB) dispatch(createColumn(newState));
+    if (updatedDB) {
+      dispatch(createColumn(newState));
+      setActive(false);
+      setNewColumn("");
+    }
   };
 
   const renderContent = () => {

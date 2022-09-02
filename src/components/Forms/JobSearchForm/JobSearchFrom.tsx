@@ -55,7 +55,7 @@ const JobSearchForm = ({
             <option value={""}>Most Relevant</option>
             <option value={"sort_alpha"}>Alphabetically (A - Z)</option>
             <option value={"sort_ascending"}>Salary (Acending)</option>
-            <option value={"sort_decending"}>Salary (Decending)</option>
+            <option value={"sort_decsending"}>Salary (Decending)</option>
           </select>
         </div>
       </div>
