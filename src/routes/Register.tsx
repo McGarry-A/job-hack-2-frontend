@@ -16,7 +16,7 @@ import RouteVar from "../animations/Route";
 import RegisterHero from "../images/register-hero.jpg";
 import { useToast } from "@chakra-ui/react";
 
-import bcrypt from "bcrypt"
+import bcryptjs from "bcryptjs"
 // import jwt_decode from "jwt-decode";
 // import GoogleAuthFlow from "../utils/googleAuthFlow";
 // import { UserObjectInterface } from "../types/GoogleAuthTypes";
@@ -48,8 +48,6 @@ const Register = ({ isRegister = true }: props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const toast = useToast();
-
-  const salt = bcrypt.genSaltSync(10)
 
   const handleCallbackResponse = (res: any, error: any) => {
     if (error) return;
@@ -177,7 +175,8 @@ const Register = ({ isRegister = true }: props) => {
       setError("Password must be at least 6 characters.");
     }
 
-    const hashedPassword = bcrypt.hashSync(password, salt)
+    const salt = bcryptjs.genSaltSync(10)
+		const hashedPassword = bcryptjs.hashSync(password, salt)
 
     const user = await registerEmail({
       firstName,
