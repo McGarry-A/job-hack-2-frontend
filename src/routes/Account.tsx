@@ -16,12 +16,9 @@ import updateUser from "../utils/updateUser";
 const Account = () => {
   const state = useAppSelector((state) => state.user);
 
-  const [error, setError] = useState("");
-
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
-  const currentPassRef = useRef<HTMLInputElement>(null);
   const newPassRef = useRef<HTMLInputElement>(null);
   const newPassConfRef = useRef<HTMLInputElement>(null);
 
@@ -60,10 +57,11 @@ const Account = () => {
     toast({
       title: "Log out succesful",
       status: "success",
-      description: "Logging out also deletes your details from localstorage so you will need to log in again.",
+      description:
+        "Logging out also deletes your details from localstorage so you will need to log in again.",
     });
 
-    localStorage.removeItem("jobhack_user")
+    localStorage.removeItem("jobhack_user");
     dispatch(removeActiveUser());
     navigate("/");
   };
@@ -75,9 +73,13 @@ const Account = () => {
       user: { firstName, lastName, email },
     } = state;
 
-    if (newPassRef.current !== newPassConfRef.current) {
-      setError("Passwords do not match.");
-      return
+    if (newPassRef.current?.value !== newPassConfRef.current?.value) {
+      toast({
+        status: "error",
+        title: "Error",
+        description: "Passwords do not match, please re-enter",
+      });
+      return;
     }
 
     const user = {
@@ -90,10 +92,10 @@ const Account = () => {
       firstName: firstNameRef.current?.value as string,
       lastName: lastNameRef.current?.value as string,
       email: emailRef.current?.value as string,
-      password: currentPassRef.current?.value as string,
+      password: newPassRef.current?.value as string,
     };
 
-    const updateDb = await updateUser({ user, newUser })
+    const updateDb = await updateUser({ user, newUser });
 
     if (updateDb) {
       toast({
@@ -112,7 +114,6 @@ const Account = () => {
   const renderSectionHeader = (title: string) => (
     <div className="col-span-2 mb-3">
       <h4 className="text-2xl">{title}</h4>
-      {error && <p className="text-sm text-rose-600">*{error}</p>}
     </div>
   );
 
@@ -157,6 +158,8 @@ const Account = () => {
             emailRef={emailRef}
             firstNameRef={firstNameRef}
             lastNameRef={lastNameRef}
+            newPassRef={newPassRef}
+            newPassConfRef={newPassConfRef}
             handleUpdateCustomer={handleUpdateCustomer}
           />
           {renderDeleteUserAccount()}
