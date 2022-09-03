@@ -24,6 +24,7 @@ const AccountForm = ({
         <input
           type="text"
           ref={firstNameRef}
+          disabled
           className="border w-full h-10 rounded border-gray-300 p-2 focus-visible:outline-sky-300"
         />
       </div>
@@ -32,6 +33,7 @@ const AccountForm = ({
         <input
           type="text"
           ref={lastNameRef}
+          disabled
           className="border w-full h-10 rounded border-gray-300 p-2 focus-visible:outline-sky-300"
         />
       </div>
@@ -40,6 +42,7 @@ const AccountForm = ({
         <input
           type="text"
           ref={emailRef}
+          disabled
           className="border w-full h-10 rounded border-gray-300 p-2 focus-visible:outline-sky-300"
         />
       </div>

@@ -4,7 +4,7 @@ To Do List:
 
 hash password on front end and save hashed password on backend
 NEED TO MAKE THE APP RESPONSIVE
-UPDATE ACCOUNT
+UPDATE ACCOUNT DONE
 
 
 HomePage:
