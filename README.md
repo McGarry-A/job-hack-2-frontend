@@ -2,9 +2,10 @@ Recreation of my CodeNation final project to see what improvements that I can ma
 
 To Do List:
 
-hash password on front end and save hashed password on backend
-NEED TO MAKE THE APP RESPONSIVE
+hash password on front end and save hashed password on backend DONE
+NEED TO MAKE THE APP RESPONSIVE DONE
 UPDATE ACCOUNT DONE
+JWT?
 
 
 HomePage:

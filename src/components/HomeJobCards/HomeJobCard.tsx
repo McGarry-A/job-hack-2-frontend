@@ -11,7 +11,6 @@ import { useToast } from "@chakra-ui/react";
 import { addJob as getNewState } from "../../utils/ManageJobsTable/addJob";
 import updateJobs from "../../utils/updateJobs";
 import { setJobs } from "../../store/savedJobsSlice";
-import { AiOutlineHeart } from "react-icons/ai";
 
 interface props {
   el: JobInterface;
