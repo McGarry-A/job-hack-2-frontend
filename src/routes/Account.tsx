@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Navbar from "../components/Layout/Navbar/Navbar";
 import { useAppDispatch, useAppSelector } from "../store";
 import { useToast } from "@chakra-ui/react";

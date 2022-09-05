@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { useAppSelector } from "../../../store";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { removeActiveUser } from "../../../store/userSlice";
+import { useToast } from "@chakra-ui/react";
 
 const Navbar = () => {
   const user = useAppSelector((state) => state.user);
@@ -10,6 +12,17 @@ const Navbar = () => {
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
 
   const [isHome] = useState<boolean>(location.pathname === "/" ? true : false);
+  const dispatch = useAppDispatch();
+  const toast = useToast();
+
+  const handleSignOut = () => {
+    dispatch(removeActiveUser());
+    return toast({
+      status: "success",
+      title: "Successfully logged out",
+      duration: 5000,
+    });
+  };
 
   const renderWelcomeName = () => {
     const {
@@ -134,9 +147,9 @@ const Navbar = () => {
       <div
         className={`${
           isMenuActive
-            ? "w-full z-40 bg-sky-900 bg-opacity-90 block"
+            ? "w-full z-40 bg-sky-900 bg-opacity-90 block overflow-y-hidden scroll"
             : "hidden w-0"
-        } transition duration-300 absolute h-screen left-0 top-0 overflow-hidden scroll-y-none text-gray-50 md:hidden`}
+        } transition duration-300 fixed h-full max-h-screen left-0 top-0 text-gray-50 md:hidden`}
       >
         <ul className="flex flex-col w-full items-center justify-center h-3/4 text-4xl space-y-10 font-semibold transition duration-300">
           <li className="cursor-pointer">
@@ -161,7 +174,9 @@ const Navbar = () => {
           <li className="mt-2">
             {isLoggedIn ? (
               <button className="bg-white text-sky-600 px-6 py-2 rounded uppercase text-2xl font-bold">
-                <NavLink to="/register">Sign Out</NavLink>
+                <NavLink to="/register" onClick={() => handleSignOut()}>
+                  Sign Out
+                </NavLink>
               </button>
             ) : (
               <button className="bg-white text-sky-600 px-6 py-2 rounded uppercase text-2xl font-bold">
