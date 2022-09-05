@@ -83,7 +83,7 @@ const Contact = () => {
 
   const renderForm = () => {
     return (
-      <div className="max-w-6xl mx-auto bg-white rounded flex mb-24">
+      <div className="max-w-6xl mx-auto bg-white rounded flex mb-24 flex-col-reverse md:flex-row">
         <ContactForm
           handleFormSubmit={handleFormSubmit}
           setEmail={setEmail}

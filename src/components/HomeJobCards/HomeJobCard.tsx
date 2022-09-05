@@ -11,6 +11,7 @@ import { useToast } from "@chakra-ui/react";
 import { addJob as getNewState } from "../../utils/ManageJobsTable/addJob";
 import updateJobs from "../../utils/updateJobs";
 import { setJobs } from "../../store/savedJobsSlice";
+import { AiOutlineHeart } from "react-icons/ai";
 
 interface props {
   el: JobInterface;
@@ -84,13 +85,19 @@ const HomeJobCard = ({ el }: props) => {
         to={`/job-profile/${el.id}`}
         className={`w-full transition duration-150`}
       >
-        <div className="flex w-full">
-          <div className="flex justify-center items-center py-2 px-4 mr-4 flex-shrink-0">
+        <div className="flex flex-col md:flex-row w-full p-2 md:p-0">
+          <div className="flex justify-between md:justify-center items-center py-2 md:px-4 md:mr-4 flex-shrink-0">
             <img
               src={reedLogo}
               className="w-20 min-w-20"
               alt="search-api-provider-logo"
             />
+            <div className="z-30 cursor-pointer">
+              <FaHeart
+                className="md:hidden hover:fill-rose-600 transition duration-150 mr-2"
+                onClick={() => handleAddToList()}
+              />
+            </div>
           </div>
           <div className="flex flex-col justify-center py-2">
             <h5 className="text-2xl tracking-tight text-gray-900 max-w-full">
@@ -108,7 +115,7 @@ const HomeJobCard = ({ el }: props) => {
         </div>
       </NavLink>
       <div
-        className={`transition duration-300 flex justify-center font-semibold items-center bg-sky-500 hover:bg-sky-400 hover:text-rose-500 text-gray-50 text-sm -p-3 hover:shadow ${
+        className={`transition hidden duration-300 md:flex justify-center font-semibold items-center bg-sky-500 hover:bg-sky-400 hover:text-rose-500 text-gray-50 text-sm -p-3 hover:shadow ${
           showAddToWishList ? "w-1/12 translate-x-0" : "w-0 translate-x-24"
         }`}
         onClick={() => handleAddToList()}

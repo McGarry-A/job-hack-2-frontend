@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import ContentWrapper from "../components/Layout/ContentWrapper/ContentWrapper";
 import deleteUser from "../utils/deleteUser";
 import updateUser from "../utils/updateUser";
+import Footer from "../components/Layout/Footer/Footer";
 
 const Account = () => {
   const state = useAppSelector((state) => state.user);
@@ -165,6 +166,7 @@ const Account = () => {
           {renderDeleteUserAccount()}
         </BGWrapper>
       </motion.div>
+      <Footer />
     </ContentWrapper>
   );
 };

@@ -16,7 +16,7 @@ const AccountForm = ({
 }: props) => {
   return (
     <form
-      className="grid grid-cols-2 w-full mx-auto gap-3"
+      className="grid md:grid-cols-2 w-full mx-auto gap-3"
       onSubmit={(e) => handleUpdateCustomer(e)}
     >
       <div>

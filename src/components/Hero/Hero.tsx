@@ -86,7 +86,7 @@ const Hero = () => {
         <ContentWrapper>
           <Navbar />
           <div className=" w-full h-full flex justify-center flex-col items-center py-10">
-            <h1 className="text-7xl font-bold text-center text-gray-50 w-2/3">
+            <h1 className="text-5xl md:text-7xl font-bold text-center text-gray-50 w-2/3">
               The job board for developers, made by developers.
             </h1>
             <p className="w-full text-center uppercase text-sm font-bold opacity-50 my-6 text-gray-50">

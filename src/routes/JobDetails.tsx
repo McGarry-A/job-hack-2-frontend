@@ -79,8 +79,8 @@ const JobDetails = () => {
   };
 
   const renderLoadMoreButton = () => {
-    console.log(jobs)
-    if (jobs && jobs.length === (page * 5)) {
+    console.log(jobs);
+    if (jobs && jobs.length === page * 5) {
       return (
         <>
           <button
@@ -93,7 +93,7 @@ const JobDetails = () => {
       );
     }
 
-    if (jobs && jobs.length < (page * 5)) {
+    if (jobs && jobs.length < page * 5) {
       return (
         <>
           <button
@@ -103,8 +103,7 @@ const JobDetails = () => {
             No more Jobs
           </button>
         </>
-      )
-
+      );
     }
   };
 
@@ -119,7 +118,7 @@ const JobDetails = () => {
       >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         {renderHero()}
-        <div className="max-w-7xl mx-auto bg-white rounded-2xl flex mb-24 flex-col space-y-4 py-8 px-14 shadow pb-10">
+        <div className="md:max-w-7xl w-11/12 mx-auto bg-white rounded md:rounded-2xl flex mb-24 flex-col space-y-4 py-8 md:px-14 px-4 shadow pb-10">
           {renderJobDetails()}
           {renderMoreFromThisEmployer()}
           {renderCards()}

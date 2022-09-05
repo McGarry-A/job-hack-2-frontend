@@ -18,7 +18,7 @@ const JobSearchForm = ({
 }: props) => {
   return (
     <form
-      className="grid grid-cols-4 gap-3 pt-2"
+      className="grid grid-cols-1 md:grid-cols-4 gap-3 pt-2"
       onSubmit={(e) => handleFormSubmit(e)}
     >
       <div className="flex flex-col">

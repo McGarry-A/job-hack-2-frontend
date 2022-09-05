@@ -17,7 +17,7 @@ const Footer = () => {
     ];
 
     return (
-      <div className="flex">
+      <div className="flex justify-center md:justify-start mt-4 md:mt-0">
         {icons.map((El, index) => {
           return (
             <div
@@ -33,37 +33,39 @@ const Footer = () => {
   };
 
   return (
-    <footer className="border-t flex font-sans justify-evenly p-4 space-x-3 w-full mt-auto">
-      <div className="my-2">
+    <footer className="border-t flex flex-col md:flex-row font-sans justify-evenly p-4 space-x-3 w-full mt-auto">
+      <div className="my-2 text-center md:text-left">
         <h2 className="text-xl">JobHack2</h2>
-        <p className="opacity-50 w-3/4 tracking-wide text-sm">
+        <p className="opacity-50 md:w-3/4 tracking-wide text-sm">
           The leading job board for developers, made by developers
         </p>
       </div>
-      <nav className="flex flex-col my-2">
-        <ul className="flex flex-col space-y-2">
-          <li className="text-xl font-bold">Pages</li>
-          <li className="opacity-50">
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li className="opacity-50">
-            <NavLink to="/contact">Contact</NavLink>
-          </li>
-          <li className="opacity-50">
-            <NavLink to="/register">My Account</NavLink>
-          </li>
-        </ul>
-      </nav>
-      <div className="flex flex-col my-2">
-        <ul className="space-y-2">
-          <li className="text-xl font-bold">Join us</li>
-          <li className="opacity-50">
-            <NavLink to="/register">Login</NavLink>
-          </li>
-          <li className="opacity-50">
-            <NavLink to="/register">Register</NavLink>
-          </li>
-        </ul>
+      <div className="flex justify-center space-x-10 my-4 md:my-0">
+        <nav className="flex flex-col my-2">
+          <ul className="flex flex-col space-y-2">
+            <li className="text-xl font-bold">Pages</li>
+            <li className="opacity-50">
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li className="opacity-50">
+              <NavLink to="/contact">Contact</NavLink>
+            </li>
+            <li className="opacity-50">
+              <NavLink to="/register">My Account</NavLink>
+            </li>
+          </ul>
+        </nav>
+        <div className="flex flex-col my-2">
+          <ul className="space-y-2">
+            <li className="text-xl font-bold">Join us</li>
+            <li className="opacity-50">
+              <NavLink to="/register">Login</NavLink>
+            </li>
+            <li className="opacity-50">
+              <NavLink to="/register">Register</NavLink>
+            </li>
+          </ul>
+        </div>
       </div>
       <div>
         <div className="space-y-1 flex flex-col my-2">

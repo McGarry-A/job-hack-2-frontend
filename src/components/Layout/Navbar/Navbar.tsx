@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../../store";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
   const user = useAppSelector((state) => state.user);
   const jobs = useAppSelector((state) => state.jobs.jobs);
   const location = useLocation();
+  const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
 
   const [isHome] = useState<boolean>(location.pathname === "/" ? true : false);
 
@@ -113,16 +115,79 @@ const Navbar = () => {
     </>
   );
 
-  return (
-    <header className="flex justify-between p-8 bg-transparent items-center ">
-      {renderWelcomeName()}
-      <nav className="flex justify-end">
-        <ul className="flex space-x-10 items-center">
-          {renderNavLinks()}
-          {renderNotLoggedInTabs()}
-          {renderIsLoggedInTabs()}
+  const renderHamburger = () => {
+    return (
+      <div
+        className={`cursor-pointer z-50 md:hidden ${
+          isMenuActive || isHome ? `text-gray-50` : `text-gray-900`
+        }`}
+        onClick={() => setIsMenuActive(!isMenuActive)}
+      >
+        <GiHamburgerMenu size={"2rem"} />
+      </div>
+    );
+  };
+
+  const renderMobileMenu = () => {
+    const { isLoggedIn } = user;
+    return (
+      <div
+        className={`${
+          isMenuActive
+            ? "w-full z-40 bg-sky-900 bg-opacity-90 block"
+            : "hidden w-0"
+        } transition duration-300 absolute h-screen left-0 top-0 overflow-hidden scroll-y-none text-gray-50 md:hidden`}
+      >
+        <ul className="flex flex-col w-full items-center justify-center h-3/4 text-4xl space-y-10 font-semibold transition duration-300">
+          <li className="cursor-pointer">
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li className="cursor-pointer">
+            <NavLink to="/contact">Contact</NavLink>
+          </li>
+          {isLoggedIn && (
+            <>
+              <li className="cursor-pointer">
+                <NavLink to="/my-account">My Account</NavLink>
+              </li>
+              <li className="cursor-pointer ">
+                <div className="relative">
+                  <NavLink to="/my-jobs">My Jobs</NavLink>
+                  {renderJobsCount()}
+                </div>
+              </li>
+            </>
+          )}
+          <li className="mt-2">
+            {isLoggedIn ? (
+              <button className="bg-white text-sky-600 px-6 py-2 rounded uppercase text-2xl font-bold">
+                <NavLink to="/register">Sign Out</NavLink>
+              </button>
+            ) : (
+              <button className="bg-white text-sky-600 px-6 py-2 rounded uppercase text-2xl font-bold">
+                <NavLink to="/register">Sign In</NavLink>
+              </button>
+            )}
+          </li>
         </ul>
-      </nav>
+      </div>
+    );
+  };
+
+  return (
+    <header className="flex justify-between p-8 bg-transparent items-center">
+      <div className="hidden md:flex md:w-full">
+        {renderWelcomeName()}
+        <nav className="flex justify-end ml-auto">
+          <ul className="flex space-x-10 items-center justify-end">
+            {renderNavLinks()}
+            {renderNotLoggedInTabs()}
+            {renderIsLoggedInTabs()}
+          </ul>
+        </nav>
+      </div>
+      {renderHamburger()}
+      {renderMobileMenu()}
     </header>
   );
 };
