@@ -6,6 +6,7 @@ hash password on front end and save hashed password on backend DONE
 NEED TO MAKE THE APP RESPONSIVE DONE
 UPDATE ACCOUNT DONE
 JWT?
+scrolling animation on the homepage improvement
 
 
 HomePage:
